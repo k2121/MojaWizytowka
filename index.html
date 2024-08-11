@@ -6,17 +6,16 @@
     <title>O mnie</title>
     <link rel="icon" href="Logo Człowieczek.png" type="image/png">
     <style>
-@font-face {
-    font-family: 'Krzysia';
-    src: url('Krzysia.woff2') format('woff2'),
-         url('Krzysia.woff') format('woff'),
-         url('Krzysia.ttf') format('truetype');
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
         body {
-            font-family: 'Krzysia', sans-serif; /* Użyj niestandardowej czcionki jako głównej czcionki */
+            font-family: "Poppins", sans-serif; /* Użyj czcionki Georgia jako głównej czcionki */
             margin: 0;
             padding: 0;
-            background: url('Kylo K3 FHD.jpg') no-repeat center center fixed; /* Fixed background */
+            background: radial-gradient(circle at top left, #B3FF81, #2A6900); /* Radial gradient background */
             background-size: cover; /* Ensure the background covers the entire page */
         }
         .header {
@@ -24,7 +23,7 @@
             padding: 20px;
             color: #fff;
             position: relative;
-            background: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+            background: rgba(0, 0, 0, 0.45); /* semi-transparent background */
         }
         .header::before {
             content: '';
@@ -56,7 +55,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 10px;
-            background-color: rgba(255, 255, 255, 0.9); /* semi-transparent background */
+            background-color: rgba(255, 255, 255, 0.05); /* semi-transparent background */
             border-radius: 8px; /* Optional: rounded corners */
             max-width: 1000px; /* Optional: limit the width */
             width: 100%; /* Ensure it uses full width available in the container */
@@ -78,7 +77,7 @@
             padding: 20px;
             font-size: 24px;
             color: #333;
-            background-color: rgba(255, 255, 255, 0.9); /* slightly opaque background */
+            background-color: rgba(255, 255, 255, 0.05); /* slightly opaque background */
             border-radius: 8px;
             margin: 20px;
         }
@@ -86,7 +85,7 @@
             padding: 20px;
             font-size: 24px; /* Increase font size */
             color: #333;
-            background-color: rgba(255, 255, 255, 0.9); /* slightly opaque background */
+            background-color: rgba(255, 255, 255, 0.05); /* slightly opaque background */
             border-radius: 8px;
             margin: 20px;
             text-align: center;
@@ -96,7 +95,7 @@
             padding: 20px;
             font-size: 24px; /* Increase font size */
             color: #333;
-            background-color: rgba(255, 255, 255, 0.9); /* slightly opaque background */
+            background-color: rgba(255, 255, 255, 0.05); /* slightly opaque background */
             border-radius: 8px;
             margin: 20px;
         }
@@ -106,6 +105,11 @@
             }
         }
     </style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <div class="header">
@@ -134,10 +138,12 @@
         Mieszkam w Woli, 10 km na zachód od Oświęcimia.
         <br><br>Wykształciłem się jako informatyk. Pracuję jako górnik powiechrzniowy. Lubię słuchać muzyki instrumentalnej i pop'u, fotografować przyrodę, digitalizować stare klisze fotograficzne. Nie oglądam sportu. 
         <br><br>Mam dwóch młodszych braci. Cała rodzina jest w Prawdzie. Ochrzciłem się w 2002 roku. Byłem na kilku Ośrodkach Pionierskich.
-        <br><br><br>📲 (+48) 508-728-428
-        <br>🌐 <a href="https://www.facebook.com/krzysztof.parobczy.58/" target="_blank">mój facebook</a>
-        <br>📩parmar2097@gmail.com
-        <br>📸 <a href="https://www.instagram.com/krzysztof.008/" target="_blank">mój instagram</a>
+        <br><br>
+        <br><img src="whatsapp-svgrepo-com.svg" alt="WhatsApp" style="width: 30px; vertical-align: middle; margin-right: 5px; margin-bottom: 10px;">(+48) 508-728-428
+        <br><img src="Facebook_icon_2013.svg" alt="Facebook" style="width: 30px; vertical-align: middle; margin-right: 5px; margin-bottom: 10px;"><a href="https://www.facebook.com/krzysztof.parobczy.58/" target="_blank">krzysztof.parobczy.58</a>
+        <br><img src="instagram-1-svgrepo-com_.svg" alt="Instagram" style="width: 30px; vertical-align: middle; margin-right: 5px; margin-bottom: 10px;"><a href="https://www.instagram.com/krzysztof.008/" target="_blank">krzysztof.008</a>
+        <br><img src="gmail-svgrepo-com(1).svg" alt="Gmail" style="width: 30px; vertical-align: middle; margin-right: 5px; margin-bottom: 10px;">parmar2097@gmail.com
+        <br><img src="spotify-seeklogo.svg" alt="Spotify" style="width: 30px; vertical-align: middle; margin-right: 5px; margin-bottom: 10px;"><a href="https://open.spotify.com/playlist/25qlHlgA0GsecRX1ftCZLk?si=oVBfR-dbTT6w-AiZyumnRA&pi=e-8MjR0tBnTEWa" target="_blank">Słucham</a>
     </div>
 
     <!-- Audio Section -->
@@ -190,7 +196,7 @@
             const startDate = '1986-04-15';
             const { years, months, days } = calculateTimeDifference(startDate);
             const counterElement = document.getElementById('counter');
-            counterElement.textContent = `Żyję już na świecie ${years} lat, ${months} miesięcy, i ${days} dni.`;
+            counterElement.textContent = `Żyję już na świecie ${years} lat, ${months} miesięcy i ${days} dni.`;
         }
 
         // Update counter on page load
