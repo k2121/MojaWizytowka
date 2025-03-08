@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SATORI</title>
+
+
+  <style>
+	#opis {
+width: 100%;
+height: 160px;
+font-size: 15px;
+padding: 0;
+margin-top: 0;
+margin-bottom: 0;
+resize: both;
+background-color: rgb(255, 255, 255);
+overflow-y: scroll; 
+}
+    #zdarzenie {
+width: 100%;
+height: 40px;
+font-size: 15px;
+padding: 0;
+margin-top: 0;
+margin-bottom: 0;
+resize: both;
+background-color: rgb(115, 52, 156);
+color: rgb(255, 255, 255);
+}
+    #kontekst {
+width: 100%;
+height: 40px;
+font-size: 15px;
+padding: 0;
+margin-top: 0;
+margin-bottom: 0;
+resize: both;
+background-color: rgb(204, 153, 255);
+}
+    #karma {
+width: 100%;
+height: 20px;
+font-size: 15px;
+padding: 0;
+margin-top: 0;
+margin-bottom: 0;
+resize: both;
+background-color: rgb(102, 255, 153);
+}
+    
+
+#wyobraz_sobie {
+width: 100%;
+height: 75px;
+font-size: 15px;
+padding: 0;
+margin-top: 0;
+margin-bottom: 0;
+resize: both;
+background-color: rgb(246, 152, 188);
+}
+
+
+    #przekonanie {
+width: 100%;
+height: 40px;
+font-size: 15px;
+padding: 0;
+margin-top: 0;
+margin-bottom: 0;
+resize: both;
+background-color: rgb(255, 236, 12);
+}
+    #blokady_energii {
+width: 100%;
+height: 60px;
+font-size: 15px;
+padding: 0;
+margin-top: 0;
+margin-bottom: 0;
+resize: both;
+background-color: rgb(255, 255, 255);
+}
+    #nowa_opowiesc {
+width: 100%;
+height: 60px;
+font-size: 15px;
+padding: 0;
+margin-top: 0;
+margin-bottom: 0;
+resize: both;
+background-color: rgb(0, 205, 255);
+}
+    #projekcje {
+width: 76px;
+height: 80px;
+font-size: 50px;
+padding: 0;
+margin-top: 0;
+margin-bottom: 0;
+resize: both;
+background-color: rgb(0, 0, 127);
+color: rgb(0, 255, 0);
+}
+
+
+
+        textarea {
+            width: 100%;
+            min-height: 20px;
+            resize: none;
+            overflow: hidden;
+box-sizing: border-box; /* Upewnia się, że padding i border są uwzględniane w wymiarach */
+font-size: 15px;
+padding: 0;
+margin-top: 0;
+margin-bottom: 0;
+
+background-color: rgb(255, 186, 137);
+}
+
+
+label {
+font-size: 15px;
+padding: 0;
+margin-top: 0;
+margin-bottom: 0;
+display: block;
+}
+button {
+padding: 4px 4px;
+font-size: 15px;
+cursor: pointer;
+}
+.dice-result {
+font-size: 15px;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+
+
+        .karma-background { background-color: rgb(102, 255, 153); }
+        .wyobraz-sobie-background { background-color: rgb(246, 152, 188); }
+        .przekonanie-background { background-color: rgb(255, 236, 12); }
+        .blokada-energii-background { background-color: rgb(255, 255, 255); }
+        .nowa-background { background-color: rgb(0, 205, 255); }
+        .default-background { background-color: rgb(255, 186, 137); }
+
+
+       table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 0px auto;
+        }
+        th, td {
+            border: 0px solid black;
+            padding: 0px;
+            text-align: center;
+        }
+        .blue-cell {
+            background-color: #FFFFAF; /* kolor cytrynowy */
+            color: black; /* czarny tekst */
+            text-align: left; /* wyrównanie do lewej */
+padding: 5px;
+margin-top: 0;
+margin-bottom: 0;
+            }
+
+
+  </style>
+</head>
+
+
+<body style="background-color: rgb(0, 255, 0); color: rgb(0, 0, 0);" alink="#ee0000" link="#0000ee" vlink="#551a8b">
+
+    <table>
+        <tr>
+            <td class="green-cell">
+Gra Radykalnego Wybaczania SATORI 💖 
+<br>
+wydanie elektroniczne by KP 💞
+
+            </td>
+        </tr>
+    </table>
+
+<br>
+
+    <table>
+        <tr>
+            <td class="blue-cell">
+
+
+<form id="myForm">
+
+
+  <label for="zdarzenie">___Oto
+zdarzenie / sytuacja:</label> <textarea id="zdarzenie" name="zdarzenie"></textarea>
+
+
+
+  <label for="kontekst">___Oto kontekst:</label> <textarea id="kontekst" name="kontekst"></textarea>
+
+ 
+
+  <label for="karma">___Tematem Mojej życiowej lekcji
+jest&hellip;</label> <textarea id="karma" name="karma"></textarea>
+
+  
+
+  <label for="wyobraz_sobie">___Wyobraź sobie że...:</label>
+  <textarea id="wyobraz_sobie" name="wyobraz_sobie"></textarea>
+
+  
+<div>
+  <label for="przekonanie">___Przekonanie: 'Całkowicie
+    pozbywam się TERAZ z mojej świadomości przekonania, że&hellip;</label>
+  <textarea id="przekonanie" name="przekonanie" style="display: none;"></textarea>
+</div>
+
+<!--
+<button type="button" onclick="document.getElementById('przekonanie').style.display='none'">Ukryj pole przekonanie ⛔</button>
+<button type="button" onclick="document.getElementById('przekonanie').style.display='block'">Pokaż pole przekonanie 🟢</button>
+-->
+<button type="button" onclick="copyToClipboard('przekonanie')">Kopiuj📋</button>
+
+
+  
+
+  <label for="blokady_energii">___Zablokowana czakra:
+'Uwalniam teraz wszystkie blokady związane z...'</label> <textarea id="blokady_energii" name="blokady_energii"></textarea>
+
+  
+
+  <label for="nowa_opowiesc">___Oto Moja nowa opowieść...</label>
+  <textarea id="nowa_opowiesc" name="nowa_opowiesc"></textarea>
+
+  
+
+  <label for="projekcje">___Oto kierunek projekcji...</label>
+  <textarea id="projekcje" name="projekcje"></textarea>
+
+
+
+            </td>
+        </tr>
+    </table>
+
+
+  <label for="pola_planszy">Pole planszy:</label>
+  <select id="pola_planszy" name="pola_planszy">
+  <option value="">Wybierz pole planszy...</option>
+<!-- Opcje będą generowane dynamicznie w skrypcie JavaScript -->
+  </select>
+
+  
+
+ 
+
+  <button type="button" onclick="randomizeData()">Losuj
+kartę 📋</button> <button type="button" onclick="rollDice()">Rzut kostką 🎲</button>
+  <div class="dice-result" id="diceResult">
+
+  
+
+  </div>
+
+
+
+<label for="pola_zdarzenie">Pole zdarzenie:</label>
+  <select id="pola_zdarzenie" name="pola_zdarzenie">
+  <option value="">Wybierz pole zdarzenie...</option>
+<!-- Opcje będą generowane dynamicznie w skrypcie JavaScript -->
+  </select>
+
+  <label for="pola_kontekst">Pole kontekst:</label>
+  <select id="pola_kontekst" name="pola_kontekst">
+  <option value="">Wybierz pole kontekst...</option>
+<!-- Opcje będą generowane dynamicznie w skrypcie JavaScript -->
+  </select>
+
+
+</form>
+
+<script>
+// Przykładowe dane do losowania
+const sampleData = {
+pola_planszy: [
+{ value: "00", label: "00 😓 Kraina ofiar" },
+{ value: "01", label: "A01 🕸️🕷️ Przekonanie" },
+{ value: "02", label: "A02 🔒 Blokada energii" },
+{ value: "03", label: "A03 📽️ Projekcja" },
+{ value: "04", label: "A04 👉🏻🙎🏻‍♂️ Zabawa w obwinianie" },
+{ value: "05", label: "A05 🕸️🕷️ Przekonanie" },
+{ value: "06", label: "A06 🔒 Blokada energii" },
+{ value: "07", label: "A07 📽️ Projekcja" },
+{ value: "08", label: "A08 🔁 KARMA" },
+{ value: "09", label: "A09 🕸️🕷️ Przekonanie" },
+{ value: "10", label: "A10 🔒 Blokada energii" },
+{ value: "11", label: "A11 🤔 Wyobraź sobie!" },
+{ value: "12", label: "A12 👉🏻🙎🏻‍♂️ Zabawa w obwinianie" },
+{ value: "13", label: "A13 🕸️🕷️ Przekonanie" },
+{ value: "14", label: "A14 🔁 KARMA" },
+{ value: "15", label: "A15 🤔 Wyobraź sobie!" },
+{ value: "16", label: "A16 ⛔ Wrota Świadomości STOP!" },
+{ value: "17", label: "B17 💡 Światło" },
+{ value: "18", label: "B18 🙋🏻‍♂️ Gotowość" },
+{ value: "19", label: "B19 🤗 Samo- akceptacja" },
+{ value: "20", label: "B20 💡 Światło" },
+{ value: "21", label: "B21 😮‍💨 Westchnienie ulgi" },
+{ value: "22", label: "B22 😅 Widzisz u innych własne cechy" },
+{ value: "23", label: "B23 🙋🏻‍♂️ Gotowość" },
+{ value: "24", label: "B24 🤗 Samo- akceptacja" },
+{ value: "25", label: "B25 🤔 Wyobraź sobie!" },
+{ value: "26", label: "B26 💡 Światło" },
+{ value: "27", label: "B27 🙋🏻‍♂️ Gotowość" },
+{ value: "28", label: "B28 💔 Duchowy unik" },
+{ value: "29", label: "B29 💡 Światło" },
+{ value: "30", label: "B30 🔥 Pozbądź się tego" },
+{ value: "31", label: "B31 ⛔↪️ Wrota Przemiany STOP!" },
+{ value: "32", label: "C32 😮‍💨 Westchnienie ulgi" },
+{ value: "33", label: "C33 📖 Nowa opowieść" },
+{ value: "34", label: "C34 💡 Światło" },
+{ value: "35", label: "C35 🦋 Uzdrawiający Anioł" },
+{ value: "36", label: "C36 🤔 Wyobraź sobie!" },
+{ value: "37", label: "C37 🔥 Pozbądź się tego" },
+{ value: "38", label: "C38 📖 Nowa opowieść" },
+{ value: "39", label: "C39 💡 Światło" },
+{ value: "40", label: "C40 🦋 Uzdrawiający Anioł" },
+{ value: "41", label: "C41 ⚡ Moc" },
+{ value: "42", label: "C42 📖 Nowa opowieść" },
+{ value: "43", label: "C43 😮‍💨 Westchnienie ulgi" },
+{ value: "44", label: "C44 💡 Światło" },
+{ value: "45", label: "C45 📖 Nowa opowieść" },
+{ value: "46", label: "C46 ⛔ Wrota Poddania się STOP!" },
+{ value: "47", label: "D47 😮‍💨 Westchnienie ulgi" },
+{ value: "48", label: "D48 🔥 Pozbądź się tego" },
+{ value: "49", label: "D49 💞 Radykalne Wybaczenie" },
+{ value: "50", label: "D50 🥹 Poddanie się" },
+{ value: "51", label: "D51 🤗 Samo- akceptacja" },
+{ value: "52", label: "D52 💔 Duchowy unik" },
+{ value: "53", label: "D53 🤔 Wyobraź sobie!" },
+{ value: "54", label: "D54 🔥 Pozbądź się tego" },
+{ value: "55", label: "D55 ⚡ Moc" },
+{ value: "56", label: "D56 💞 Radykalne Wybaczenie" },
+{ value: "57", label: "D57 🦋 Uzdrawiający Anioł" },
+{ value: "58", label: "D58 💗 Jedność" },
+{ value: "59", label: "D59 🤗 Samo- akceptacja" },
+{ value: "60", label: "D60 🥹 Poddanie się" },
+{ value: "61", label: "D61 🧘🏻‍♂️🥂 SATORI" }
+],
+pola_zdarzenie: [
+{ value: "z01", label: "Byłeś prześladowany za swe religijne / duchowe przekonania." },
+{ value: "z02", label: "Doświadczyłeś nieuzasadnionej dyskryminacji." },
+{ value: "z03", label: "Działałeś wbrew własnym interesom." },
+{ value: "z04", label: "Ktoś boleśnie Cię odrzucił lub porzucił." },
+{ value: "z05", label: "Ktoś Cię okłamał bardzo perfidnie." },
+{ value: "z06", label: "Ktoś Cię zdradził bardzo boleśnie." },
+{ value: "z07", label: "Ktoś kogo kochałeś zmarł nieoczekiwanie." },
+{ value: "z08", label: "Ktoś odebrał Ci władzę." },
+{ value: "z09", label: "Ktoś skradł Twoje marzenia lub Ty uczyniłeś to komuś." },
+{ value: "z10", label: "Ktoś sprawił, że uległeś poważnemu wypadkowi." },
+{ value: "z11", label: "Ktoś uwiódł Twojego małżonka / partnera." },
+{ value: "z12", label: "Musiałeś podjąć decyzję w sprawie niechcianej ciąży." },
+{ value: "z13", label: "Musiałeś zmierzyć się ze  skutkami alkoholizmu / narkomanii." },
+{ value: "z14", label: "Obwiniałeś się o coś, czemu nie zawiniłeś." },
+{ value: "z15", label: "Powiedziano Ci, że byłeś niechciany." },
+{ value: "z16", label: "Pozbawiono Cię kontaktu z Twoimi dziećmi." },
+{ value: "z17", label: "Rozmieniłeś się na drobne." },
+{ value: "z18", label: "Uczyniono z Ciebie kozła ofiarnego." },
+{ value: "z19", label: "Utraciłeś miłość swego życia." },
+{ value: "z20", label: "Zostałeś dotknięty chorobą lub ranny." },
+{ value: "z21", label: "Zostałeś fizycznie / emocjonalnie / psychicznie zraniony." },
+{ value: "z22", label: "Zostałeś okropnie zawstydzony." },
+{ value: "z23", label: "Zostałeś oszukany bardzo perfidnie." },
+{ value: "z24", label: "Zostałeś surowo osądzony lub niesłusznie oskarżony." }
+],
+pola_kontekst: [
+{ value: "k01", label: "Cel życia" },
+{ value: "k02", label: "Ciało" },
+{ value: "k03", label: "Dług" },
+{ value: "k04", label: "Dzieci" },
+{ value: "k05", label: "Kariera" },
+{ value: "k06", label: "Kościół / Instytucja religijna" },
+{ value: "k07", label: "Krewni" },
+{ value: "k08", label: "Małżeństwo / Partner przyszły lub przeszły" },
+{ value: "k09", label: "Marzenia" },
+{ value: "k10", label: "Pieniądze" },
+{ value: "k11", label: "Praca / Miejsce pracy" },
+{ value: "k12", label: "Prasa / Media" },
+{ value: "k13", label: "Przyjaciele / Grupa społeczna" },
+{ value: "k14", label: "Rodzina" },
+{ value: "k15", label: "Rząd" },
+{ value: "k16", label: "Seks" },
+{ value: "k17", label: "Społeczeństwo" },
+{ value: "k18", label: "Szkoła" },
+{ value: "k19", label: "Szpital lub Sanatorium" },
+{ value: "k20", label: "Tajemnice" },
+{ value: "k21", label: "Twórczość" },
+{ value: "k22", label: "Wakacje" },
+{ value: "k23", label: "Władza" },
+{ value: "k24", label: "Związki" }
+],
+zdarzenie: ["zdarzenie: Byłeś prześladowany za swe religijne / duchowe przekonania.", "zdarzenie: Doświadczyłeś nieuzasadnionej dyskryminacji.", "zdarzenie: Działałeś wbrew własnym interesom.", "zdarzenie: Ktoś boleśnie Cię odrzucił lub porzucił.", "zdarzenie: Ktoś Cię okłamał bardzo perfidnie.", "zdarzenie: Ktoś Cię zdradził bardzo boleśnie.", "zdarzenie: Ktoś kogo kochałeś zmarł nieoczekiwanie.", "zdarzenie: Ktoś odebrał Ci władzę.", "zdarzenie: Ktoś skradł Twoje marzenia lub Ty uczyniłeś to komuś.", "zdarzenie: Ktoś sprawił, że uległeś poważnemu wypadkowi.", "zdarzenie: Ktoś uwiódł Twojego małżonka / partnera.", "zdarzenie: Musiałeś podjąć decyzję w sprawie niechcianej ciąży.", "zdarzenie: Musiałeś zmierzyć się ze skutkami alkoholizmu / narkomanii.", "zdarzenie: Obwiniałeś się o coś, czemu nie zawiniłeś.", "zdarzenie: Powiedziano Ci, że byłeś niechciany.", "zdarzenie: Pozbawiono Cię kontaktu z Twoimi dziećmi.", "zdarzenie: Rozmieniłeś się na drobne.", "zdarzenie: Uczyniono z Ciebie kozła ofiarnego.", "zdarzenie: Utraciłeś miłość swego życia.", "zdarzenie: Zostałeś dotknięty chorobą lub ranny.", "zdarzenie: Zostałeś fizycznie / emocjonalnie / psychicznie zraniony.", "zdarzenie: Zostałeś okropnie zawstydzony.", "zdarzenie: Zostałeś oszukany bardzo perfidnie.", "zdarzenie: Zostałeś surowo osądzony lub niesłusznie oskarżony."],
+kontekst: ["kontekst: Cel życia", "kontekst: Ciało", "kontekst: Dług", "kontekst: Dzieci", "kontekst: Kariera", "kontekst: Kościół / Instytucja religijna", "kontekst: Krewni", "kontekst: Małżeństwo / Partner przyszły lub przeszły", "kontekst: Marzenia", "kontekst: Pieniądze", "kontekst: Praca / Miejsce pracy", "kontekst: Prasa / Media", "kontekst: Przyjaciele / Grupa społeczna", "kontekst: Rodzina", "kontekst: Rząd", "kontekst: Seks", "kontekst: Społeczeństwo", "kontekst: Szkoła", "kontekst: Szpital lub Sanatorium", "kontekst: Tajemnice", "kontekst: Twórczość", "kontekst: Wakacje", "kontekst: Władza", "kontekst: Związki"],
+karma: ["karma: Bezstronność", "karma: Bogactwo", "karma: Bycie ignorowanym", "karma: Cierpienie", "karma: Dbałość", "karma: Intymność", "karma: Moja cielesność", "karma: Poczucie godności", "karma: Poczucie własnej wartości", "karma: Poddanie się", "karma: Pokój", "karma: Poniżenie", "karma: Porzucenie", "karma: Pozbywanie się uprzedzeń", "karma: Przebaczenie", "karma: Rodzina", "karma: Samoakceptacja", "karma: Seksualność", "karma: Sprawiedliwość", "karma: Tolerancja", "karma: Tożsamość płciowa", "karma: Wstyd", "karma: Zasługiwanie", "karma: Zdrada"],
+wyobraz_sobie: ["wyobraźSobie: Bierzesz sprawy w swoje ręce i sam kierujesz swoim życiem. Pozbądź się Przekonania lub Blokady Energii.", "wyobraźSobie: Brałeś wszystko zanadto do siebie. Poznaj Przekonanie.", "wyobraźSobie: Byłeś posłuszny swej intuicji. Następne Wrota.", "wyobraźSobie: Choroba sprawia że zwalniasz tempo. Przerwa.", "wyobraźSobie: Czujesz się zagubiony. Odczytaj nowe Przekonanie.", "wyobraźSobie: Czujesz, że życie jest ekscytujące. Rzuć kostką jeszcze raz.", "wyobraźSobie: Działałeś na własną szkodę. Weź Wydarzenie i Kontekst.", "wyobraźSobie: Jesteś w depresji. Odkryj Blokadę Energii.", "wyobraźSobie: Jesteś w świetnym nastroju. Następne wrota. :)", "wyobraźSobie: Obudziła się w tobie zazdrość. Poznaj Przekonanie.", "wyobraźSobie: Odzyskałeś wiarę w ludzkość. Uzdrawiający anioł.", "wyobraźSobie: Podjąłeś ryzyko i rezultat okazał się wspaniały. Przesuń się do przodu o jedno pole. :)", "wyobraźSobie: Pomyliłeś się. Cofnij się o jedno pole. :)", "wyobraźSobie: Przegapiłeś okazję. Cofnij się o dwa pola. :)", "wyobraźSobie: Robisz się coraz silniejszy. Przesuń się do przodu o 3 pola. :)", "wyobraźSobie: Słońce wyziera zza chmur. Radykalne Wybaczanie. :)", "wyobraźSobie: Twoja ocena była słuszna. Idź dwa pola do przodu. :)", "wyobraźSobie: Twoje pozytywne myślenie przynosi dobre rezultaty. Weź Nową Opowieść.", "wyobraźSobie: Twoje uczucia zostały zranione. Cofnij się o trzy pola. :)", "wyobraźSobie: Twój gniew eksploduje! Wyraź emocje. (Zabawa w obwinianie)", "wyobraźSobie: Widzisz u innych własne cechy. Weź Przekonanie lub Blokadę Energii.", "wyobraźSobie: Zachowałeś się nieuczciwie. Poziom niżej. (minus 16 pól)", "wyobraźSobie: Znalazłeś twórcze rozwiązanie problemu. Pozbądź się Przekonania i Blokady Energii.", "wyobraźSobie: Zwycięstwo jest nieuniknione. Następne Wrota."],
+przekonanie: ["przekonanie: Aby być kochanym, muszę być kimś innym niż jestem.", "przekonanie: Boję się nawiązywania bliskich relacji.", "przekonanie: Boję się osiągnąć sukces.", "przekonanie: Chyba nie dam rady.", "przekonanie: Coś mi przeszkadza w osiągnięciu mego celu.", "przekonanie: Coś musi być ze mną nie w porządku.", "przekonanie: Ja się nie liczę - inni są ważniejsi ode mnie.", "przekonanie: Jestem zbyt schorowany i słaby.", "przekonanie: Jestem zupełnie sam na świecie.", "przekonanie: Jeśli będę narzekać, narobię sobie kłopotów.", "przekonanie: Jeśli otworzę swe serce, zostanę zraniony.", "przekonanie: Jeśli pokażę prawdziwą twarz, nikt nie będzie mnie kochać.", "przekonanie: Moje życie po prostu się nie układa.", "przekonanie: Muszę być doskonały, aby mnie kochano.", "przekonanie: Muszę mieć nad wszystkim kontrolę.", "przekonanie: Na wszystko muszę ciężko zapracować.", "przekonanie: Nie jestem wart miłości.", "przekonanie: Nie jestem zbyt lubiany.", "przekonanie: Nie mam żadnych uzdolnień.", "przekonanie: Nie mogę sobie ufać.", "przekonanie: Nie staję na wysokości zadania.", "przekonanie: Nie wyglądam dobrze i tyle.", "przekonanie: Nie zasługuję na miłość.", "przekonanie: Nie zasługuję na pieniądze.", "przekonanie: Nie zasługuję na szczęście.", "przekonanie: Nie zasługuję na to, aby być rodzicem.", "przekonanie: Nie zasługuję, aby mieć to, czego pragnę.", "przekonanie: Nigdy nic mi się nie udaje!", "przekonanie: Nigdy nie będę dość dobry.", "przekonanie: Nigdy nie będę mieć dość pieniędzy.", "przekonanie: Nigdy nie dorastam do sytuacji.", "przekonanie: Nigdzie nie pasuję.", "przekonanie: Nikomu nie mogę ufać.", "przekonanie: Obawiam się bliskości.", "przekonanie: Sam naprawdę nie dam sobie rady.", "przekonanie: Trudno mnie kochać takim jakim jestem.", "przekonanie: Wciąż przydarza mi się coś złego.", "przekonanie: Wszyscy ciągle mi dokuczają.", "przekonanie: Wszyscy mnie ciągle osądzają.", "przekonanie: Wszyscy mnie ignorują i nie zwracają na mnie uwagi.", "przekonanie: Zapewne mi się nie uda.", "przekonanie: Zawsze będę sam.", "przekonanie: Zawsze czegoś brakuje.", "przekonanie: Zawsze wszystko robię źle.", "przekonanie: Złe rzeczy zawsze przydarzają się dobrym ludziom.", "przekonanie: Życie jest niebezpieczne i okrutne.", "przekonanie: Życie jest przygnębiające.", "przekonanie: Życie jest walką, a to co najlepsze trafia się innym."],
+blokady_energii: ["blokadaEnergii: 1) ❤️ czerwony: Bezpieczeństwo, Przetrwanie, Tożsamość", "blokadaEnergii: 2) 🧡 pomarańczowy: Związki, Pieniądze / Seks, Twórcza inwencja", "blokadaEnergii: 3) 💛 żółty: Pewność siebie, Lęk / Zaufanie, Władza", "blokadaEnergii: 4) 💚 zielony: Współczucie / Przebaczenie, Miłość / Nienawiść, Złość / Żal", "blokadaEnergii: 5) 🩵 błękitny: Komunikacja, Krytycyzm, Wolna wola", "blokadaEnergii: 6) 💙 indygo: Samoświadomość, Intuicja, Prawda", "blokadaEnergii: 7) 💜 fioletowy: Duchowość, Natchnienie, Wiara"],
+nowa_opowiesc: ["NOWA OPOWIEŚĆ: _Najgorsze już minęło.", "NOWA OPOWIEŚĆ: _Na świecie żyją tez inni ludzie którzy mają swoje problemy.", "NOWA OPOWIEŚĆ: _W przeszłości mi się udało, więc teraz też mi się uda.", "NOWA OPOWIEŚĆ: Bardzo cieszy Mnie sposób, w jaki toczy się Moje życie.", "NOWA OPOWIEŚĆ: Bóg obdarzył Mnie wieloma darami, którymi z radością dzielę się z innymi.", "NOWA OPOWIEŚĆ: Gdy zachodzi potrzeba, dowiaduję się o wszystkim, co muszę wiedzieć.", "NOWA OPOWIEŚĆ: Jestem absolutnie doskonały jaki jaki jestem.", "NOWA OPOWIEŚĆ: Jestem bardzo uzdolniony!", "NOWA OPOWIEŚĆ: Jestem doskonały właśnie taki jaki jestem.", "NOWA OPOWIEŚĆ: Jestem dostatecznie silny, by poradzić Sobie w życiu, ponieważ wierzę, że dam radę!", "NOWA OPOWIEŚĆ: Jestem najważniejszą osobą w Moim życiu!", "NOWA OPOWIEŚĆ: Jestem największym szczęściarzem na świecie; przepełnia Mnie wdzięczność.", "NOWA OPOWIEŚĆ: Jestem równie popularny jak inni.", "NOWA OPOWIEŚĆ: Jestem teraz zawsze zauważany i doceniany.", "NOWA OPOWIEŚĆ: Jestem wart tego, by mieć wszystko, czego pragnę. I domagam się tego teraz!", "NOWA OPOWIEŚĆ: Jestem zawsze uwzględniany we wszystkich ważnych dla Mnie kwestiach.", "NOWA OPOWIEŚĆ: Kiedy pokazuję, jaki jestem naprawdę, wszyscy Mnie kochają.", "NOWA OPOWIEŚĆ: Mam teraz wszystko, czego pragnę. Z łatwością urzeczywistniam marzenia.", "NOWA OPOWIEŚĆ: Mam zawsze wszystkiego pod dostatkiem, a pieniądze napływają do Mnie teraz szerokim strumieniem.", "NOWA OPOWIEŚĆ: Mogę odnieść sukces we wszystkim, na czym Mi zależy.", "NOWA OPOWIEŚĆ: Mogę osiągnąć wszystko; a gdy czasem coś Mi nie wyjdzie, to nie szkodzi!", "NOWA OPOWIEŚĆ: Moje życie funkcjonuje doskonale - rozpiera Mnie energia!", "NOWA OPOWIEŚĆ: Moje życie to fascynująca przygoda.", "NOWA OPOWIEŚĆ: Nie jestem swoim ciałem, ale kocham i akceptuję ciało, które posiadam.", "NOWA OPOWIEŚĆ: Nigdy nie będę samotny, jeśli tak postanowię.", "NOWA OPOWIEŚĆ: Nikt nie może Mi niczego narzucać - sam podejmuję swoje decyzje.", "NOWA OPOWIEŚĆ: Wierzę, że zawsze mogę liczyć na siebie oraz na opiekę ze strony Wszechświata.", "NOWA OPOWIEŚĆ: Wolno Mi być SOBĄ!", "NOWA OPOWIEŚĆ: Wszyscy darzą Mnie szacunkiem.", "NOWA OPOWIEŚĆ: Wszyscy kochają Mnie właśnie takim, jakim jestem.", "NOWA OPOWIEŚĆ: Wszyscy Mnie lubią takiego jakim jestem.", "NOWA OPOWIEŚĆ: Wszystkie aspekty Mojego życia pozostają w doskonałej równowadze.", "NOWA OPOWIEŚĆ: Z łatwością odczuwam i wyrażam swe uczucia.", "NOWA OPOWIEŚĆ: Z przekonaniem wyrażam Swoje myśli, poglądy i uczucia.", "NOWA OPOWIEŚĆ: Zajmuję się tym, na co mam wpływ, powierzając resztę spraw Sile Wyższej.", "NOWA OPOWIEŚĆ: Zasługuję na wszystko, czego pragnę i domagam się tego teraz!", "NOWA OPOWIEŚĆ: Życie jest teraz takie proste. Jadę na wakacje.", "NOWA OPOWIEŚĆ: Żyję przepełniony mocą i poczuciem szczęścia.", "NOWA OPOWIEŚĆ: Żyję w zgodzie ze sobą."],
+projekcje: ["⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️", "↖️"]
+};
+    function getRandomItem(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function randomizeData() {
+      document.getElementById('zdarzenie').value = getRandomItem(sampleData.zdarzenie);
+      document.getElementById('kontekst').value = getRandomItem(sampleData.kontekst);
+      document.getElementById('karma').value = getRandomItem(sampleData.karma);
+      document.getElementById('wyobraz_sobie').value = getRandomItem(sampleData.wyobraz_sobie);
+      document.getElementById('przekonanie').value = getRandomItem(sampleData.przekonanie);
+      document.getElementById('blokady_energii').value = getRandomItem(sampleData.blokady_energii);
+      document.getElementById('nowa_opowiesc').value = getRandomItem(sampleData.nowa_opowiesc);
+      document.getElementById('projekcje').value = getRandomItem(sampleData.projekcje);
+    }
+
+    function rollDice() {
+      const diceResult = Math.floor(Math.random() * 6) + 1;
+      document.getElementById('diceResult').innerText = "Wynik rzutu kostką 🎲 = " + diceResult;
+    }
+
+    // Inicjalizacja pól wyboru
+    function initPolaPlanszyDropdown() {
+      const select = document.getElementById('pola_planszy');
+      sampleData.pola_planszy.forEach(option => {
+        const opt = document.createElement('option');
+        opt.value = option.value;
+        opt.textContent = option.label;
+        select.appendChild(opt);
+      });
+    }
+
+    function initPolaZdarzenieDropdown() {
+      const select = document.getElementById('pola_zdarzenie');
+      sampleData.pola_zdarzenie.forEach(option => {
+        const opt = document.createElement('option');
+        opt.value = option.value;
+        opt.textContent = option.label;
+        select.appendChild(opt);
+      });
+    }
+
+    function initPolaKontekstDropdown() {
+      const select = document.getElementById('pola_kontekst');
+      sampleData.pola_kontekst.forEach(option => {
+        const opt = document.createElement('option');
+        opt.value = option.value;
+        opt.textContent = option.label;
+        select.appendChild(opt);
+      });
+    }
+
+    // Inicjalizacja po załadowaniu strony
+    window.onload = function() {
+      initPolaPlanszyDropdown();
+      initPolaZdarzenieDropdown();
+      initPolaKontekstDropdown();
+    const container = document.getElementById('textareas-container');
+    const numberOfTextareas = 99;
+     
+    for (let i = 1; i <= numberOfTextareas; i++) {
+      container.innerHTML += generateTextarea(`textarea${i.toString().padStart(2, '0')}`);
+    }
+  };
+
+    // Funkcja kopiująca zawartość pola tekstowego do schowka
+    async function copyToClipboard(textareaId) {
+      const textarea = document.getElementById(textareaId);
+      textarea.style.display = 'none'; // Pokazuje pole przed kopiowaniem
+      try {
+        await navigator.clipboard.writeText(textarea.value); // Używa Clipboard API
+        alert('Zawartość została skopiowana do schowka!');
+      } catch (err) {
+        console.error('Błąd podczas kopiowania:', err);
+      }
+      textarea.style.display = 'none'; // Ponowne ukrycie pola po skopiowaniu
+    }
+
+    function generateTextarea(id) {
+      return `
+        <div>
+          <label for="${id}">Twoja karta ${id.slice(-2)}:</label>
+          <textarea id="${id}" name="${id}" rows="1" cols="50"></textarea>
+        </div>
+        <button type="button" onclick="toggleVisibility('${id}')">⛔Ukryj/🟢Odkryj tekst</button>
+        <button type="button" onclick="clearTextarea('${id}')">Kasuj🗑️</button>
+        <button type="button" onclick="pasteFromClipboard('${id}')">Wklej📋</button>
+      `;
+    }
+
+    function toggleVisibility(id) {
+      var element = document.getElementById(id);
+      element.style.display = (element.style.display === 'none') ? 'block' : 'none';
+    }
+
+    // Funkcja czyszcząca zawartość textarea
+    function clearTextarea(id) {
+      document.getElementById(id).value = '';
+    }
+
+    // Funkcja do wklejania tekstu ze schowka i ukrywania pola
+    async function pasteFromClipboard(id) {
+      const textarea = document.getElementById(id);
+      if (textarea) {
+        try {
+          const text = await navigator.clipboard.readText();
+          textarea.value = text;
+          textarea.style.display = 'none';
+        } catch (err) {
+          console.error('Błąd podczas odczytu ze schowka:', err);
+        }
+      }
+    }
+    
+    
+    
+
+function pole00() {
+document.getElementById("opis").value = "Rozpoczynanie gry w Krainie ofiar:\nKraina ofiar to miejsce, które zamieszkujemy, ilekroć jesteśmy pogrążeni w swojej „opowieści”. Dzieje się tak zawsze, gdy winnymi lub odpowiedzialnymi za nasze uczucia czynimy inne osoby, gdy innych obwiniamy, mamy wobec nich oczekiwania, pragniemy, aby się zmienili itp. Ważne jest, aby uświadomić sobie swoją sytuację i najpierw pokochać siebie w swej własnej krainie ofiar. Dopiero wówczas można przejść do etapu wybaczania. Czynienie tego wcześniej jest próbą wykonania duchowego uniku.";
+};
+function pole01() {
+    // Wstawienie tekstu do pola tekstowego
+    document.getElementById("opis").value = "Przekonanie:\nWyciągnij kartę „Przekonanie” (przekonania są częścią twojej opowieści o życiu w roli ofiary). Nie czytaj jej! Musi pozostać w nieświadomości, dopóki nie staniesz na polu „Światło”. Wówczas możesz ją odczytać i tym samym „wydobyć na światło dzienne”. Połóż ją tekstem do dołu w lewej części planszy gracza, odnoszącej się do starej wersji TWOJEJ OPOWIEŚCI.";
+};
+function pole02() {
+document.getElementById("opis").value = "Blokada energii:\nZakręć „Kołem kolorów”, aby odkryć miejsce zablokowania energii w swym ciele. Odczytaj, jakiego obszaru życia dotyczy blokada (np. fiolet reprezentuje siódmą czakrę i oznacza, że blokujesz swoją zdolność do korzystania z natchnienia, przewodnictwa oraz wiary). Wyciągnij jedną z kolorowych kart reprezentujących wskazaną czakrę i połóż ją w na planszy gracza w części dotyczącej starej wersji TWOJEJ OPOWIEŚCI. Aby uwolnić blokadę, musisz znaleźć się na polu „Westchnienie ulgi”.";
+}
+function pole03() {
+document.getElementById("opis").value = "Projekcja:\nZakręć „Kołem kolorów”, aby zobaczyć, komu przypisujesz własne osądy. (Projekcja polega na przypisywaniu innym ludziom tego, co odrzucamy lub czego nie znosimy w sobie samych). Zobacz, którego z graczy wskazuje strzałka (siebie też weź pod uwagę). Zakręć kołem raz jeszcze, aby zobaczyć, która z twoich czakr jest zablokowana i powoduje projekcję określonych cech na inne osoby. Graczowi, któremu przypisujesz własne cechy, daj kartę „Blokady energii” zgodną z kolorem czakry, z poziomu której dokonujesz projekcji niechęci do samego siebie. Projekcja ma swoją cenę, musisz więc wyciągnąć dla siebie kartę „Przekonanie”. Połóż ją bez czytania w lewej ramce planszy gracza. Twoja „projekcja” dotyczy tego, czemu zaprzeczasz i co wypierasz, jest więc nieświadoma. Dlatego też musi pozostać zakryta.";
+}
+function pole04() {
+document.getElementById("opis").value = "Zabawa w obwinianie:\nJeden z graczy trzyma przed sobą maskę twojego „prześladowcy”, abyś mógł dać upust swym uczuciom. Powiedz, co i dlaczego masz mu /im za złe (np. „to twoja wina, bo...”, „ty mnie do tego zmusiłeś”, „gdyby nie ty...”, „mówiłeś, że będzie dobrze”). Wyrzuć z siebie wszystko, co ty - jako ofiara - chcesz mu /im powiedzieć, i udramatyzuj swą wypowiedź, nie szczędząc emocji. Jeśli nie pojawią się żadne uczucia, nie przejmuj się. Po prostu udawaj.\n\n>>Reakcja grupy: „Tak jest!”, „Wygarnij im!”, „Brawo!”";
+}
+function pole08() {
+document.getElementById("opis").value = "Karma:\nWeź kartę „Karma” i połóż razem z kartami „Zdarzenie” i „Kontekst”. Zastanów się, jaką rolę mogły odegrać sprawy karmiczne dla przebiegu tej historii.";
+}
+function pole11() {
+document.getElementById("opis").value = "Wyobraź sobie!:\nWeź pierwszą z góry kartę tego typu i wykonaj polecenie. Działaj zgodnie z instrukcją. Możesz zachować tę kartę na później.";
+}
+function pole16() {
+document.getElementById("opis").value = "Wrota pierwsze: Świadomość\n1.    Jeśli nie masz żadnej karty typu „Przekonanie”, weź jedną. Połóż ją tekstem do dołu (twoje przekonania nadal pozostają nie uświadomione) w ramce po lewej stronie planszy gracza.\n2.    Podziel się z pozostałymi graczami swoją opowieścią w dotychczasowej wersji, w oparciu o odkryte przed tobą karty. Powinieneś mieć karty „Wydarzenie” oraz „Kontekst”, być może wyciągnąłeś też kartę „Karma”. Jeśli byłeś obiektem projekcji lub stanąłeś na polu „Blokada energii”, zapewne posiadasz też jedną lub więcej kart typu „Blokady energii”.\n3.    Podsumuj poprzednią wypowiedź jednym zdaniem. Na przykład: „Najwidoczniej moją karmą było nauczyć się czegoś o zasługiwaniu i wygląda na to, że całkiem dobrze idzie mi studiowanie tego zagadnienia, ponieważ moi rodzice niewątpliwie wzbudzali we mnie poczucie, że nie zasługuję na nic dobrego. Nie poświęcali mi prawie wcale uwagi, a jeszcze do tego ciągle mnie bili. Nawet teraz czuję się nie dostrzegana i wciąż walczę o zdobycie wystarczającej ilości pieniędzy aby przetrwać”.\n\nWysłuchaj reakcji grupy i ponownie rzuć kostką.\n\n>>REAKCJA GRUPY: „(Imię), przykro mi, że to cię spotkało.”";
+}
+function pole17() {
+document.getElementById("opis").value = "Światło:\nOdkryj jedną z kart „Przekonanie” leżących w lewej części planszy gracza (aby wydobyć ją na światło dzienne) i odczytaj jej treść. Odłóż ją na miejsce tekstem do góry. Jeśli nie masz tego typu karty, wylosuj jedną i dokonaj procesu pozbywania się przekonania (patrz instrukcja „Pozbądź się tego”). (Jeśli gracz cofa się, może pozbyć się karty „Przekonanie” lub „Blokady energii”).\n\n>>Reakcja grupy: „Przecież to nieprawda”, lub jeśli gracz się cofa, „O tak”.";
+}
+function pole18() {
+document.getElementById("opis").value = "Gotowość:\nPowiedz: „Choć być może nie do końca rozumiem dlaczego, jestem gotów/gotowa dostrzec w tej sytuacji Boskie przewodnictwo i ufam, że to co się zdarzyło, stało się nie MNIE lecz DLA MNIE”.\n\n>>Reakcja grupy: „Szanujemy twoją gotowość widzenia tego w taki sposób”.";
+}
+function pole19() {
+document.getElementById("opis").value = "Samoakceptacja:\nPowiedz: „Kocham siebie, czując to, co odczuwam w związku z tą sprawą. Wiem, że gdy będę gotów/gotowa, mogę wybrać spokój”.\n\n>>Reakcja grupy: „(Imię), kochamy cię taką, jaką jesteś!”";
+}
+function pole21() {
+document.getElementById("opis").value = "Westchnienie ulgi:\nPozbądź się jednej karty „Blokady energii”, mówiąc: „Uwalniam teraz wszystkie blokady związane z ____________ (odczytaj kartę)”. Jeśli otrzymałeś tę kartę, stając na polu „Blokada energii”, odłóż ją do pudełka. Jeśli zaś była wynikiem projekcji, zwróć ją osobie, która dokonała przeniesienia swych cech na ciebie. Jeśli nie masz karty, czekasz kolejkę.\n\n>>Reakcja grupy: Głęboki wdech i głośne westchnienie ulgi.";
+}
+function pole22() {
+document.getElementById("opis").value = "Widzisz u innych własne cechy:\nPrzyjrzyj się wszystkim odkrytym kartom „Przekonanie” i „Blokady energii” (u wszystkich graczy). Wybierz tę z nich, która najbardziej do Ciebie przemawia, i weź ją. Połóż ją tekstem do góry w lewej części planszy gracza. Jeśli dokonałeś projekcji swych osądów na innego gracza, dobrze się zastanów, czy chcesz wziąć tę właśnie kartę. Jeśli nie ma żadnej odkrytej karty tego typu, wyciągnij jedną kartę „Przekonanie”, odczytaj na głos i połóż w lewej części swojej planszy gracza.\n\n>>Reakcja grupy: „Skoro widzisz u innych własne cechy, musisz to mieć!”";
+}
+function pole28() {
+document.getElementById("opis").value = "Duchowy unik:\nUczucia są ważne. Uświadom je sobie. Powiedz grupie, co naprawdę czujesz. Następnie cofnij się o 3 pola.\n\n>>Reakcja grupy: „Tak jest, bądź sobą!”";
+}
+function pole30() {
+document.getElementById("opis").value = "Pozbądź się tego:\nSpośród odkrytych kart „Przekonanie” wybierz tę, która zawiera przekonanie, jakiego pragniesz się pozbyć. Jeśli wszystkie twoje karty „Przekonanie” są zakryte, odkryj jedną. Jeśli nie masz żadnej, wylosuj jedną. Trzymając ją w dłoni, powiedz zdecydowanie i z przekonaniem: „Całkowicie pozbywam się TERAZ z mojej świadomości przekonania, że (odczytaj tekst z karty)”. Odłóż kartę na bok.\n\n>>Reakcja grupy: Aplauz i słowa zachęty oraz uznania.";
+}
+function pole31() {
+document.getElementById("opis").value = "Wrota drugie: Przemiana\n1.    Przed pokonaniem tych wrót, weź jedną kartę „Nowa opowieść” i połóż ją tekstem do góry w prawej części planszy gracza (NOWA OPOWIEŚĆ). Wyjaśnij, że ta nowa interpretacja może pomóc ci osiągnąć zmianę świadomości oraz że opisana sytuacja może zawierać w sobie okazję do rozwoju i uzdrowienia.\n2.    Powiedz tak: „Czuję, że moja świadomość ulega przemianie. Zaczynam otwierać się na ideę, że wszystko, co się zdarza, ma swój sens oraz że ta sytuacja być może została mi dana dla mojego duchowego rozwoju”.\n\nWysłuchaj reakcji grupy i ponownie rzuć kostką.\n>>REAKCJA GRUPY: „(Imię), szanujemy twoją gotowość otwarcia się na taką możliwość”.";
+}
+function pole33() {
+document.getElementById("opis").value = "Nowa opowieść:\nWyciągnij kartę „Nowa opowieść” i połóż w ramce po prawej stronie planszy gracza, by stworzyć dla siebie nową interpretację. Odczytaj ją.\n\n>>Reakcja grupy: Potwierdźcie: „To jest dla ciebie dobre”";
+}
+function pole35() {
+document.getElementById("opis").value = "Uzdrawiający anioł:\nSpójrz na swych dawnych wrogów jak na uzdrawiające anioły. Powiedz tak: „Choć być może nie wiem, dlaczego tak się dzieje, uświadamiam sobie teraz, że ____________ i ja wykonujemy razem uzdrawiający taniec, i rozumiem, że jesteśmy dla siebie nawzajem uzdrawiającymi aniołami.\n\n>>Reakcja grupy: „Dla nich TY także jesteś uzdrawiającym aniołem!”";
+}
+function pole41() {
+document.getElementById("opis").value = "Moc:\nPozbądź się wszystkich pozostałych kart „Przekonanie” (p30) i „Blokady energii” (p21). Jeśli nie masz już żadnych kart tego typu, przesuń się do przodu do najbliższych Wrót (Wrota poddania się albo SATORI).\n\n>>Reakcja grupy: „Rzeczywiście posiadasz moc!”";
+}
+function pole46() {
+document.getElementById("opis").value = "Wrota trzecie: Poddanie się\n1.    Odwróć wszystkie karty „Przekonanie”, które nadal pozostają zakryte, i dokładnie zapoznaj się z ich treścią. Przeczytaj je na głos i wyjaśnij, w jaki sposób przekonania te miały wcześniej nad tobą władzę i były odpowiedzialne za dramaty twego życia. Powiedz, że zdajesz sobie sprawę, iż stara wersja TWOJEJ OPOWIEŚCI zapewne była spowodowana jedynie błędami percepcji, i że jesteś teraz gotów ujrzeć swoją sytuację w innym świetle.\n2.    Powiedz: „Całkowicie pozbyłem się swego przywiązania do starej wersji swojej opowieści i odmawiam dalszego inwestowania w nią mojej energii. Pozbywam się potrzeby kontrolowania rezultatów wydarzeń i jestem gotów przyjąć ideę, że wszystko rozwija się zgodnie z Boskim planem”.\n3.    Zakończ, odczytując teksty wszystkich posiadanych przez siebie kart „NOWA OPOWIEŚĆ”.\n\nWysłuchaj reakcji grupy i ponownie rzuć kostką.\n>>REAKCJA GRUPY: „Wspaniale! Wspieramy cię w akcie powierzenia się Sile Wyższej!”";
+}
+function pole49() {
+document.getElementById("opis").value = "Radykalne Wybaczenie:\nWybacz swoim rzekomym wrogom. Powiedz: „ ____________ , całkowicie ci / wam wybaczam. Rozumiem teraz, że nie zrobiłeś / nie zrobiliście nic złego. Wszystko pozostaje w Boskim Porządku. Bezwarunkowo wspieram cię takim, jaki jesteś / was takimi, jacy jesteście w całej wspaniałości swego istnienia.\n\n>>Reakcja grupy: „Oto prawdziwe poddanie się Sile Wyższej!”";
+}
+function pole50() {
+document.getElementById("opis").value = "Poddanie się:\nPowiedz: „Poddaję się Wyższej Sile, którą dla mnie jest ____________ i ufam, że wszystko ułoży się doskonale, w zgodzie z Boskim przewodnictwem i duchowym prawem. Odczuwam Boską Miłość, która przepełnia tę sytuację. (Skup się przez chwilę i poczuj Boską Miłość).\n\n>>Reakcja grupy: „My też ją czujemy! My także się poddajemy!”";
+}
+function pole58() {
+document.getElementById("opis").value = "Jedność:\nPowiedz: „Odczuwam jedność ze wszystkim i wszystkimi”.\n\n>>Reakcja grupy: „Tak, jesteśmy jednością.”";
+}
+function pole61() {
+document.getElementById("opis").value = "*Uwaga: Jeśli dotrzesz do pola SATORI, wciąż jeszcze mając jakąś kartę typu „Blokady Energii” lub „Przekonanie”, nie możesz iść dalej lecz musisz się cofnąć. Cofaj się, aż pozbędziesz się wszystkich Blokad i/lub Przekonań - dopiero wówczas zacznij ponownie posuwać się do przodu, Ta sama zasada dotyczy sytuacji, gdy dotrzesz do WRÓT PRZEMIANY. Jest to najdalsze miejsce, do którego trzeba się cofać, zanim dokona się ponownego zwrotu w kierunku SATORI.\n\n\nSatori (Przebudzenie)\n____Po osiągnięciu przez wszystkich graczy pola SATORI (co umożliwia uprzednie pozbycie się wszystkich kart typu „Blokady energii” oraz „Przekonanie”), każdy z nich próbuje przedstawić nową interpretację swej opowieści ofiary w zgodzie z założeniami Radykalnego Wybaczania. Rozpoczyna gracz, który dotarł do końcowego pola pierwszy. Pamiętaj, że nowa interpretacja opisuje sytuację z duchowego punktu widzenia, który zakłada, że wszystkie wydarzenia mają swój sens. Wyrażasz gotowość przyjęcia takiej możliwości, nawet jeśli nie umiesz dostrzec owego sensu. Dokonanie tego powoduje przemianę energii, a wówczas zdarzają się cuda.\n____Nie ma potrzeby powrotu do dawnej opowieści i dalszego zajmowania się nią. Być może zechcesz opowiedzieć z głębi serca o tym, czego nauczyła cię twoja podróż. Wybierz nową rzeczywistość, wykorzystując do tego karty „Nowa opowieść” i tworząc całkowicie nową interpretację swej życiowej historii. Zakończ, wygłaszając jedno z poniższych stwierdzeń - którekolwiek wydaje się lepiej pasować do twojej sytuacji - albo oba, jeśli i jedno i drugie mogą mieć zastosowanie.\n\n1.    Zdaję sobie teraz sprawę, że to co się wydarzyło, było dokładnie tym, czego pragnęła moja dusza, i że wzięła ona udział w stworzeniu tego dla mnie. Nawet jeśli nie rozumiem dlaczego, jestem teraz gotów/gotowa przyjąć, że pojawienie się w moim życiu ____________ dało mi okazję do uzdrowienia i rozwoju.\n\n2.     ____________ pojawił(a) się w moim życiu, aby ukazać mi tę część mnie, której nigdy nie pokochałem ani nie zaakceptowałem - część, która jest ____________ - o co oskarżałem jego/ją. Wcześniej nigdy tego u siebie nie dostrzegałem, lecz widziałem u niego/niej i krytykowałem go/ją za to. Wybaczając ____________ , wycofuję tę projekcję i obdarzam teraz ową część siebie miłością. Zamiast dalej czynić ____________ wyrzuty, pragnę podziękować mu/jej za bycie moim Uzdrawiającym aniołem.\n\n\n\nNa zakończenie gry:\n„Pozostańmy spokojni w obliczu dającej ukojenie wiedzy, że wszystko jest, zawsze było i na zawsze pozostanie w zgodzie z Boskim porządkiem, przebiegając zgodnie z Boskim planem. Przyjmijmy tę prawdę z otwartością, niezależnie od tego, czy możemy ją pojąć czy też nie. Prośmy także o pomoc w uzyskaniu i zachowaniu świadomości naszego związku z Boską cząstką w nas samych, związku ze wszystkimi i wszystkim, tak abyśmy prawdziwie odczuwali oraz wyrażali to, że w istocie stanowimy Jedność”. \n\nPo zakończeniu gry...\nNie zdziw się, jeśli w ciągu następnych kilku dni zauważysz jakieś zmiany. Choć jest to tylko zabawa, prawdopodobnie w jej trakcie poruszone zostało mnóstwo zastałej energii. Mogą pojawić się emocje - warto wiedzieć, że jest to normalne. Pozwól, aby się pojawiły i dały o sobie znać. Mogą wystąpić także pewne doznania fizyczne. Po każdym doświadczeniu Radykalnego Wybaczania zalecana jest kąpiel, najlepiej z dodatkiem oczyszczającej soli. Pozwala to na usunięcie wszelkich toksyn, które zostały uwolnione podczas gry. Przygotuj się też na cudowne zdarzenia. Gdy wybaczamy radykalnie, uwalnia się także energia wokół drugiej osoby, tak więc możesz spodziewać się telefonu lub listu. Jednak nie miej żadnych oczekiwań i nie rób niczego na siłę.";
+}
+
+
+    
+
+</script>
+<br><br>
+     <button onclick="pole00()">p00</button>
+     <button onclick="pole01()">p01</button>
+     <button onclick="pole02()">p02</button>
+     <button onclick="pole03()">p03</button>
+     <button onclick="pole04()">p04</button>
+     <button onclick="pole01()">p05</button>
+     <button onclick="pole02()">p06</button>
+     <button onclick="pole03()">p07</button>
+     <button onclick="pole08()">p08</button>
+     <button onclick="pole01()">p09</button>
+     <button onclick="pole02()">p10</button>
+     <button onclick="pole11()">p11</button>
+     <button onclick="pole04()">p12</button>
+     <button onclick="pole01()">p13</button>
+     <button onclick="pole08()">p14</button>
+     <button onclick="pole11()">p15</button>
+     <button onclick="pole16()">p16</button>
+     <button onclick="pole17()">p17</button>
+     <button onclick="pole18()">p18</button>
+     <button onclick="pole19()">p19</button>
+     <button onclick="pole17()">p20</button>
+     <button onclick="pole21()">p21</button>
+     <button onclick="pole22()">p22</button>
+     <button onclick="pole18()">p23</button>
+     <button onclick="pole19()">p24</button>
+     <button onclick="pole11()">p25</button>
+     <button onclick="pole17()">p26</button>
+     <button onclick="pole18()">p27</button>
+     <button onclick="pole28()">p28</button>
+     <button onclick="pole17()">p29</button>
+     <button onclick="pole30()">p30</button>
+     <button onclick="pole31()">p31</button>
+     <button onclick="pole21()">p32</button>
+     <button onclick="pole33()">p33</button>
+     <button onclick="pole17()">p34</button>
+     <button onclick="pole35()">p35</button>
+     <button onclick="pole11()">p36</button>
+     <button onclick="pole30()">p37</button>
+     <button onclick="pole33()">p38</button>
+     <button onclick="pole17()">p39</button>
+     <button onclick="pole35()">p40</button>
+     <button onclick="pole41()">p41</button>
+     <button onclick="pole33()">p42</button>
+     <button onclick="pole21()">p43</button>
+     <button onclick="pole17()">p44</button>
+     <button onclick="pole33()">p45</button>
+     <button onclick="pole46()">p46</button>
+     <button onclick="pole21()">p47</button>
+     <button onclick="pole30()">p48</button>
+     <button onclick="pole49()">p49</button>
+     <button onclick="pole50()">p50</button>
+     <button onclick="pole19()">p51</button>
+     <button onclick="pole28()">p52</button>
+     <button onclick="pole11()">p53</button>
+     <button onclick="pole30()">p54</button>
+     <button onclick="pole41()">p55</button>
+     <button onclick="pole49()">p56</button>
+     <button onclick="pole35()">p57</button>
+     <button onclick="pole58()">p58</button>
+     <button onclick="pole19()">p59</button>
+     <button onclick="pole50()">p60</button>
+     <button onclick="pole61()">p61</button>
+     
+<div> <label for="opis">Polecenie:</label>
+<textarea id="opis" name="opis" rows="10" cols="50"></textarea> </div>
+
+
+<div id="textareas-container"></div>
+<br><br>KONIEC
+
+</body>
+</html>
