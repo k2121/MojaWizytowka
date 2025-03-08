@@ -121,7 +121,7 @@ padding: 0;
 margin-top: 0;
 margin-bottom: 0;
 
-background-color: rgb(255, 255, 128);
+background-color: rgb(255, 186, 137);
 }
 
 
@@ -606,58 +606,101 @@ document.getElementById("opis").value = "*Uwaga: Jeśli dotrzesz do pola SATORI,
 }
 
 
-         document.addEventListener('DOMContentLoaded', function() {
-            const textInput = document.getElementById('textarea');
-            // Sprawdzamy, czy element istnieje
-            if (textInput) {
-                function updateBackgroundColor() {
-                    const inputText = textInput.value.trim();
-                    const firstWord = inputText.split(' ')[0].toLowerCase();
-                    // Usuwanie wszystkich klas tła
-                    textInput.classList.remove(
-                        'karma-background', 
-                        'wyobraz-sobie-background', 
-                        'przekonanie-background', 
-                        'blokada-energii-background', 
-                        'nowa-background', 
-                        'default-background'
-                    );
-                    // Dodawanie odpowiedniej klasy na podstawie pierwszego słowa
-                    switch(firstWord) {
-                        case 'karma:':
-                            textInput.classList.add('karma-background');
-                            break;
-                        case 'wyobraźsobie:':
-                            textInput.classList.add('wyobraz-sobie-background');
-                            break;
-                        case 'przekonanie:':
-                            textInput.classList.add('przekonanie-background');
-                            break;
-                        case 'blokadaenergii:':
-                            textInput.classList.add('blokada-energii-background');
-                            break;
-                        case 'nowa':
-                            textInput.classList.add('nowa-background');
-                            break;
-                        default:
-                            textInput.classList.add('default-background');
-                    }
-                }
-                function toggleTextareaVisibility(visible) {
-                    textInput.style.display = visible ? 'block' : 'none';
-                }
-                // Nasłuchiwacze zdarzeń
-                textInput.addEventListener('input', updateBackgroundColor);
-                textInput.addEventListener('paste', function() {
-                    // Małe opóźnienie, aby poczekać na wklejenie tekstu
-                    setTimeout(updateBackgroundColor, 0);
-                });
-                // Udostępnienie funkcji toggle w globalnym zakresie
-                window.toggleTextareaVisibility = toggleTextareaVisibility;
-            } else {
-                console.error('Element textarea1 nie został znaleziony.');
-            }
-        });   
+// Funkcja generująca pole tekstowe z przyciskami
+function generateTextarea(id) {
+  return `
+    <div>
+      <label for="${id}">Twoja karta ${id.slice(-2)}:</label>
+      <textarea id="${id}" name="${id}" rows="1" cols="50"></textarea>
+      <button type="button" onclick="toggleVisibility('${id}')">⛔Ukryj/🟢Odkryj tekst</button>
+      <button type="button" onclick="clearTextarea('${id}')">Kasuj🗑️</button>
+      <button type="button" onclick="pasteFromClipboard('${id}')">Wklej📋</button>
+    </div>
+  `;
+}
+
+// Funkcja do przełączania widoczności pola tekstowego
+function toggleVisibility(id) {
+  const textarea = document.getElementById(id);
+  if (textarea) {
+    textarea.style.display = textarea.style.display === 'none' ? 'block' : 'none';
+  }
+}
+
+// Funkcja do czyszczenia pola tekstowego
+function clearTextarea(id) {
+  const textarea = document.getElementById(id);
+  if (textarea) {
+    textarea.value = '';
+    updateBackgroundColor(textarea);
+  }
+}
+
+// Funkcja do wklejania tekstu z schowka
+function pasteFromClipboard(id) {
+  const textarea = document.getElementById(id);
+  if (textarea) {
+    navigator.clipboard.readText().then(text => {
+      textarea.value = text;
+      updateBackgroundColor(textarea);
+    });
+  }
+}
+
+// Funkcja do aktualizacji koloru tła
+function updateBackgroundColor(textarea) {
+  const inputText = textarea.value.trim();
+  const firstWord = inputText.split(' ')[0].toLowerCase();
+  
+  // Usuwanie wszystkich klas tła
+  textarea.classList.remove(
+    'karma-background', 
+    'wyobraz-sobie-background', 
+    'przekonanie-background', 
+    'blokada-energii-background', 
+    'nowa-background', 
+    'default-background'
+  );
+  
+  // Dodawanie odpowiedniej klasy na podstawie pierwszego słowa
+  switch(firstWord) {
+    case 'karma:':
+      textarea.classList.add('karma-background');
+      break;
+    case 'wyobraźsobie:':
+      textarea.classList.add('wyobraz-sobie-background');
+      break;
+    case 'przekonanie:':
+      textarea.classList.add('przekonanie-background');
+      break;
+    case 'blokadaenergii:':
+      textarea.classList.add('blokada-energii-background');
+      break;
+    case 'nowa':
+      textarea.classList.add('nowa-background');
+      break;
+    default:
+      textarea.classList.add('default-background');
+  }
+}
+
+// Inicjalizacja po załadowaniu DOM
+document.addEventListener('DOMContentLoaded', function() {
+  const container = document.getElementById('textarea-container');
+  if (container) {
+    // Generowanie przykładowych pól tekstowych
+    container.innerHTML = generateTextarea('textarea1') + generateTextarea('textarea2');
+    
+    // Dodanie nasłuchiwaczy zdarzeń dla każdego pola tekstowego
+    const textareas = container.querySelectorAll('textarea');
+    textareas.forEach(textarea => {
+      textarea.addEventListener('input', () => updateBackgroundColor(textarea));
+      textarea.addEventListener('paste', () => setTimeout(() => updateBackgroundColor(textarea), 0));
+    });
+  } else {
+    console.error('Kontener pól tekstowych nie został znaleziony.');
+  }
+});
 
 </script>
 <br><br>
