@@ -606,7 +606,58 @@ document.getElementById("opis").value = "*Uwaga: Jeśli dotrzesz do pola SATORI,
 }
 
 
-    
+         document.addEventListener('DOMContentLoaded', function() {
+            const textInput = document.getElementById('textarea');
+            // Sprawdzamy, czy element istnieje
+            if (textInput) {
+                function updateBackgroundColor() {
+                    const inputText = textInput.value.trim();
+                    const firstWord = inputText.split(' ')[0].toLowerCase();
+                    // Usuwanie wszystkich klas tła
+                    textInput.classList.remove(
+                        'karma-background', 
+                        'wyobraz-sobie-background', 
+                        'przekonanie-background', 
+                        'blokada-energii-background', 
+                        'nowa-background', 
+                        'default-background'
+                    );
+                    // Dodawanie odpowiedniej klasy na podstawie pierwszego słowa
+                    switch(firstWord) {
+                        case 'karma:':
+                            textInput.classList.add('karma-background');
+                            break;
+                        case 'wyobraźsobie:':
+                            textInput.classList.add('wyobraz-sobie-background');
+                            break;
+                        case 'przekonanie:':
+                            textInput.classList.add('przekonanie-background');
+                            break;
+                        case 'blokadaenergii:':
+                            textInput.classList.add('blokada-energii-background');
+                            break;
+                        case 'nowa':
+                            textInput.classList.add('nowa-background');
+                            break;
+                        default:
+                            textInput.classList.add('default-background');
+                    }
+                }
+                function toggleTextareaVisibility(visible) {
+                    textInput.style.display = visible ? 'block' : 'none';
+                }
+                // Nasłuchiwacze zdarzeń
+                textInput.addEventListener('input', updateBackgroundColor);
+                textInput.addEventListener('paste', function() {
+                    // Małe opóźnienie, aby poczekać na wklejenie tekstu
+                    setTimeout(updateBackgroundColor, 0);
+                });
+                // Udostępnienie funkcji toggle w globalnym zakresie
+                window.toggleTextareaVisibility = toggleTextareaVisibility;
+            } else {
+                console.error('Element textarea1 nie został znaleziony.');
+            }
+        });   
 
 </script>
 <br><br>
