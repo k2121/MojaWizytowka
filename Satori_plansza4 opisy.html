@@ -16,7 +16,7 @@ padding: 0;
 margin-top: 0;
 margin-bottom: 0;
 resize: both;
-background-color: rgb(255, 255, 255);
+background-color: rgb(192, 192, 192);
 color: rgb(0, 128, 0);
 overflow-y: scroll; }
 #zdarzenie {
@@ -113,6 +113,7 @@ padding: 0;
 margin-top: 0;
 margin-bottom: 0;
 background-color: rgb(255, 186, 137);
+resize: both;
 }
 label {
 font-size: 15px;
@@ -213,16 +214,7 @@ opowieść...</label> <textarea id="nowa_opowiesc"
 kartę 📋</button> <button type="button"
  onclick="rollDice()">Rzut kostką 🎲</button>
 <div class="dice-result" id="diceResult"> </div>
-<label for="pola_zdarzenie">Pole zdarzenie:</label>
-<select id="pola_zdarzenie" name="pola_zdarzenie">
-<option value="">Wybierz pole zdarzenie...</option>
-<!-- Opcje będą generowane dynamicznie w skrypcie JavaScript -->
-</select>
-<label for="pola_kontekst">Pole kontekst:</label>
-<select id="pola_kontekst" name="pola_kontekst">
-<option value="">Wybierz pole kontekst...</option>
-<!-- Opcje będą generowane dynamicznie w skrypcie JavaScript -->
-</select>
+
 <script>
 // Przykładowe dane do losowania
 const sampleData = {
@@ -243,7 +235,7 @@ pola_planszy: [
 { value: "13", label: "A13 🕸️🕷️ Przekonanie" },
 { value: "14", label: "A14 🔁 KARMA" },
 { value: "15", label: "A15 🤔 Wyobraź sobie!" },
-{ value: "16", label: "A16 ⛔ Wrota Świadomości STOP!" },
+{ value: "16", label: "=A16 ⛔ Wrota Świadomości STOP!" },
 { value: "17", label: "B17 💡 Światło" },
 { value: "18", label: "B18 🙋🏻‍♂️ Gotowość" },
 { value: "19", label: "B19 🤗 Samo- akceptacja" },
@@ -258,7 +250,7 @@ pola_planszy: [
 { value: "28", label: "B28 💔 Duchowy unik" },
 { value: "29", label: "B29 💡 Światło" },
 { value: "30", label: "B30 🔥 Pozbądź się tego" },
-{ value: "31", label: "B31 ⛔↪️ Wrota Przemiany STOP!" },
+{ value: "31", label: "=B31 ⛔↪️ Wrota Przemiany STOP!" },
 { value: "32", label: "C32 😮‍💨 Westchnienie ulgi" },
 { value: "33", label: "C33 📖 Nowa opowieść" },
 { value: "34", label: "C34 💡 Światło" },
@@ -273,7 +265,7 @@ pola_planszy: [
 { value: "43", label: "C43 😮‍💨 Westchnienie ulgi" },
 { value: "44", label: "C44 💡 Światło" },
 { value: "45", label: "C45 📖 Nowa opowieść" },
-{ value: "46", label: "C46 ⛔ Wrota Poddania się STOP!" },
+{ value: "46", label: "=C46 ⛔ Wrota Poddania się STOP!" },
 { value: "47", label: "D47 😮‍💨 Westchnienie ulgi" },
 { value: "48", label: "D48 🔥 Pozbądź się tego" },
 { value: "49", label: "D49 💞 Radykalne Wybaczenie" },
@@ -288,7 +280,7 @@ pola_planszy: [
 { value: "58", label: "D58 💗 Jedność" },
 { value: "59", label: "D59 🤗 Samo- akceptacja" },
 { value: "60", label: "D60 🥹 Poddanie się" },
-{ value: "61", label: "D61 🧘🏻‍♂️🥂 SATORI" }
+{ value: "61", label: "=D61 🧘🏻‍♂️🥂 SATORI" }
 ],
 pola_zdarzenie: [
 { value: "z01", label: "Byłeś prześladowany za swe religijne / duchowe przekonania." },
@@ -607,137 +599,156 @@ console.error('Kontener pól tekstowych nie został znaleziony.');
 }
 });
 </script>
+
 <br>
-<br>
-<button style="background-color: gray; color: rgb(64, 27, 122);" onclick="pole00()">p00</button>
+<button style="background-color: gray; color: rgb(64, 27, 122);" onclick="pole00()">p00😓</button>
 <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
- onclick="pole01()">p01</button> <button
+ onclick="pole01()">p01🕸️🕷️</button> <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
- onclick="pole02()">p02</button> <button
+ onclick="pole02()">p02🔒</button> <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
- onclick="pole03()">p03</button> <button
+ onclick="pole03()">p03📽️</button> <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
- onclick="pole04()">p04</button> <button
+ onclick="pole04()">p04👉🏻🙎🏻‍♂️</button> <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
- onclick="pole01()">p05</button> <button
+ onclick="pole01()">p05🕸️🕷️</button> <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
- onclick="pole02()">p06</button> <button
+ onclick="pole02()">p06🔒</button> <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
- onclick="pole03()">p07</button> <button
+ onclick="pole03()">p07📽️</button> <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
- onclick="pole08()">p08</button> <button
+ onclick="pole08()">p08🔁</button> <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
- onclick="pole01()">p09</button> <button
+ onclick="pole01()">p09🕸️🕷️</button> <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
- onclick="pole02()">p10</button> <button
+ onclick="pole02()">p10🔒</button> <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
- onclick="pole11()">p11</button> <button
+ onclick="pole11()">p11🤔</button> <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
- onclick="pole04()">p12</button> <button
+ onclick="pole04()">p12👉🏻🙎🏻‍♂️</button> <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
- onclick="pole01()">p13</button> <button
+ onclick="pole01()">p13🕸️🕷️</button> <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
- onclick="pole08()">p14</button> <button
+ onclick="pole08()">p14🔁</button> <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
- onclick="pole11()">p15</button> <button
+ onclick="pole11()">p15🤔</button> <button
  style="background-color: rgb(195, 0, 128); color: black;"
- onclick="pole16()">p16</button> <button
+ onclick="pole16()">p16⛔</button> <button
  style="background-color: rgb(197, 210, 132); color: rgb(64, 27, 122);"
- onclick="pole17()">p17</button> <button
+ onclick="pole17()">p17💡</button> <button
  style="background-color: rgb(197, 210, 132); color: rgb(64, 27, 122);"
- onclick="pole18()">p18</button> <button
+ onclick="pole18()">p18🙋🏻‍♂️</button> <button
  style="background-color: rgb(197, 210, 132); color: rgb(64, 27, 122);"
- onclick="pole19()">p19</button> <button
+ onclick="pole19()">p19🤗</button> <button
  style="background-color: rgb(197, 210, 132); color: rgb(64, 27, 122);"
- onclick="pole17()">p20</button> <button
+ onclick="pole17()">p20💡</button> <button
  style="background-color: rgb(197, 210, 132); color: rgb(64, 27, 122);"
- onclick="pole21()">p21</button> <button
+ onclick="pole21()">p21😮‍💨</button> <button
  style="background-color: rgb(197, 210, 132); color: rgb(64, 27, 122);"
- onclick="pole22()">p22</button> <button
+ onclick="pole22()">p22😅</button> <button
  style="background-color: rgb(197, 210, 132); color: rgb(64, 27, 122);"
- onclick="pole18()">p23</button> <button
+ onclick="pole18()">p23🙋🏻‍♂️</button> <button
  style="background-color: rgb(197, 210, 132); color: rgb(64, 27, 122);"
- onclick="pole19()">p24</button> <button
+ onclick="pole19()">p24🤗</button> <button
  style="background-color: rgb(197, 210, 132); color: rgb(64, 27, 122);"
- onclick="pole11()">p25</button> <button
+ onclick="pole11()">p25🤔</button> <button
  style="background-color: rgb(197, 210, 132); color: rgb(64, 27, 122);"
- onclick="pole17()">p26</button> <button
+ onclick="pole17()">p26💡</button> <button
  style="background-color: rgb(197, 210, 132); color: rgb(64, 27, 122);"
- onclick="pole18()">p27</button> <button
+ onclick="pole18()">p27🙋🏻‍♂️</button> <button
  style="background-color: rgb(197, 210, 132); color: rgb(64, 27, 122);"
- onclick="pole28()">p28</button> <button
+ onclick="pole28()">p28💔</button> <button
  style="background-color: rgb(197, 210, 132); color: rgb(64, 27, 122);"
- onclick="pole17()">p29</button> <button
+ onclick="pole17()">p29💡</button> <button
  style="background-color: rgb(197, 210, 132); color: rgb(64, 27, 122);"
- onclick="pole30()">p30</button> <button
- style="background-color: red; color: rgb(64, 27, 122);" onclick="pole31()">p31</button>
+ onclick="pole30()">p30🔥</button> <button
+ style="background-color: green; color: rgb(64, 27, 122);" onclick="pole31()">p31⛔↪️</button>
 <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122);"
- onclick="pole21()">p32</button> <button
+ onclick="pole21()">p32😮‍💨</button> <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122);"
- onclick="pole33()">p33</button> <button
+ onclick="pole33()">p33📖</button> <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122);"
- onclick="pole17()">p34</button> <button
+ onclick="pole17()">p34💡</button> <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122);"
- onclick="pole35()">p35</button> <button
+ onclick="pole35()">p35🦋</button> <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122);"
- onclick="pole11()">p36</button> <button
+ onclick="pole11()">p36🤔</button> <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122);"
- onclick="pole30()">p37</button> <button
+ onclick="pole30()">p37🔥</button> <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122);"
- onclick="pole33()">p38</button> <button
+ onclick="pole33()">p38📖</button> <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122);"
- onclick="pole17()">p39</button> <button
+ onclick="pole17()">p39💡</button> <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122);"
- onclick="pole35()">p40</button> <button
+ onclick="pole35()">p40🦋</button> <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122);"
- onclick="pole41()">p41</button> <button
+ onclick="pole41()">p41⚡</button> <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122);"
- onclick="pole33()">p42</button> <button
+ onclick="pole33()">p42📖</button> <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122);"
- onclick="pole21()">p43</button> <button
+ onclick="pole21()">p43😮‍💨</button> <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122);"
- onclick="pole17()">p44</button> <button
+ onclick="pole17()">p44💡</button> <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122);"
- onclick="pole33()">p45</button> <button
+ onclick="pole33()">p45📖</button> <button
  style="background-color: rgb(195, 0, 128); color: black;"
- onclick="pole46()">p46</button> <button
+ onclick="pole46()">p46⛔</button> <button
  style="background-color: rgb(224, 149, 232); color: rgb(64, 27, 122);"
- onclick="pole21()">p47</button> <button
+ onclick="pole21()">p47😮‍💨</button> <button
  style="background-color: rgb(224, 149, 232); color: rgb(64, 27, 122);"
- onclick="pole30()">p48</button> <button
+ onclick="pole30()">p48🔥</button> <button
  style="background-color: rgb(224, 149, 232); color: rgb(64, 27, 122);"
- onclick="pole49()">p49</button> <button
+ onclick="pole49()">p49💞</button> <button
  style="background-color: rgb(224, 149, 232); color: rgb(64, 27, 122);"
- onclick="pole50()">p50</button> <button
+ onclick="pole50()">p50🥹</button> <button
  style="background-color: rgb(224, 149, 232); color: rgb(64, 27, 122);"
- onclick="pole19()">p51</button> <button
+ onclick="pole19()">p51🤗</button> <button
  style="background-color: rgb(224, 149, 232); color: rgb(64, 27, 122);"
- onclick="pole28()">p52</button> <button
+ onclick="pole28()">p52💔</button> <button
  style="background-color: rgb(224, 149, 232); color: rgb(64, 27, 122);"
- onclick="pole11()">p53</button> <button
+ onclick="pole11()">p53🤔</button> <button
  style="background-color: rgb(224, 149, 232); color: rgb(64, 27, 122);"
- onclick="pole30()">p54</button> <button
+ onclick="pole30()">p54🔥</button> <button
  style="background-color: rgb(224, 149, 232); color: rgb(64, 27, 122);"
- onclick="pole41()">p55</button> <button
+ onclick="pole41()">p55⚡</button> <button
  style="background-color: rgb(224, 149, 232); color: rgb(64, 27, 122);"
- onclick="pole49()">p56</button> <button
+ onclick="pole49()">p56💞</button> <button
  style="background-color: rgb(224, 149, 232); color: rgb(64, 27, 122);"
- onclick="pole35()">p57</button> <button
+ onclick="pole35()">p57🦋</button> <button
  style="background-color: rgb(224, 149, 232); color: rgb(64, 27, 122);"
- onclick="pole58()">p58</button> <button
+ onclick="pole58()">p58💗</button> <button
  style="background-color: rgb(224, 149, 232); color: rgb(64, 27, 122);"
- onclick="pole19()">p59</button> <button
+ onclick="pole19()">p59🤗</button> <button
  style="background-color: rgb(224, 149, 232); color: rgb(64, 27, 122);"
- onclick="pole50()">p60</button> <button
+ onclick="pole50()">p60🥹</button> <button
  style="background-color: rgb(195, 0, 128); color: black;"
- onclick="pole61()">p61</button>
+ onclick="pole61()">p61🧘🏻‍♂️🥂</button>
+<br><br>
 <div> <label for="opis">
-<i>Pozbądź się wszystkich pozostałych kart „Przekonanie” [p30] i „Blokady energii” [p21].</i><br>Polecenia do pól planszy:
+<i>Pozbądź się wszystkich pozostałych kart „Przekonanie” [p30] i „Blokady energii” [p21].</i>
+<br><br>Polecenia do pól planszy:
 </label>
 <textarea id="opis" name="opis" rows="10"
  cols="50"></textarea> </div>
+
+
+<label for="pola_zdarzenie">Pole zdarzenie:</label>
+<select id="pola_zdarzenie" name="pola_zdarzenie">
+<option value="">Wybierz pole zdarzenie...</option>
+<!-- Opcje będą generowane dynamicznie w skrypcie JavaScript -->
+</select>
+<label for="pola_kontekst">Pole kontekst:</label>
+<select id="pola_kontekst" name="pola_kontekst">
+<option value="">Wybierz pole kontekst...</option>
+<!-- Opcje będą generowane dynamicznie w skrypcie JavaScript -->
+</select>
+
+
+
+
+
 <div id="textareas-container"></div>
 <br>
 <br>
