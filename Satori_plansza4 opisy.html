@@ -81,7 +81,7 @@ resize: both;
 background-color: rgb(255, 255, 255);
 }
 #nowa_opowiesc {
-width: 100%;
+width: 400px;
 height: 60px;
 font-size: 15px;
 padding: 0;
@@ -172,34 +172,86 @@ wydanie elektroniczne by KP</td>
 <br>
 <table>
  <tbody>
-  <tr>
-   <td class="blue-cell">
-   <form id="myForm"> <label for="zdarzenie">___Oto
-zdarzenie / sytuacja:</label> <textarea id="zdarzenie"
- name="zdarzenie"></textarea> <label for="kontekst">___Oto
-kontekst:</label> <textarea id="kontekst"
- name="kontekst"></textarea> <label for="karma">___Tematem
-Mojej życiowej lekcji
-jest:</label> <textarea id="karma"
- name="karma"></textarea> <label for="wyobraz_sobie">___Wyobraź
-sobie że...:</label> <textarea id="wyobraz_sobie"
- name="wyobraz_sobie"></textarea>
-    <div> <label for="przekonanie">___Szkodliwe Przekonanie:</label> <textarea id="przekonanie"
- name="przekonanie" style="display: none;"></textarea>
-    </div>
-<!-- <button type="button" onclick="document.getElementById('przekonanie').style.display='none'">Ukryj pole przekonanie ⛔</button> <button type="button" onclick="document.getElementById('przekonanie').style.display='block'">Pokaż pole przekonanie 🟢</button> -->
-    <button type="button"
- onclick="copyToClipboard('przekonanie')">Kopiuj📄</button>
-    <label for="blokady_energii">___Zablokowana
-czakra:</label> <textarea
- id="blokady_energii" name="blokady_energii"></textarea>
-    <label for="nowa_opowiesc">___Oto Moja nowa
-opowieść...</label> <textarea id="nowa_opowiesc"
- name="nowa_opowiesc"></textarea> <label
- for="projekcje">___Oto kierunek projekcji...</label> <textarea
- id="projekcje" name="projekcje"></textarea> </form>
-   </td>
-  </tr>
+<tr>
+  <td class="blue-cell">
+    <form id="myForm">
+      <div class="form-container">
+        <!-- Pierwszy rząd -->
+        <div class="form-group">
+          <label for="zdarzenie">___Oto zdarzenie / sytuacja:</label>
+          <textarea id="zdarzenie" name="zdarzenie"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="kontekst">___Oto kontekst:</label>
+          <textarea id="kontekst" name="kontekst"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="karma">___Tematem Mojej życiowej lekcji jest:</label>
+          <textarea id="karma" name="karma"></textarea>
+        </div>
+
+        <!-- Drugi rząd -->
+        <div class="form-group">
+          <label for="wyobraz_sobie">___Wyobraź sobie że...:</label>
+          <textarea id="wyobraz_sobie" name="wyobraz_sobie"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="blokady_energii">___Zablokowana czakra:</label>
+          <textarea id="blokady_energii" name="blokady_energii"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="nowa_opowiesc">___Oto Moja nowa opowieść...</label>
+          <textarea id="nowa_opowiesc" name="nowa_opowiesc"></textarea>
+        </div>
+
+        <!-- Trzeci rząd -->
+        <div class="form-group">
+          <label for="projekcje">___Oto kierunek projekcji...</label>
+          <textarea id="projekcje" name="projekcje"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="przekonanie">___Szkodliwe Przekonanie:</label>
+          <textarea id="przekonanie" name="przekonanie" style="display: none;"></textarea>
+                    <button type="button" onclick="copyToClipboard('przekonanie')">Kopiuj📄</button>
+        </div>
+      </div>
+    </form>
+  </td>
+</tr>
+
+<style>
+  .form-container {
+    display: flex;
+    flex-wrap: wrap; /* Pozwala na zawijanie elementów do nowej linii */
+    gap: 10px; /* Odstęp między grupami */
+  }
+
+  .form-group {
+    flex: 1 1 calc(33.33% - 10px); /* Trzy pola w rzędzie, z odstępem */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group label {
+    margin-bottom: 5px; /* Odstęp między etykietą a textarea */
+  }
+
+  .form-group textarea {
+    width: 100%; /* Textarea zajmuje całą dostępną szerokość */
+    box-sizing: border-box; /* Uwzględnia padding i border w szerokości */
+  }
+
+  button {
+    margin-top: 10px; /* Odstęp od ostatniego pola */
+  }
+
+  /* Responsywność - na małych ekranach pola ułożą się jedno pod drugim */
+  @media (max-width: 768px) {
+    .form-group {
+      flex: 1 1 100%; /* Każde pole zajmuje 100% szerokości */
+    }
+  }
+</style>
  </tbody>
 </table>
 <label for="pola_planszy">Pole planszy:</label>
@@ -824,7 +876,7 @@ function pole58() {
 document.getElementById("opis").value = "Jedność:\n   Powiedz: \n   „Odczuwam jedność ze wszystkim i wszystkimi”.\n\n   >>Reakcja grupy: „Tak, jesteśmy jednością!”";
 }
 function pole61() {
-document.getElementById("opis").value = "___*Uwaga: Jeśli dotrzesz do pola SATORI, wciąż jeszcze mając jakąś kartę typu „Blokady Energii” lub „Przekonanie”, nie możesz iść dalej lecz musisz się cofnąć. Cofaj się, aż pozbędziesz się wszystkich Blokad i/lub Przekonań - dopiero wówczas zacznij ponownie posuwać się do przodu, Ta sama zasada dotyczy sytuacji, gdy dotrzesz do WRÓT PRZEMIANY [p31]. Jest to najdalsze miejsce, do którego trzeba się cofać, zanim dokona się ponownego zwrotu w kierunku SATORI.\n\n\n   Satori (Przebudzenie)\n_______Po osiągnięciu przez wszystkich graczy pola SATORI (co umożliwia uprzednie pozbycie się wszystkich kart typu „Blokady energii” oraz „Przekonanie”), każdy z nich próbuje przedstawić nową interpretację swej opowieści ofiary w zgodzie z założeniami Radykalnego Wybaczania. Rozpoczyna gracz, który dotarł do końcowego pola pierwszy. Pamiętaj, że nowa interpretacja opisuje sytuację z duchowego punktu widzenia, który zakłada, że wszystkie wydarzenia mają swój sens. Wyrażasz gotowość przyjęcia takiej możliwości, nawet jeśli nie umiesz dostrzec owego sensu. Dokonanie tego powoduje przemianę energii, a wówczas zdarzają się cuda.\n_______Nie ma potrzeby powrotu do dawnej opowieści i dalszego zajmowania się nią. Być może zechcesz opowiedzieć z głębi serca o tym, czego nauczyła cię twoja podróż. Wybierz nową rzeczywistość, wykorzystując do tego karty „Nowa opowieść” i tworząc całkowicie nową interpretację swej życiowej historii. Zakończ, wygłaszając jedno z poniższych stwierdzeń - którekolwiek wydaje się lepiej pasować do twojej sytuacji - albo oba, jeśli i jedno i drugie mogą mieć zastosowanie.\n\n   1. „Zdaję sobie teraz sprawę, że to co się wydarzyło, było dokładnie tym, czego pragnęła moja dusza, i że wzięła ona udział w stworzeniu tego dla mnie. Nawet jeśli nie rozumiem dlaczego, jestem teraz gotów/gotowa przyjąć, że pojawienie się w moim życiu ____________ dało mi okazję do uzdrowienia i rozwoju.”\n\n   2. „____________ pojawił(a) się w moim życiu, aby ukazać mi tę część mnie, której nigdy nie pokochałem ani nie zaakceptowałem - część, która jest ____________ - o co oskarżałem jego/ją. Wcześniej nigdy tego u siebie nie dostrzegałem, lecz widziałem u niego/niej i krytykowałem go/ją za to. Wybaczając ____________, wycofuję tę projekcję i obdarzam teraz ową część siebie miłością. Zamiast dalej czynić ____________ wyrzuty, pragnę podziękować mu/jej za bycie moim Uzdrawiającym aniołem.”\n\n\n\n   Na zakończenie gry odczytaj:\n   „Pozostańmy spokojni w obliczu dającej ukojenie wiedzy, że wszystko jest, zawsze było i na zawsze pozostanie w zgodzie z Boskim porządkiem, przebiegając zgodnie z Boskim planem. Przyjmijmy tę prawdę z otwartością, niezależnie od tego, czy możemy ją pojąć czy też nie. Prośmy także o pomoc w uzyskaniu i zachowaniu świadomości naszego związku z Boską cząstką w nas samych, związku ze wszystkimi i wszystkim, tak abyśmy prawdziwie odczuwali oraz wyrażali to, że w istocie stanowimy Jedność”. \n\n   Po zakończeniu gry...\n   Nie zdziw się, jeśli w ciągu następnych kilku dni zauważysz jakieś zmiany. Choć jest to tylko zabawa, prawdopodobnie w jej trakcie poruszone zostało mnóstwo zastałej energii. Mogą pojawić się emocje- warto wiedzieć, że jest to normalne. Pozwól, aby się pojawiły i dały o sobie znać. Mogą wystąpić także pewne doznania fizyczne. Po każdym doświadczeniu Radykalnego Wybaczania zalecana jest kąpiel, najlepiej z dodatkiem oczyszczającej soli. Pozwala to na usunięcie wszelkich toksyn, które zostały uwolnione podczas gry. Przygotuj się też na cudowne zdarzenia. Gdy wybaczamy radykalnie, uwalnia się także energia wokół drugiej osoby, tak więc możesz spodziewać się telefonu lub listu. Jednak nie miej żadnych oczekiwań i nie rób niczego na siłę...";
+document.getElementById("opis").value = "___*Uwaga: Jeśli dotrzesz do pola SATORI, wciąż jeszcze mając jakąś kartę typu „Blokady Energii” lub „Przekonanie”, nie możesz iść dalej lecz musisz się cofnąć. Cofaj się, aż pozbędziesz się wszystkich Blokad i/lub Przekonań - dopiero wówczas zacznij ponownie posuwać się do przodu, Ta sama zasada dotyczy sytuacji, gdy dotrzesz do WRÓT PRZEMIANY [p31]. Jest to najdalsze miejsce, do którego trzeba się cofać, zanim dokona się ponownego zwrotu w kierunku SATORI.\n\n\n   Satori (Przebudzenie)\n_______Po osiągnięciu przez wszystkich graczy pola SATORI (co umożliwia uprzednie pozbycie się wszystkich kart typu „Blokady energii” oraz „Przekonanie”), każdy z nich próbuje przedstawić nową interpretację swej opowieści ofiary w zgodzie z założeniami Radykalnego Wybaczania. Rozpoczyna gracz, który dotarł do końcowego pola pierwszy. Pamiętaj, że nowa interpretacja opisuje sytuację z duchowego punktu widzenia, który zakłada, że wszystkie wydarzenia mają swój sens. Wyrażasz gotowość przyjęcia takiej możliwości, nawet jeśli nie umiesz dostrzec owego sensu. Dokonanie tego powoduje przemianę energii, a wówczas zdarzają się cuda.\n_______Nie ma potrzeby powrotu do dawnej opowieści i dalszego zajmowania się nią. Być może zechcesz opowiedzieć z głębi serca o tym, czego nauczyła cię twoja podróż. Wybierz nową rzeczywistość, wykorzystując do tego karty „Nowa opowieść” i tworząc całkowicie nową interpretację swej życiowej historii. Zakończ, wygłaszając jedno z poniższych stwierdzeń - którekolwiek wydaje się lepiej pasować do twojej sytuacji - albo oba, jeśli i jedno i drugie mogą mieć zastosowanie.\n\n   1. „Zdaję sobie teraz sprawę, że to co się wydarzyło, było dokładnie tym, czego pragnęła moja dusza, i że wzięła ona udział w stworzeniu tego dla mnie. Nawet jeśli nie rozumiem dlaczego, jestem teraz gotów/gotowa przyjąć, że pojawienie się w moim życiu ____________ dało mi okazję do uzdrowienia i rozwoju.”\n\n   2. „____________ pojawił(a) się w moim życiu, aby ukazać mi tę część mnie, której nigdy nie pokochałem ani nie zaakceptowałem - część, która jest ____________ - o co oskarżałem jego/ją. Wcześniej nigdy tego u siebie nie dostrzegałem, lecz widziałem u niego/niej i krytykowałem go/ją za to. Wybaczając ____________, wycofuję tę projekcję i obdarzam teraz ową część siebie miłością. Zamiast dalej czynić ____________ wyrzuty, pragnę podziękować mu/jej za bycie moim Uzdrawiającym aniołem.”\n\n\n\n   Na zakończenie gry odczytaj:\n   „Pozostańmy spokojni w obliczu dającej ukojenie wiedzy, że wszystko jest, zawsze było i na zawsze pozostanie w zgodzie z Boskim porządkiem, przebiegając zgodnie z Boskim planem. Przyjmijmy tę prawdę z otwartością, niezależnie od tego, czy możemy ją pojąć czy też nie. Prośmy także o pomoc w uzyskaniu i zachowaniu świadomości naszego związku z Boską cząstką w nas samych, związku ze wszystkimi i wszystkim, tak abyśmy prawdziwie odczuwali oraz wyrażali to, że w istocie stanowimy Jedność”. \n\n   Po zakończeniu gry...\n   Nie zdziw się, jeśli w ciągu następnych kilku dni zauważysz jakieś zmiany. Choć jest to tylko zabawa, prawdopodobnie w jej trakcie poruszone zostało mnóstwo zastałej energii. Mogą pojawić się emocje - warto wiedzieć, że jest to normalne. Pozwól, aby się pojawiły i dały o sobie znać. Mogą wystąpić także pewne doznania fizyczne. Po każdym doświadczeniu Radykalnego Wybaczania zalecana jest kąpiel, najlepiej z dodatkiem oczyszczającej soli. Pozwala to na usunięcie wszelkich toksyn, które zostały uwolnione podczas gry. Przygotuj się też na cudowne zdarzenia. Gdy wybaczamy radykalnie, uwalnia się także energia wokół drugiej osoby, tak więc możesz spodziewać się telefonu lub listu. Jednak nie miej żadnych oczekiwań i nie rób niczego na siłę...";
 }
 // Funkcja generująca pole tekstowe z przyciskami
 function generateTextarea(id) {
@@ -1276,12 +1328,12 @@ Zanim rozpoczniesz grę, Mistrz Gry odtworzy pierwsze
 nagranie z płyty
 CD.<br>
    <br>
-   <big span style="font-style: italic; color: rgb(75, 0, 130);">Zinterpretuj
+   <span style="font-style: italic; color: rgb(75, 0, 130);">Zinterpretuj
 na nowo</span><br
  style="font-style: italic; color: rgb(75, 0, 130);">
-   <style="color: rgb(75, 0, 130);"><span
+   <big style="color: rgb(75, 0, 130);"><span
  style="font-weight: bold; font-style: italic;">swoją
-przeszłość</span><br
+przeszłość</span></big><br
  style="font-style: italic; color: rgb(75, 0, 130);">
    <br style="font-style: italic; color: rgb(75, 0, 130);">
    <span style="font-style: italic; color: rgb(75, 0, 130);">Dokonaj</span><br
@@ -1304,7 +1356,7 @@ przyszłość</span><br
 Gra dla 2-5 osób od lat 14<br>
     Czas gry 120 minut<br
  style="color: rgb(75, 0, 130);">
-   </span></big> <br>
+   </span> <br>
    <br>
    <big style="font-style: italic; text-decoration: underline;"><big>Zasady
 gry</big></big><br>
@@ -1344,7 +1396,7 @@ spirali. Wgrze chodzi o to, aby przejść od
 &bdquo;Krainy ofiar&rdquo; do pola &lsquo;Satori&rsquo;. Można
 tego dokonać dopiero po
 pozbyciu się wszystkich kart typu &bdquo;Blokady Energii&rdquo;
-i &bdquo;Przekonanie&rdquo; (zob. UWAGA przy polu SATORI). Na planszy znajdują
+i &bdquo;Przekonanie&rdquo; (zob. Uwaga). Na planszy znajdują
 się 4 kręgi. Reprezentują one kolejne poziomy świadomości,
 odpowiadające obszarom duchowej rzeczywistości. Zmierzając przez owe
 poziomy do pełnej świadomości - czyli SATORI - doświadczamy Radykalnego
