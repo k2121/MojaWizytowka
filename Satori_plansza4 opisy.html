@@ -123,14 +123,14 @@ margin-bottom: 0;
 display: block;
 }
 button {
-padding: 4px 4px;
+padding: 0px 0px;
 font-size: 15px;
 cursor: pointer;
 }
 .dice-result {
 font-size: 15px;
-margin-top: 5px;
-margin-bottom: 5px;
+margin-top: 0px;
+margin-bottom: 0px;
 }
 .karma-background { background-color: rgb(102, 255, 153); }
 .wyobraz-sobie-background { background-color: rgb(246, 152, 188); }
@@ -141,7 +141,7 @@ margin-bottom: 5px;
 table {
 border-collapse: collapse;
 width: 100%;
-margin: 0px auto;
+margin: 0px;
 }
 th, td {
 border: 0px solid black;
@@ -162,15 +162,15 @@ margin-bottom: 0;
   .textarea-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 16px;
-    margin-top: 20px;
+    gap: 0px;
+    margin-top: 0px;
   }
 
   .textarea-box {
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    background: #f9f9f9;
+    border: 0px solid #ccc;
+    padding: 0px;
+    border-radius: 0px;
+    background: #FFFFAF;
   }
 
   .textarea-box textarea {
@@ -179,7 +179,7 @@ margin-bottom: 0;
   }
 
   .textarea-box button {
-    margin: 4px 2px 0 0;
+    margin: 0px 0px 0 0;
   }
 
 
@@ -268,7 +268,7 @@ wydanie elektroniczne by KP</td>
   }
 
   .form-group {
-    flex: 1 1 calc(25% - 10px); /* Trzy pola w rzędzie, z odstępem */
+    flex: 1 1 calc(25% - 10px); /* Cztery pola w rzędzie, z odstępem */
     display: flex;
     flex-direction: column;
   }
@@ -301,10 +301,9 @@ wydanie elektroniczne by KP</td>
 <!-- Opcje będą generowane dynamicznie w skrypcie JavaScript -->
 </select>
 <button type="button" onclick="randomizeData()">Losuj
-kartę 📑</button> <button type="button"
- onclick="rollDice()">Rzut kostką 🎲</button>
-<div class="dice-result" id="diceResult"> </div>
-
+kartę 📑</button>
+<button type="button" onclick="rollDice()">Rzut kostką 🎲</button>
+<span class="dice-result" id="diceResult"></span>
 <script>
 // Przykładowe dane do losowania
 const sampleData = {
@@ -1087,13 +1086,13 @@ document.getElementById("opis").value = "___*Uwaga: Jeśli dotrzesz do pola SATO
  onclick="pole50()">p60🥹</button> <button
  style="background-color: rgb(195, 0, 128); color: black;"
  onclick="pole61()">p61🧘🏻‍♂️</button>
-<br><br>
-<div> <label for="opis">
+<br>
+<span> <label for="opis">
 <i>Pozbądź się wszystkich pozostałych kart „Przekonanie” [p30] i „Blokady energii” [p21].</i>
 <br><br>Polecenia do pól planszy:
 </label>
 <textarea id="opis" name="opis" rows="10"
- cols="50"></textarea> </div>
+ cols="50"></textarea> </span>
 
 
 <label for="pola_zdarzenie">Pole zdarzenie:</label>
