@@ -793,8 +793,16 @@ function toggleVisibility(textareaId, button) {
   }
 }
 
-function clearTextarea(id) {
-  document.getElementById(id).value = '';
+async function clearTextarea(id) {
+  const textarea = document.getElementById(id);
+  try {
+    const text = await '';
+    textarea.value = text;
+    updateBackgroundColor(textarea); // Aktualizacja koloru tła po wklejeniu
+  } catch (err) {
+    console.error('Błąd podczas kasowania:', err);
+}
+           
 }
 
 async function pasteFromClipboard(id) {
