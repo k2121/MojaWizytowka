@@ -241,7 +241,7 @@ wydanie elektroniczne by KP</td>
         <div class="form-group">
           <label for="przekonanie">___Szkodliwe Przekonanie:</label>
           <textarea id="przekonanie" name="przekonanie" style="display: none;"></textarea>
-                    <button type="button" onclick="copyToClipboardHidden('przekonanie')">Kopiuj📄</button>
+                    <button type="button" onclick="copyToClipboard('przekonanie')">Kopiuj📄</button>
         </div>
       </div>
     </form>
@@ -820,19 +820,6 @@ projekcje: ["⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️"
 
 
 
-// Funkcja do wklejania tekstu ze schowka i ukrywania pola
-async function pasteFromClipboardHidden(id) {
-const textarea = document.getElementById(id);
-if (textarea) {
-try {
-const text = await navigator.clipboard.readText();
-textarea.value = text;
-textarea.style.display = 'none';
-} catch (err) {
-console.error('Błąd podczas odczytu ze schowka:', err);
-}
-}
-}
 function pole00() {
 document.getElementById("opis").value = "Rozpoczynanie gry w Krainie ofiar:\n   Kraina ofiar to miejsce, które zamieszkujemy, ilekroć jesteśmy pogrążeni w swojej „opowieści”. Dzieje się tak zawsze, gdy winnymi lub odpowiedzialnymi za nasze uczucia czynimy inne osoby, gdy innych obwiniamy, mamy wobec nich oczekiwania, pragniemy, aby się zmienili itp. Ważne jest, aby uświadomić sobie swoją sytuację i najpierw pokochać siebie w swej własnej krainie ofiar. Dopiero wówczas można przejść do etapu wybaczania. Czynienie tego wcześniej jest próbą wykonania duchowego uniku.";
 };
