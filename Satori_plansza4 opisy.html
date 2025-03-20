@@ -804,6 +804,7 @@ projekcje: ["⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️"
 
 
 
+  
   window.onload = function () {
     initPolaPlanszyDropdown();
     initPolaZdarzenieDropdown();
@@ -821,7 +822,8 @@ projekcje: ["⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️"
       container.appendChild(div);
     }
 
-    function updateBackgroundColor(textarea) {
+    // Funkcja kolorująca tło
+    window.updateBackgroundColor = function (textarea) {
       const inputText = textarea.value.trim();
       const firstWord = inputText.split(' ')[0].toLowerCase();
 
@@ -851,25 +853,25 @@ projekcje: ["⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️"
       }
     }
 
+    // Obsługa inputów - kolorowanie przy wpisywaniu
     const textareas = container.querySelectorAll('textarea');
     textareas.forEach(textarea => {
-      const handleUpdate = () => {
-        try {
-          updateBackgroundColor(textarea);
-        } catch (error) {
-          console.error('Błąd podczas aktualizacji koloru tła:', error);
-        }
-      };
-
-      textarea.addEventListener('input', handleUpdate);
-
-      textarea.addEventListener('pasteFromClipboard', () => {
-        setTimeout(() => {
-          handleUpdate();
-        }, 10); // pozwala na przetworzenie wklejonego tekstu
+      textarea.addEventListener('input', () => {
+        updateBackgroundColor(textarea);
       });
     });
+
+    // Definicja funkcji pasteFromClipboard
+    window.pasteFromClipboard = function (targetTextarea) {
+      navigator.clipboard.readText().then(text => {
+        targetTextarea.value = text;
+        updateBackgroundColor(targetTextarea); // kolorowanie po wklejeniu przez funkcję
+      }).catch(err => {
+        console.error('Błąd podczas odczytu z schowka:', err);
+      });
+    };
   };
+
 
   
 
