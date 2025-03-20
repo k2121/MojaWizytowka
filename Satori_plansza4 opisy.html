@@ -862,7 +862,7 @@ projekcje: ["⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️"
     });
 
     // Definicja funkcji pasteFromClipboard
-    window.pasteFromClipboard = function (targetTextarea) {
+    window.pasteFromClipboard(id) = function (targetTextarea) {
       navigator.clipboard.readText().then(text => {
         targetTextarea.value = text;
         updateBackgroundColor(targetTextarea); // kolorowanie po wklejeniu przez funkcję
