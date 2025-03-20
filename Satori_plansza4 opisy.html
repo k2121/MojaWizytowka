@@ -820,14 +820,14 @@ async function copyToClipboard(id) {
   const textarea = document.getElementById(id);
   try {
     await navigator.clipboard.writeText(textarea.value);
-    alert('Zawartość została skopiowana do schowka!');
+    alert('Karta została skopiowana.');
   } catch (err) {
     console.error('Błąd podczas kopiowania:', err);
   }
 }
 
 window.onload = function () {
-initPolaPlanszyDropdown();
+    initPolaPlanszyDropdown();
     initPolaZdarzenieDropdown();
     initPolaKontekstDropdown();
   const container = document.getElementById('textareas-container');
