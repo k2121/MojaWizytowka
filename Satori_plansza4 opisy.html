@@ -760,7 +760,7 @@ projekcje: ["⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️"
         <textarea id="${id}" rows="2" cols="50"></textarea><br>
         <button type="button" onclick="toggleVisibility('${id}', this)">Ukryj tekst</button>
         <button type="button" onclick="clearTextarea('${id}')">Kasuj</button>
-        <button type="button" onclick="pasteFromClipboard('${id}')">Wklej</button>
+        <button type="button" onclick="pasteFromClipboard('${id}')">,📋Wklej</button>
         <button type="button" onclick="copyToClipboard('${id}')">Kopiuj</button>
       `;
     }
@@ -863,7 +863,7 @@ projekcje: ["⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️"
 
       textarea.addEventListener('input', handleUpdate);
 
-      textarea.addEventListener('paste', () => {
+      textarea.addEventListener('pasteFromClipboard', () => {
         setTimeout(() => {
           handleUpdate();
         }, 10); // pozwala na przetworzenie wklejonego tekstu
