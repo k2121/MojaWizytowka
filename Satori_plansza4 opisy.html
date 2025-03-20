@@ -224,15 +224,21 @@ wydanie elektroniczne by KP</td>
 
         <!-- Drugi rząd -->
         <div class="form-group">
-          <label for="wyobraz_sobie">___Wyobraź sobie że...:</label>
+          <label for="wyobraz_sobie">___Wyobraź sobie że...:
+   <button type="button" onclick="copyToClipboard('wyobraz_sobie')">Kopiuj</button></label>
           <textarea id="wyobraz_sobie" name="wyobraz_sobie"></textarea>
         </div>
         <div class="form-group">
-          <label for="blokady_energii">___Zablokowana czakra:</label>
+          <label for="blokady_energii">___Zablokowana czakra:
+   <button type="button" onclick="copyToClipboard('blokady_energii')">Kopiuj</button>
+</label>
           <textarea id="blokady_energii" name="blokady_energii"></textarea>
         </div>
         <div class="form-group">
-          <label for="nowa_opowiesc">___Oto Moja nowa opowieść...</label>
+          <label for="nowa_opowiesc">___Oto Moja nowa opowieść...
+
+   <button type="button" onclick="copyToClipboard('nowa_opowiesc')">Kopiuj</button>
+</label>
           <textarea id="nowa_opowiesc" name="nowa_opowiesc"></textarea>
         </div>
 
@@ -242,9 +248,12 @@ wydanie elektroniczne by KP</td>
           <textarea id="projekcje" name="projekcje"></textarea>
         </div>
         <div class="form-group">
-          <label for="przekonanie">___Szkodliwe Przekonanie:</label>
+          <label for="przekonanie">___Szkodliwe Przekonanie:
+
+<button type="button" onclick="copyToClipboard('przekonanie')">Kopiuj📄</button>
+</label>
           <textarea id="przekonanie" name="przekonanie" style="display: none;"></textarea>
-                    <button type="button" onclick="copyToClipboard('przekonanie')">Kopiuj📄</button>
+                    
         </div>
       </div>
     </form>
@@ -757,157 +766,116 @@ projekcje: ["⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️"
       });
     }
 
-    function generateTextarea(id) {
-      return `
-        <label for="${id}">Twoja karta ${id.slice(-2)}:</label><br>
-        <textarea id="${id}" rows="2" cols="50"></textarea><br>
-        <button type="button" onclick="toggleVisibility('${id}', this)">Ukryj tekst</button>
-        <button type="button" onclick="clearTextarea('${id}')">Kasuj</button>
-        <button type="button" onclick="pasteFromClipboard('${id}')">,📋Wklej</button>
-        <button type="button" onclick="copyToClipboard('${id}')">Kopiuj</button>
-      `;
-    }
-
-    function toggleVisibility(textareaId, button) {
-      const textarea = document.getElementById(textareaId);
-      if (textarea.style.display === 'none') {
-        textarea.style.display = 'block';
-        button.innerText = 'Ukryj tekst';
-      } else {
-        textarea.style.display = 'none';
-        button.innerText = 'Odkryj tekst';
-      }
-    }
-
-    function clearTextarea(id) {
-      document.getElementById(id).value = '';
-    }
-
-    async function pasteFromClipboard(id) {
-      const textarea = document.getElementById(id);
-      try {
-        const text = await navigator.clipboard.readText();
-        textarea.value = text;
-      } catch (err) {
-        console.error('Błąd podczas wklejania:', err);
-      }
-    }
-
-    async function copyToClipboard(id) {
-      const textarea = document.getElementById(id);
-      try {
-        await navigator.clipboard.writeText(textarea.value);
-        alert('Zawartość została skopiowana do schowka!');
-      } catch (err) {
-        console.error('Błąd podczas kopiowania:', err);
-      }
-    }
-
     
-
-
-
   
-  window.onload = function () {
-    initPolaPlanszyDropdown();
+
+
+function generateTextarea(id) {
+  return `
+    <label for="${id}">Twoja karta ${id.slice(-2)}:
+      <button type="button" onclick="toggleVisibility('${id}', this)">Ukryj</button>
+      <button type="button" onclick="clearTextarea('${id}')">Kasuj</button>
+      <button type="button" onclick="pasteFromClipboard('${id}')">📋Wklej</button>
+      <button type="button" onclick="copyToClipboard('${id}')">Kopiuj</button>
+    </label>
+    <textarea id="${id}" rows="2" cols="50"></textarea>
+  `;
+}
+
+function toggleVisibility(textareaId, button) {
+  const textarea = document.getElementById(textareaId);
+  if (textarea.style.display === 'none') {
+    textarea.style.display = 'block';
+    button.innerText = 'Ukryj';
+  } else {
+    textarea.style.display = 'none';
+    button.innerText = 'Pokaż';
+  }
+}
+
+function clearTextarea(id) {
+  document.getElementById(id).value = '';
+}
+
+async function pasteFromClipboard(id) {
+  const textarea = document.getElementById(id);
+  try {
+    const text = await navigator.clipboard.readText();
+    textarea.value = text;
+    updateBackgroundColor(textarea); // Aktualizacja koloru tła po wklejeniu
+  } catch (err) {
+    console.error('Błąd podczas wklejania:', err);
+  }
+}
+
+async function copyToClipboard(id) {
+  const textarea = document.getElementById(id);
+  try {
+    await navigator.clipboard.writeText(textarea.value);
+    alert('Zawartość została skopiowana do schowka!');
+  } catch (err) {
+    console.error('Błąd podczas kopiowania:', err);
+  }
+}
+
+window.onload = function () {
+initPolaPlanszyDropdown();
     initPolaZdarzenieDropdown();
     initPolaKontekstDropdown();
+  const container = document.getElementById('textareas-container');
+  const numberOfTextareas = 39;
 
-    const container = document.getElementById('textareas-container');
-    const numberOfTextareas = 39;
+  for (let i = 1; i <= numberOfTextareas; i++) {
+    const textareaId = `textarea${i.toString().padStart(2, '0')}`;
+    const textareaHTML = generateTextarea(textareaId);
+    const div = document.createElement('div');
+    div.className = 'textarea-box';
+    div.innerHTML = textareaHTML;
+    container.appendChild(div);
+  }
 
-    for (let i = 1; i <= numberOfTextareas; i++) {
-      const textareaId = `textarea${i.toString().padStart(2, '0')}`;
-      const textareaHTML = generateTextarea(textareaId);
-      const div = document.createElement('div');
-      div.className = 'textarea-box';
-      div.innerHTML = textareaHTML;
-      container.appendChild(div);
+  // Funkcja kolorująca tło
+  window.updateBackgroundColor = function (textarea) {
+    const inputText = textarea.value.trim();
+    const firstWord = inputText.split(' ')[0].toLowerCase();
+
+    textarea.classList.remove(
+      'karma-background', 'wyobraz-sobie-background', 'przekonanie-background',
+      'blokada-energii-background', 'nowa-background', 'default-background'
+    );
+
+    switch (firstWord) {
+      case 'karma:':
+        textarea.classList.add('karma-background');
+        break;
+      case 'wyobraźsobie:':
+        textarea.classList.add('wyobraz-sobie-background');
+        break;
+      case 'przekonanie:':
+        textarea.classList.add('przekonanie-background');
+        break;
+      case 'blokadaenergii:':
+        textarea.classList.add('blokada-energii-background');
+        break;
+      case 'nowa':
+        textarea.classList.add('nowa-background');
+        break;
+      default:
+        textarea.classList.add('default-background');
     }
+  }
 
-    // Funkcja kolorująca tło
-    window.updateBackgroundColor = function (textarea) {
-      const inputText = textarea.value.trim();
-      const firstWord = inputText.split(' ')[0].toLowerCase();
-
-      textarea.classList.remove(
-        'karma-background', 'wyobraz-sobie-background', 'przekonanie-background',
-        'blokada-energii-background', 'nowa-background', 'default-background'
-      );
-
-      switch (firstWord) {
-        case 'karma:':
-          textarea.classList.add('karma-background');
-          break;
-        case 'wyobraźsobie:':
-          textarea.classList.add('wyobraz-sobie-background');
-          break;
-        case 'przekonanie:':
-          textarea.classList.add('przekonanie-background');
-          break;
-        case 'blokadaenergii:':
-          textarea.classList.add('blokada-energii-background');
-          break;
-        case 'nowa':
-          textarea.classList.add('nowa-background');
-          break;
-        default:
-          textarea.classList.add('default-background');
-      }
-    }
-
-    // Obsługa inputów - kolorowanie przy wpisywaniu
-    const textareas = container.querySelectorAll('textarea');
-    textareas.forEach(textarea => {
-      textarea.addEventListener('input', () => {
-        updateBackgroundColor(textarea);
-      });
+  // Obsługa inputów - kolorowanie przy wpisywaniu
+  const textareas = container.querySelectorAll('textarea');
+  textareas.forEach(textarea => {
+    textarea.addEventListener('input', () => {
+      updateBackgroundColor(textarea);
     });
+  });
+};
 
 
-// Inicjalizacja po załadowaniu DOM
-document.addEventListener('DOMContentLoaded', function() {
-const container = document.getElementById('textarea-container');
-if (container) {
-// Generowanie przykładowych pól tekstowych
-container.innerHTML = generateTextarea('textarea1') + generateTextarea('textarea2');
-// Dodanie nasłuchiwaczy zdarzeń dla każdego pola tekstowego
-const textareas = container.querySelectorAll('textarea');
-textareas.forEach(textarea => {
-    // Wspólna funkcja do aktualizacji koloru tła
-    const handleUpdate = () => {
-        try {
-            updateBackgroundColor(textarea);
-        } catch (error) {
-            console.error('Błąd podczas aktualizacji koloru tła:', error);
-        }
-    };
 
-    // Nasłuchiwanie zdarzenia input
-    textarea.addEventListener('input', handleUpdate);
-
-    // Nasłuchiwanie zdarzenia paste z opóźnieniem
-    textarea.addEventListener('paste', handleUpdate);
-});
-} else {
-console.error('Kontener pól tekstowych nie został znaleziony.');
-}
-});
-
-
-    // Definicja funkcji pasteFromClipboard
-    window.pasteFromClipboard(id) = function (targetTextarea) {
-      navigator.clipboard.readText().then(text => {
-        targetTextarea.value = text;
-        updateBackgroundColor(targetTextarea); // kolorowanie po wklejeniu przez funkcję
-      }).catch(err => {
-        console.error('Błąd podczas odczytu z schowka:', err);
-      });
-    };
-  };
-
-
-  
 
 
 function pole00() {
