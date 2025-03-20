@@ -803,6 +803,7 @@ projekcje: ["⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️"
     
 
 
+
   window.onload = function () {
     initPolaPlanszyDropdown();
     initPolaZdarzenieDropdown();
@@ -820,18 +821,15 @@ projekcje: ["⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️"
       container.appendChild(div);
     }
 
-    // Funkcja do aktualizacji koloru tła
     function updateBackgroundColor(textarea) {
       const inputText = textarea.value.trim();
       const firstWord = inputText.split(' ')[0].toLowerCase();
 
-      // Usuwanie wszystkich klas tła
       textarea.classList.remove(
         'karma-background', 'wyobraz-sobie-background', 'przekonanie-background',
         'blokada-energii-background', 'nowa-background', 'default-background'
       );
 
-      // Dodawanie odpowiedniej klasy na podstawie pierwszego słowa
       switch (firstWord) {
         case 'karma:':
           textarea.classList.add('karma-background');
@@ -853,7 +851,6 @@ projekcje: ["⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️"
       }
     }
 
-    // Dodanie nasłuchiwaczy zdarzeń do każdego textarea
     const textareas = container.querySelectorAll('textarea');
     textareas.forEach(textarea => {
       const handleUpdate = () => {
@@ -865,10 +862,16 @@ projekcje: ["⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️"
       };
 
       textarea.addEventListener('input', handleUpdate);
-      textarea.addEventListener('paste', handleUpdate);
+
+      textarea.addEventListener('paste', () => {
+        setTimeout(() => {
+          handleUpdate();
+        }, 10); // pozwala na przetworzenie wklejonego tekstu
+      });
     });
   };
 
+  
 
 
 function pole00() {
