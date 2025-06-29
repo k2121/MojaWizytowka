@@ -126,6 +126,8 @@ button {
   margin-top: 0px;
   margin-bottom: 0px;
 }
+.zdarzenie-background { background-color: rgb(115, 52, 156); color: rgb(255, 255, 255);}
+.kontekst-background {  background-color: rgb(204, 153, 255);}
 .karma-background { background-color: rgb(102, 255, 153); }
 .wyobraz-sobie-background { background-color: rgb(246, 152, 188); }
 .przekonanie-background { background-color: rgb(255, 236, 12); }
@@ -411,11 +413,15 @@ th, td {
         <!-- Nowy kontener z siatką -->
         <div class="cards-grid-container">
           <div class="card-item">
-            <label for="zdarzenie">Oto zdarzenie / sytuacja:</label>
+            <label for="zdarzenie">Oto zdarzenie / sytuacja:
+              <button type="button" onclick="copyToClipboard('zdarzenie')">Kopiuj</button>
+            </label>
             <textarea id="zdarzenie" name="zdarzenie"></textarea>
           </div>
           <div class="card-item">
-            <label for="kontekst">Oto kontekst:</label>
+            <label for="kontekst">Oto kontekst:
+              <button type="button" onclick="copyToClipboard('kontekst')">Kopiuj</button>
+            </label>
             <textarea id="kontekst" name="kontekst"></textarea>
           </div>
           <div class="card-item">
@@ -1439,11 +1445,18 @@ window.onload = function () {
     const firstWord = inputText.split(' ')[0].toLowerCase();
 
     textarea.classList.remove(
+      'zdarzenie-background', 'kontekst-background',
       'karma-background', 'wyobraz-sobie-background', 'przekonanie-background',
       'blokada-energii-background', 'nowa-background', 'default-background'
     );
 
     switch (firstWord) {
+      case 'zdarzenie:':
+        textarea.classList.add('zdarzenie-background');
+        break;
+      case 'kontekst:':
+        textarea.classList.add('kontekst-background');
+        break;
       case 'karma:':
         textarea.classList.add('karma-background');
         break;
