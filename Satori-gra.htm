@@ -183,7 +183,161 @@ margin-bottom: 0;
   }
 
 
+/* === POCZĄTEK STYLÓW DLA NOWEGO MODUŁU PROBLEMÓW (Wersja z akordeonem) === */
+#problem-selector-container {
+  background-color: #f0f8ff;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 10px 0;
+  border: 1px solid #dcdcdc;
+}
 
+#problem-selector-container h3 {
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 5px;
+  margin-top: 15px;
+}
+
+.cart-container {
+  background-color: #ecf0f1;
+  border: 1px dashed #7f8c8d;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+#cart {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: rgb(102, 255, 153);
+  color: black;
+  border: 1px solid #bdc3c7;
+  font-family: monospace;
+}
+
+.cart-container button {
+  margin: 5px 5px 0 0;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.cart-container button:last-of-type {
+  background-color: #e74c3c;
+}
+
+#problem-list-container {
+  height: 450px;
+  overflow-y: auto;
+  border: 1px solid #bdc3c7;
+  padding: 10px;
+  background-color: #ffffff;
+}
+
+#problemSearch {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Nowe style dla Akordeonu */
+.problem-category-header {
+  background-color: #2980b9;
+  color: white;
+  padding: 10px 15px;
+  margin: 0 -10px 0 -10px;
+  text-transform: uppercase;
+  font-size: 1.1em;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.3s;
+  border-bottom: 1px solid #fff;
+}
+
+.problem-category-header:hover {
+  background-color: #3498db;
+}
+
+.problem-category-header.active {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.problem-category-header::after {
+  content: '+';
+  font-size: 1.5em;
+  color: #fff;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.problem-category-header.active::after {
+  content: '−'; /* To jest znak minusa, nie łącznik */
+}
+
+.problem-content {
+  padding: 0 10px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+  border: 1px solid #2980b9;
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+  margin: 0 -10px 10px -10px;
+}
+
+.problem-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  padding: 5px 2px;
+  border-bottom: 1px dotted #ecf0f1;
+  transition: background-color 0.2s;
+}
+.problem-item:last-child {
+    border-bottom: none;
+}
+.problem-item:hover {
+    background-color: #f5f5f5;
+}
+
+.add-problem-btn {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.add-problem-btn.added {
+  background-color: #f39c12; /* Pomarańczowy po dodaniu */
+  cursor: not-allowed;
+}
+
+.problem-label {
+    flex-grow: 1;
+}
+
+/* Ukrycie pod-nagłówków h5 kiedy content jest schowany */
+.problem-category-header + .problem-content h5 {
+  margin-top: 10px;
+  text-align: center;
+  font-style: italic;
+  font-weight: bold;
+}
+/* === KONIEC STYLÓW DLA NOWEGO MODUŁU PROBLEMÓW (Wersja z akordeonem) === */
 
  </style>
 </head>
@@ -305,6 +459,28 @@ wydanie elektroniczne by KP</td>
 kartę 📑</button>
 <button type="button" onclick="rollDice()">Rzut kostką 🎲</button>
 <span class="dice-result" id="diceResult"></span>
+
+
+<!-- === POCZĄTEK NOWEGO KODU - WYBÓR PROBLEMÓW === -->
+<br>
+<div id="problem-selector-container">
+  <div class="cart-container">
+    <h3>🛒 Twój koszyk wyzwań</h3>
+    <textarea id="cart" readonly rows="4" placeholder="Twoje wybrane problemy pojawią się tutaj..."></textarea>
+    <button onclick="copyCartToClipboard()">📋 Kopiuj wszystko z koszyka</button>
+    <button onclick="clearCart()">🗑️ Wyczyść koszyk</button>
+  </div>
+  
+  <h3>Wybierz 3 problemy, nad którymi chcesz pracować:</h3>
+  <input type="text" id="problemSearch" onkeyup="filterProblems()" placeholder="Szukaj problemu...">
+  
+  <div id="problem-list-container">
+    <!-- Kategorie i problemy będą wstawione tutaj dynamicznie przez JavaScript -->
+  </div>
+</div>
+<!-- === KONIEC NOWEGO KODU - WYBÓR PROBLEMÓW === -->
+
+
 <script>
 // Przykładowe dane do losowania
 const sampleData = {
@@ -714,7 +890,382 @@ nowa_opowiesc: ["NOWA OPOWIEŚĆ: _Najgorsze już minęło.", "NOWA OPOWIEŚĆ: 
 projekcje: ["⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️", "↖️"]
 };
 
+/* === POCZĄTEK NOWEGO KODU JS - OBSŁUGA WYBORU PROBLEMÓW === */
+const problemsData = {
+    "Relacja z Sobą: Ja, Tożsamość i Wewnętrzny Świat": {
+        "Tożsamość i Autentyczność": [
+            "Ambiwalencja wobec własnej tożsamości (nie wiem, kim chcę być)",
+            "Brak rdzenia osobowości (poczucie bycia 'kameleonem')",
+            "Fuzja Tożsamości z rolą (np. jestem tylko matką, jestem tylko lekarzem)",
+            "Idealizacja siebie w celu kompensacji niskiej wartości (fasada doskonałości)",
+            "Internalizacja obcych wartości i przekonań jako własnych",
+            "Kryzys tożsamości w kluczowych momentach życia (np. po stracie pracy, w średnim wieku)",
+            "Lęk przed byciem 'zwykłym' lub przeciętnym",
+            "Niezdolność do bycia samemu ze sobą w ciszy",
+            "Noszenie maski (Persona) tak długo, że zapomina się, kim jest się pod nią (identyfikacja z Personą)",
+            "Odrzucenie własnej wrażliwości jako synonimu słabości",
+            "Poczucie fragmentaryzacji 'Ja' (wewnętrznego rozbicia)",
+            "Poczucie zagubienia i braku kierunku w życiu",
+            "Podporządkowanie życia zewnętrznym definicjom sukcesu",
+            "Porzucenie własnych marzeń na rzecz społecznych oczekiwań",
+            "Problem z autentycznością (poczucie bycia fałszywym)",
+            "Sztywne trzymanie się starej tożsamości, pomimo potrzeby zmiany",
+            "Trudność w określeniu własnych wartości, pragnień i granic",
+            "Ucieczka od siebie w aktywność, używki lub relacje",
+            "Ukrywanie prawdziwego 'Ja' ze strachu przed niezrozumieniem i odrzuceniem",
+            "Życie w trybie 'powinienem' zamiast w trybie 'chcę' (tyrania powinności wg K. Horney)"
+        ],
+        "Poczucie Własnej Wartości i Samoocena": [
+            "Brak wewnętrznego poczucia bezpieczeństwa",
+            "Chroniczne poczucie bycia gorszym, niewystarczającym lub wybrakowanym",
+            "Dewaluacja własnych osiągnięć i sukcesów",
+            "Głęboko zakorzeniony, toksyczny wstyd",
+            "Niska odporność na krytykę i odbieranie jej jako ataku na całą osobę",
+            "Poczucie bycia ciężarem dla innych",
+            "Poczucie, że miłość i akceptację trzeba sobie zasłużyć",
+            "Poczucie, że nie zasługuje się na szczęście, miłość i dobrobyt",
+            "Sabotowanie siebie, aby potwierdzić negatywne przekonanie o sobie",
+            "Syndrom oszusta (poczucie bycia niekompetentnym, mimo dowodów na sukces)",
+            "Trudność w przyjmowaniu komplementów, pomocy i troski",
+            "Uzależnienie samooceny od opinii i walidacji z zewnątrz",
+            "Uzależnienie samooceny od osiągnięć, statusu lub wyglądu",
+            "Warunkowa samoakceptacja ('będę siebie akceptować, gdy...')"
+        ],
+        "Wewnętrzny Krytyk i Dialog Wewnętrzny": [
+            "Ciągłe porównywanie się z innymi (prowadzące do poczucia niższości lub wyższości)",
+            "Dominujący, karzący głos wewnętrznego krytyka",
+            "Identyfikacja z negatywnymi myślami (jestem swoimi myślami)",
+            "Nieustanne rozpamiętywanie przeszłych błędów i porażek (ruminacje)",
+            "Perfekcjonizm paraliżujący działanie",
+            "Samokaranie i odmawianie sobie przyjemności jako formy pokuty",
+            "Używanie negatywnego dialogu wewnętrznego do 'motywowania' się",
+            "Wewnętrzny przymus bycia idealnym w każdej dziedzinie życia"
+        ],
+        "Cień, Wyparcie i Nieświadomość (Koncepcje Jungowskie)": [
+            "Blokada kreatywności i spontaniczności",
+            "Konfrontacja z wypartym, mrocznym aspektem siebie (Cieniem)",
+            "Lęk przed tym, co nieznane we własnej psychice",
+            "Nieświadome działanie pod wpływem nierozwiązanych kompleksów",
+            "Nierozwinięta Anima (żeński aspekt w mężczyźnie) lub Animus (męski aspekt w kobiecie)",
+            "Projekcja własnego Cienia (nieakceptowanych cech) na innych ludzi",
+            "Sny koszmarne jako próba komunikacji zepchniętych treści",
+            "Utrata kontaktu z instynktem i mądrością ciała"
+        ]
+    },
+    "Świat Emocji: Regulacja, Rozumienie, Wyrażanie": [
+        "Aleksytymia (trudność w rozpoznawaniu i nazywaniu emocji)",
+        "Anhedonia (niezdolność do odczuwania radości i przyjemności)",
+        "Blokada odczuwania złości lub gniewu",
+        "Brak kontaktu z własnymi emocjami (odcięcie)",
+        "Chroniczny, wolnopłynący lęk i niepokój",
+        "Chroniczne poczucie nudy i apatii",
+        "Cynizm i ironia jako tarcza chroniąca przed zranieniem",
+        "Dominujące poczucie krzywdy",
+        "Huśtawki nastroju i labilność afektywna",
+        "Intelektualizowanie uczuć (analizowanie zamiast odczuwania)",
+        "Lęk przed intensywnością własnych emocji (zarówno pozytywnych, jak i negatywnych)",
+        "Lęk przed utratą kontroli nad własnymi uczuciami",
+        "Nadużywanie substancji lub zachowań w celu regulacji nastroju",
+        "Niezdolność do odczuwania i wyrażania wdzięczności",
+        "Patologiczne poczucie winy (nieadekwatne do sytuacji)",
+        "Poczucie winy za odczuwanie 'negatywnych' emocji (np. złości, smutku)",
+        "Racjonalizacja jako unikanie bólu emocjonalnego",
+        "Reaktywność emocjonalna (skrajne reakcje na drobne bodźce)",
+        "Skłonność do dramatyzowania i eskalacji emocjonalnej",
+        "Somatyzacja (przejawianie się problemów psychicznych w ciele)",
+        "Tłumienie emocji prowadzące do wybuchów",
+        "Trudność w odczuwaniu empatii dla samego siebie (samowspółczucia)",
+        "Trudność w uspokajaniu się po zdenerwowaniu",
+        "Ucieczka od ciszy i bycia sam na sam z uczuciami",
+        "Uzależnienie od silnych bodźców emocjonalnych (np. dramatów, kryzysów)",
+        "Wypieranie (represja) bolesnych uczuć",
+        "Zamrożenie emocjonalne (emotional numbing)",
+        "Zaprzeczanie własnym uczuciom ('nic się nie stało')"
+    ],
+    "Relacje i Więzi: Miłość, Bliskość, Samotność": {
+        "Style Przywiązania i Wzorce Związkowe": [
+            "Lękowo-ambiwalentny styl przywiązania (obsesyjna potrzeba bliskości, lęk przed porzuceniem)",
+            "Lęk przed zaangażowaniem i utratą wolności w związku",
+            "Naprzemienne idealizowanie i dewaluowanie partnera",
+            "Nieświadome wybieranie partnerów, którzy powielają traumy z dzieciństwa",
+            "Pociąg do osób niedostępnych emocjonalnie",
+            "Unikający styl przywiązania (dystansowanie się, unikanie intymności)",
+            "Wchodzenie w rolę 'wybawcy' lub 'ofiary' w związku",
+            "Wzajemne uzależnienie emocjonalne (ko-dependencja)",
+            "Zdezorganizowany styl przywiązania (jednoczesna potrzeba i lęk przed bliskością)"
+        ],
+        "Komunikacja i Granice": [
+            "Bierno-agresywna komunikacja",
+            "Brak asertywności i nieumiejętność mówienia 'nie'",
+            "Emocjonalna inkontynencja (zalewanie innych swoimi problemami bez filtra)",
+            "Lęk przed konfliktem prowadzący do unikania trudnych rozmów",
+            "Nadmierna potrzeba zadowalania innych (people-pleasing)",
+            "Niezdolność do stawiania i utrzymywania zdrowych granic",
+            "Oczekiwanie, że bliscy będą czytać w myślach i domyślać się potrzeb",
+            "Poczucie winy po postawieniu granicy",
+            "Używanie obwiniania, krytyki, pogardy lub defensywności w komunikacji (wg Gottmana)",
+            "Zatarte granice z innymi (enmeshment), poczucie braku odrębności"
+        ],
+        "Intymność, Zaufanie i Samotność": [
+            "Głęboki lęk przed byciem prawdziwie widzianym i poznanym",
+            "Lęk przed odrzuceniem po okazaniu wrażliwości",
+            "Nieufność i cynizm jako bariera w budowaniu bliskości",
+            "Patologiczna zazdrość i chęć kontrolowania partnera",
+            "Poczucie fundamentalnej samotności nawet w tłumie lub w związku",
+            "Problem z równowagą między dawaniem a braniem w relacjach",
+            "Strach przed zdradą i naruszeniem zaufania",
+            "Trudność w budowaniu głębokich, opartych na zaufaniu przyjaźni"
+        ]
+    },
+    "Systemy Rodzinne i Wzorce Pokoleniowe": [
+        "Bycie 'kozłem ofiarnym' rodziny",
+        "Chroniczne poczucie lojalności wobec destrukcyjnej rodziny",
+        "Emocjonalne odcięcie się od rodziny jako jedyna forma obrony",
+        "Nieświadome powtarzanie losu lub wzorców zachowań rodziców",
+        "Niska dyferencjacja 'Ja' (trudność w oddzieleniu myśli i uczuć od reszty rodziny)",
+        "Parentyfikacja (przejęcie roli rodzica w dzieciństwie)",
+        "Poczucie winy z powodu chęci życia inaczej niż nakazuje tradycja rodzinna",
+        "Przejęcie nieprzepracowanej traumy lub żałoby od przodków (trauma transgeneracyjna)",
+        "Skłonność do bycia wciąganym w konflikty między innymi członkami rodziny (triangulacja)",
+        "Syndrom DDA (Dorosłe Dziecko Alkoholika) lub DDD (z rodziny dysfunkcyjnej)",
+        "Ukryte, niepisane zasady i tabu rodzinne",
+        "Utrknięcie w roli 'bohatera rodzinnego', 'maskotki' lub 'niewidzialnego dziecka'",
+        "Wierność destrukcyjnym mitom rodzinnym"
+    ],
+    "Działanie i Zachowanie: Nawyki, Unikanie, Kompulsje": [
+        "Autodestrukcyjne zachowania (np. samookaleczanie, podejmowanie niepotrzebnego ryzyka)",
+        "Brak motywacji i anhedonia",
+        "Chroniczna prokrastynacja i odkładanie życia 'na później'",
+        "Kompulsywna potrzeba bycia zajętym i produktywnym",
+        "Pracoholizm jako ucieczka od problemów osobistych",
+        "Skłonność do rezygnacji przy pierwszych trudnościach",
+        "Trudność w inicjowaniu i podtrzymywaniu wysiłku w dążeniu do celu",
+        "Ucieczka w świat wirtualny (gry, media społecznościowe, pornografia)",
+        "Unikanie wyzwań i kurczowe trzymanie się strefy komfortu",
+        "Uzależnienia behawioralne (hazard, zakupy, jedzenie, seks)",
+        "Uzależnienia od substancji (alkohol, narkotyki, leki)",
+        "Wyuczona bezradność (poczucie, że żadne działanie nie ma sensu)"
+    ],
+    "Zniekształcenia Poznawcze i Negatywne Schematy Myślowe": [
+        "Czytanie w myślach ('Wiem, co on sobie myśli, i na pewno jest to coś złego')",
+        "Etykietowanie ('Jestem beznadziejny', 'On jest idiotą')",
+        "Filtrowanie mentalne (dostrzeganie tylko negatywów, ignorowanie pozytywów)",
+        "Katastrofizacja ('Jeśli to się stanie, to będzie koniec świata')",
+        "Myślenie czarno-białe / dychotomiczne ('Jeśli nie odniosę pełnego sukcesu, jestem totalnym zerem')",
+        "Myślenie życzeniowe jako unikanie rzeczywistości",
+        "Nadmierna generalizacja ('Zawsze tak jest', 'Nigdy mi się nie uda')",
+        "Personalizacja ('Wszystko, co złe, dzieje się z mojej winy')",
+        "Schemat Deprywacji Emocjonalnej (przekonanie, że nikt nie zaspokoi moich potrzeb)",
+        "Schemat Wadliwości/Wstydu (przekonanie, że jestem fundamentalnie zły i wadliwy)",
+        "Schemat Opuszczenia/Niestabilności Więzi (przekonanie, że ważni ludzie odejdą)",
+        "Schemat Roszczeniowości/Wielkościowości (przekonanie, że zasady mnie nie dotyczą)",
+        "Schemat Samopoświęcenia (przekonanie, że potrzeby innych są ważniejsze)",
+        "Schemat Uwikłania (przekonanie, że nie mogę funkcjonować bez wsparcia bliskiej osoby)",
+        "'Uzasadnianie' emocjonalne ('Czuję, że tak jest, więc to musi być prawda')"
+    ],
+    "Trauma i Przeszłość: Wydarzenia, Wzorce Rodowe, Nieprzepracowany Ból": [
+        "Doświadczenie zdrady, która podważyła zaufanie do świata",
+        "Emocjonalne lub fizyczne opuszczenie w dzieciństwie",
+        "Identyfikacja z cierpieniem przodków",
+        "Kompleksowy zespół stresu pourazowego (C-PTSD) po długotrwałej traumie",
+        "Lęk przed powtórzeniem błędów lub losu rodziców",
+        "Nieświadome powtarzanie wzorców rodowych (np. biedy, uzależnień, rozwodów)",
+        "Nieprzepracowana żałoba po stracie bliskiej osoby",
+        "Poczucie winy ocalonego ('dlaczego ja przeżyłem, a inni nie?')",
+        "Powracające, natrętne wspomnienia (flashbacki)",
+        "Syndrom dorosłego dziecka alkoholika (DDA) lub z rodziny dysfunkcyjnej (DDD)",
+        "Trauma bycia kozłem ofiarnym w rodzinie lub grupie",
+        "Trauma bycia świadkiem przemocy",
+        "Trauma doznanej przemocy (fizycznej, psychicznej, seksualnej)",
+        "Trauma medyczna (związana z chorobą, operacjami, pobytem w szpitalu)",
+        "Trauma pokoleniowa (przenoszenie nieprzepracowanego bólu na kolejne pokolenia)",
+        "Trauma religijna (związana z raniącym doświadczeniem we wspólnocie religijnej)",
+        "Utrata poczucia bezpieczeństwa w świecie",
+        "Utrknięcie w roli dziecka, pomimo dorosłości",
+        "Wierność niepisanym zasadom rodowym (np. 'w naszej rodzinie się nie cieszymy')",
+        "Nadmierna czujność (hiperwigilancja)"
+    ],
+    "Wyzwania Społeczne i Kulturowe": [
+        "Alienacja i anomia (poczucie wykorzenienia i braku norm w społeczeństwie)",
+        "Internalizacja stygmatyzacji (uwierzenie w negatywne stereotypy na swój temat)",
+        "Konflikt ról (np. napięcie między byciem dobrą matką a ambitną pracownicą)",
+        "Lęk przed oceną i wykluczeniem społecznym",
+        "Presja konformizmu i lęk przed wyróżnianiem się",
+        "Poczucie bycia uwięzionym w 'żelaznej klatce' biurokracji i racjonalności",
+        "Wpływ sytuacji na zachowanie (uleganie autorytetowi, deindywiduacja w tłumie)",
+        "Zmaganie się z dyskryminacją ze względu na płeć, rasę, orientację, status etc."
+    ],
+     "Troski Egzystencjalne: Sens, Wolność, Śmierć, Izolacja": [
+        "Brak poczucia sensu i celu w życiu",
+        "Bunt wobec nieuniknionych ograniczeń życia (starzenie się, choroba, przypadek)",
+        "Czekanie na 'prawdziwe życie', które nigdy nie nadchodzi",
+        "Kryzys egzystencjalny w obliczu zmiany (np. 'puste gniazdo', emerytura)",
+        "Lęk przed wolnością i ciężarem odpowiedzialności za własne życie",
+        "Lęk przed śmiercią i przemijaniem",
+        "Odkrycie, że życie nie ma wbudowanego sensu i trzeba go stworzyć samemu",
+        "Poczucie fundamentalnej izolacji od innych istot ludzkich",
+        "Pustka duchowa i tęsknota za transcendencją",
+        "Rezygnacja z marzeń na rzecz 'bezpiecznego' życia",
+        "Trudność w pogodzeniu się z faktem, że ostatecznie jesteśmy sami w swoim doświadczeniu",
+        "Ucieczka od wolności poprzez poddanie się autorytetowi, ideologii lub konformizmowi",
+        "Żal egzystencjalny za niewykorzystanymi możliwościami i nieprzeżytym życiem"
+    ]
+};
+let cartItems = [];
 
+// Funkcja do dynamicznego generowania listy problemów z akordeonem
+function generateProblemList() {
+    const container = document.getElementById('problem-list-container');
+    container.innerHTML = '';
+
+    for (const mainCategory in problemsData) {
+        const categoryContent = problemsData[mainCategory];
+
+        const categoryDiv = document.createElement('div');
+        categoryDiv.className = 'problem-category';
+
+        // Stworzenie nagłówka, który będzie klikalny
+        const header = document.createElement('div');
+        header.className = 'problem-category-header';
+        header.textContent = mainCategory;
+        
+        // Stworzenie kontenera na treść (będzie pokazywany/ukrywany)
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'problem-content';
+
+        if (Array.isArray(categoryContent)) {
+            // Bez podkategorii
+            categoryContent.forEach(problem => {
+                contentDiv.appendChild(createProblemItem(problem));
+            });
+        } else {
+            // Z podkategoriami
+            for (const subCategory in categoryContent) {
+                const subDiv = document.createElement('div');
+                subDiv.innerHTML = `<h5 style="text-align:center; font-style:italic;">- ${subCategory} -</h5>`;
+                categoryContent[subCategory].forEach(problem => {
+                    subDiv.appendChild(createProblemItem(problem));
+                });
+                contentDiv.appendChild(subDiv);
+            }
+        }
+        
+        categoryDiv.appendChild(header);
+        categoryDiv.appendChild(contentDiv);
+        container.appendChild(categoryDiv);
+        
+        // Dodanie logiki kliknięcia do nagłówka
+        header.addEventListener('click', function() {
+            this.classList.toggle('active');
+            const content = this.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                content.style.padding = "0 10px"; // Ukryj padding podczas zwijania
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+                content.style.padding = "10px"; // Pokaż padding podczas rozwijania
+            }
+        });
+    }
+}
+
+// Tworzenie pojedynczego elementu problemu z przyciskiem
+function createProblemItem(problem) {
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'problem-item';
+    
+    const addButton = document.createElement('button');
+    addButton.textContent = '+';
+    addButton.className = 'add-problem-btn';
+    if (cartItems.includes(problem)) {
+        addButton.classList.add('added');
+        addButton.disabled = true;
+    }
+    addButton.onclick = () => addToCart(problem, addButton);
+    
+    const label = document.createElement('span');
+    label.className = 'problem-label';
+    label.textContent = problem;
+    
+    itemDiv.appendChild(addButton);
+    itemDiv.appendChild(label);
+    
+    return itemDiv;
+}
+
+// Dodawanie problemu do koszyka
+function addToCart(problem, button) {
+    if (cartItems.length < 3) {
+        cartItems.push(problem);
+        updateCartDisplay();
+        button.classList.add('added');
+        button.disabled = true;
+    } else {
+        alert('Możesz wybrać maksymalnie 3 problemy.');
+    }
+}
+
+// Czyszczenie koszyka
+function clearCart() {
+    cartItems = [];
+    updateCartDisplay();
+    // Po prostu usuwamy klasę 'added' i włączamy przyciski, bez przebudowywania całej listy
+    const allButtons = document.querySelectorAll('.add-problem-btn.added');
+    allButtons.forEach(button => {
+        button.classList.remove('added');
+        button.disabled = false;
+    });
+}
+
+// Aktualizacja wyświetlania koszyka
+function updateCartDisplay() {
+    const cartTextarea = document.getElementById('cart');
+    const formattedCartContent = cartItems.map(item => `karma: ${item}`).join('\n');
+    cartTextarea.value = formattedCartContent;
+
+    // Po aktualizacji wartości, musimy ponownie zastosować logikę zmiany koloru tła
+    // w polu tekstowym koszyka, jeśli jest taka potrzeba. 
+    // Ponieważ wszystkie linie zaczynają się od "karma:", możemy
+    // na sztywno przypisać klasę dla koszyka.
+    // Ale w tej sytuacji lepiej zmodyfikować CSS dla konkretnego ID
+    // żeby uniknąć mieszania logiki
+}
+
+// Kopiowanie zawartości koszyka do schowka
+function copyCartToClipboard() {
+    const cartTextarea = document.getElementById('cart');
+    if(cartTextarea.value.trim() === '') {
+        alert('Koszyk jest pusty.');
+        return;
+    }
+    cartTextarea.select();
+    navigator.clipboard.writeText(cartTextarea.value).then(() => {
+        alert('Problemy z koszyka zostały skopiowane do schowka.');
+    }, (err) => {
+        alert('Błąd kopiowania: ' + err);
+    });
+}
+
+// Filtrowanie problemów na liście na podstawie wpisanego tekstu
+function filterProblems() {
+    const input = document.getElementById('problemSearch');
+    const filter = input.value.toLowerCase();
+    const container = document.getElementById('problem-list-container');
+    const items = container.getElementsByClassName('problem-item');
+
+    for (let i = 0; i < items.length; i++) {
+        const label = items[i].getElementsByClassName('problem-label')[0];
+        if (label.textContent.toLowerCase().indexOf(filter) > -1) {
+            items[i].style.display = "";
+        } else {
+            items[i].style.display = "none";
+        }
+    }
+}
+
+// Inicjalizacja listy problemów po załadowaniu strony
+document.addEventListener('DOMContentLoaded', generateProblemList);
+/* === KONIEC NOWEGO KODU JS === */
 
     function getRandomItem(arr) {
       return arr[Math.floor(Math.random() * arr.length)];
