@@ -890,7 +890,7 @@ nowa_opowiesc: ["NOWA OPOWIEŚĆ: _Najgorsze już minęło.", "NOWA OPOWIEŚĆ: 
 projekcje: ["⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️", "↖️"]
 };
 
-/* === POCZĄTEK NOWEGO KODU JS - OBSŁUGA WYBORU PROBLEMÓW === */
+/* === NOWA BAZA DANYCH PROBLEMÓW - zastąp nią CAŁY ISTNIEJĄCY obiekt 'problemsData' === */
 const problemsData = {
     "Relacja z Sobą: Ja, Tożsamość i Wewnętrzny Świat": {
         "Tożsamość i Autentyczność": [
@@ -950,6 +950,51 @@ const problemsData = {
             "Projekcja własnego Cienia (nieakceptowanych cech) na innych ludzi",
             "Sny koszmarne jako próba komunikacji zepchniętych treści",
             "Utrata kontaktu z instynktem i mądrością ciała"
+        ]
+    },
+    "Wyzwania w Związkach: Relacje Toksyczne, Karmiczne i Transformacyjne": {
+        "Dynamika z osobą o cechach narcystycznych/toksycznych": [
+            "Bycie obiektem gaslightingu (manipulowanie postrzeganiem rzeczywistości)",
+            "Chroniczne chodzenie 'na paluszkach' w obecności partnera, by uniknąć jego złości",
+            "Cykliczne przechodzenie przez fazy: idealizacja, dewaluacja, porzucenie",
+            "Doświadczanie 'głodu narcystycznego' - uzależnienie od okruchów uwagi partnera",
+            "Ignorowanie 'czerwonych flag' na początku znajomości",
+            "Utrata poczucia własnej tożsamości na rzecz partnera",
+            "Wciąganie w 'sałatkę słowną' - kłótnie, w których gubi się sens i własne argumenty",
+            "Odczuwanie poczucia winy za reakcje partnera (branie odpowiedzialności za jego emocje)",
+            "Poczucie izolacji od przyjaciół i rodziny z powodu wpływu partnera",
+            "Bycie celem kampanii oszczerstw po próbie odejścia",
+            "Problem z odróżnieniem miłości od traumatycznego przywiązania (trauma bonding)",
+            "Bycie 'latającą małpą' - nieświadome wspieranie narcyza w jego manipulacjach innymi",
+            "Doświadczanie 'hooveringu' - prób wciągnięcia z powrotem do relacji po jej zakończeniu",
+            "Usprawiedliwianie przemocy emocjonalnej, finansowej lub słownej partnera",
+            "Lęk przed publicznym upokorzeniem lub ujawnieniem prywatnych spraw przez partnera"
+        ],
+        "Wyzwania w związkach karmicznych i bliźniaczych płomieni": [
+            "Intensywne, magnetyczne przyciąganie, które wydaje się poza kontrolą",
+            "Powtarzające się, nierozwiązane konflikty i schematy zachowań",
+            "Uczucie, że partner 'aktywuje' najgłębsze, nieuleczone rany",
+            "Ciągłe cykle rozstań i powrotów, niemożność ostatecznego zakończenia relacji",
+            "Wrażenie, że związek ma 'wyższy cel', nawet jeśli przynosi ogromne cierpienie",
+            "Idealizowanie partnera i relacji pomimo oczywistych trudności",
+            "Utrata energii życiowej i poczucie 'wysysania' przez dynamikę związku",
+            "Problem z postawieniem granicy i odejściem z powodu poczucia 'duchowego obowiązku'",
+            "Czekanie, aż partner 'się obudzi' lub zrozumie głębię połączenia",
+            "Ból związany z rolą 'uciekającego' lub 'goniącego' w dynamice relacji",
+            "Poczucie, że nikt inny nie zrozumie tej relacji"
+        ],
+        "Trudności związane z rozwodem, rozstaniem i podziałem majątku": [
+            "Poczucie porażki życiowej z powodu zakończenia związku/małżeństwa",
+            "Żal i poczucie niesprawiedliwości związane z podziałem majątku",
+            "Lęk przed finansową przyszłością po rozstaniu",
+            "Trudność w prowadzeniu walki o dobra materialne, która jest wbrew własnej naturze",
+            "Ból z powodu manipulacji dziećmi w procesie rozwodowym (alienacja rodzicielska)",
+            "Uczucie bycia oszukanym lub wykorzystanym finansowo przez byłego partnera",
+            "Poczucie straty wspólnych marzeń, planów i przyszłości",
+            "Obawa przed samotnością i ponownym rozpoczęciem życia",
+            "Zmaganie się z długotrwałym procesem sądowym i jego obciążeniem emocjonalnym",
+            "Gorycz z powodu konieczności dzielenia opieki nad dziećmi",
+            "Poczucie krzywdy wynikające z utraty wspólnego domu lub firmy"
         ]
     },
     "Świat Emocji: Regulacja, Rozumienie, Wyrażanie": [
@@ -1111,6 +1156,9 @@ const problemsData = {
         "Żal egzystencjalny za niewykorzystanymi możliwościami i nieprzeżytym życiem"
     ]
 };
+/* === KONIEC NOWEJ BAZY DANYCH PROBLEMÓW === */
+
+
 let cartItems = [];
 
 // Funkcja do dynamicznego generowania listy problemów z akordeonem
