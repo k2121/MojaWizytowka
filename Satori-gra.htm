@@ -342,6 +342,68 @@ th, td {
     font-size: 11pt;
 }
 
+@media (max-width: 600px) {
+  .cart-container {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .cart-container textarea {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .cart-container button {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    font-size: 1rem;
+  }
+
+  .cart-container h3 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  #problem-list-container {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .problem-category-header {
+    font-size: 1rem;
+    padding: 5px 10px;
+  }
+
+  .problem-content {
+    font-size: 0.95rem;
+    padding: 5px 10px;
+  }
+
+  .problem-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .add-problem-btn {
+    width: 100%;
+    padding: 6px;
+    font-size: 1rem;
+  }
+
+  .problem-label {
+    font-size: 1rem;
+  }
+}
+
+
+
 /* === Style dla siatki kart do gry === */
 #panel-losowania {
   padding: 0px; /* Dodaje trochę oddechu wewnątrz komórki tabeli */
