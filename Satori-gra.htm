@@ -480,6 +480,79 @@ th, td {
 
 
 <script>
+let userName = null;
+
+// <<<===== FUNKCJA, KTÓRA PYTA O IMIĘ =====>>>
+// Będzie wywołana przy ładowaniu strony i jeśli będzie trzeba, w funkcji czytania
+function promptForName() {
+  // Pytaj tylko wtedy, gdy imię nie zostało jeszcze ustawione
+  if (userName === null || userName.trim() === "") {
+    userName = prompt("Jak się mam do ciebie zwracać?");
+
+    // Jeśli użytkownik anulował lub nic nie wpisał, ustaw imię z powrotem na null
+    if (!userName || userName.trim() === "") {
+      userName = null;
+    }
+  }
+}
+
+// <<<===== FUNKCJA URUCHAMIANA PO ZAŁADOWANIU STRONY =====>>>
+// Dodajemy "nasłuchiwacz zdarzeń", który wywoła funkcję promptForName()
+// zaraz po załadowaniu struktury strony.
+document.addEventListener('DOMContentLoaded', promptForName);
+
+
+// <<<===== ZAKTUALIZOWANA FUNKCJA CZYTANIA =====>>>
+function readDescription() {
+  if (!('speechSynthesis' in window)) {
+    alert('Twoja przeglądarka nie wspiera syntezatora mowy.');
+    return;
+  }
+  
+  const synth = window.speechSynthesis;
+  
+  if (synth.speaking) {
+    synth.cancel();
+    return;
+  }
+  
+  // Jeśli użytkownik anulował pierwsze zapytanie, zapytaj ponownie.
+  promptForName();
+  
+  // Jeśli po ponownym zapytaniu nadal nie ma imienia, przerwij.
+  if (userName === null) {
+    alert("Nie podano imienia. Proces czytania przerwany.");
+    return;
+  }
+
+  const opisTextarea = document.getElementById('opis');
+  const fullText = opisTextarea.value;
+  const triggerPhrase = "Reakcja grupy:";
+  
+  const phraseIndex = fullText.indexOf(triggerPhrase);
+
+  if (phraseIndex === -1) {
+    alert("Nie znaleziono frazy 'Reakcja grupy:'.");
+    return;
+  }
+  
+  const startIndex = phraseIndex + triggerPhrase.length;
+  let textToRead = fullText.substring(startIndex).trim();
+  
+  if (textToRead === '') {
+    alert("Brak tekstu do przeczytania po frazie kluczowej.");
+    return;
+  }
+  
+  // Podmień "(Imię)" na podaną przez użytkownika wartość
+  textToRead = textToRead.replaceAll('(Imię)', userName);
+  
+  const utterance = new SpeechSynthesisUtterance(textToRead);
+  utterance.lang = 'pl-PL';
+  
+  synth.speak(utterance);
+}
+
 // Przykładowe dane do losowania
 const sampleData = {
 pola_planszy: [
@@ -1513,7 +1586,7 @@ function pole11() {
 document.getElementById("opis").value = "Wyobraź sobie!:\n   Weź pierwszą z góry kartę tego typu i wykonaj polecenie. Działaj zgodnie z instrukcją. Możesz zachować tę kartę na później.";
 }
 function pole16() {
-document.getElementById("opis").value = "Wrota pierwsze: Świadomość\n   1. Jeśli nie masz żadnej karty typu „Przekonanie”, weź jedną. Połóż ją tekstem do dołu (twoje przekonania nadal pozostają nie uświadomione) w ramce po lewej stronie planszy gracza.\n   2. Podziel się z pozostałymi graczami swoją opowieścią w dotychczasowej wersji, w oparciu o odkryte przed tobą karty. Powinieneś mieć karty „Wydarzenie” oraz „Kontekst”, być może wyciągnąłeś też kartę „Karma”. Jeśli byłeś obiektem projekcji lub stanąłeś na polu „Blokada energii”, zapewne posiadasz też jedną lub więcej kart typu „Blokady energii”.\n   3. Podsumuj poprzednią wypowiedź jednym zdaniem. Na przykład: \n   „Najwidoczniej moją karmą było nauczyć się czegoś o zasługiwaniu i wygląda na to, że całkiem dobrze idzie mi studiowanie tego zagadnienia, ponieważ moi rodzice niewątpliwie wzbudzali we mnie poczucie, że nie zasługuję na nic dobrego. Nie poświęcali mi prawie wcale uwagi, a jeszcze do tego ciągle mnie bili. Nawet teraz czuję się nie dostrzegany i wciąż walczę o zdobycie wystarczającej ilości pieniędzy, aby przetrwać”.\n\n   Wysłuchaj reakcji grupy i ponownie rzuć kostką.\n   >>REAKCJA GRUPY: „(Imię), przykro mi, że to cię spotkało.”";
+document.getElementById("opis").value = "Wrota pierwsze: Świadomość\n   1. Jeśli nie masz żadnej karty typu „Przekonanie”, weź jedną. Połóż ją tekstem do dołu (twoje przekonania nadal pozostają nie uświadomione) w ramce po lewej stronie planszy gracza.\n   2. Podziel się z pozostałymi graczami swoją opowieścią w dotychczasowej wersji, w oparciu o odkryte przed tobą karty. Powinieneś mieć karty „Wydarzenie” oraz „Kontekst”, być może wyciągnąłeś też kartę „Karma”. Jeśli byłeś obiektem projekcji lub stanąłeś na polu „Blokada energii”, zapewne posiadasz też jedną lub więcej kart typu „Blokady energii”.\n   3. Podsumuj poprzednią wypowiedź jednym zdaniem. Na przykład: \n   „Najwidoczniej moją karmą było nauczyć się czegoś o zasługiwaniu i wygląda na to, że całkiem dobrze idzie mi studiowanie tego zagadnienia, ponieważ moi rodzice niewątpliwie wzbudzali we mnie poczucie, że nie zasługuję na nic dobrego. Nie poświęcali mi prawie wcale uwagi, a jeszcze do tego ciągle mnie bili. Nawet teraz czuję się nie dostrzegany i wciąż walczę o zdobycie wystarczającej ilości pieniędzy, aby przetrwać”.\n\n   Wysłuchaj reakcji grupy i ponownie rzuć kostką.\n   >>Reakcja grupy: „(Imię), przykro mi, że to cię spotkało.”";
 }
 function pole17() {
 document.getElementById("opis").value = "Światło:\n   Odkryj jedną z kart „Przekonanie” leżących w lewej części planszy gracza (aby wydobyć ją na światło dzienne) i odczytaj jej treść. Odłóż ją na miejsce tekstem do góry. Jeśli nie masz tego typu karty, wylosuj jedną i dokonaj procesu pozbywania się przekonania (patrz instrukcja „Pozbądź się tego” [p30]). (Jeśli gracz cofa się, może pozbyć się karty „Przekonanie” lub „Blokady energii”).\n\n   >>Reakcja grupy: „Przecież to nieprawda”, lub jeśli gracz się cofa, „O tak”.";
@@ -1522,7 +1595,7 @@ function pole18() {
 document.getElementById("opis").value = "Gotowość:\n   Powiedz: \n   „Choć być może nie do końca rozumiem dlaczego, jestem gotów/gotowa dostrzec w tej sytuacji Boskie przewodnictwo i ufam, że to co się zdarzyło, stało się nie MNIE lecz DLA MNIE”.\n\n   >>Reakcja grupy: „Szanujemy twoją gotowość widzenia tego w taki sposób”.";
 }
 function pole19() {
-document.getElementById("opis").value = "Samoakceptacja:\n   Powiedz: \n   „Kocham siebie, czując to, co odczuwam w związku z tą sprawą. Wiem, że gdy będę gotów/gotowa, mogę wybrać spokój”.\n\n   >>Reakcja grupy: „(Imię), kochamy cię taką, jaką jesteś!”";
+document.getElementById("opis").value = "Samoakceptacja:\n   Powiedz: \n   „Kocham siebie, czując to, co odczuwam w związku z tą sprawą. Wiem, że gdy będę gotów/gotowa, mogę wybrać spokój”.\n\n   >>Reakcja grupy: „(Imię), kochamy cię takim, jakim jesteś!”";
 }
 function pole21() {
 document.getElementById("opis").value = "Westchnienie ulgi:\n   Pozbądź się jednej karty „Blokady energii”, mówiąc: „Uwalniam teraz wszystkie blokady związane z ____________ (odczytaj kartę)”. Jeśli otrzymałeś tę kartę, stając na polu „Blokada energii”, odłóż ją do pudełka. Jeśli zaś była wynikiem projekcji, zwróć ją osobie, która dokonała przeniesienia swych cech na ciebie. Jeśli nie masz karty, czekasz kolejkę.\n\n   >>Reakcja grupy: Głęboki wdech i głośne westchnienie ulgi.";
@@ -1537,7 +1610,7 @@ function pole30() {
 document.getElementById("opis").value = "Pozbądź się tego:\n   Spośród odkrytych kart „Przekonanie” wybierz tę, która zawiera przekonanie, jakiego pragniesz się pozbyć. Jeśli wszystkie twoje karty „Przekonanie” są zakryte, odkryj jedną. Jeśli nie masz żadnej, wylosuj jedną. Trzymając ją w dłoni, powiedz zdecydowanie i z przekonaniem: „Całkowicie pozbywam się TERAZ z mojej świadomości przekonania, że (odczytaj tekst z karty)”. Odłóż kartę na bok.\n\n   >>Reakcja grupy: Aplauz i słowa zachęty oraz uznania.";
 }
 function pole31() {
-document.getElementById("opis").value = "Wrota drugie: Przemiana\n   1. Przed pokonaniem tych wrót, weź jedną kartę „Nowa opowieść” i połóż ją tekstem do góry w prawej części planszy gracza (NOWA OPOWIEŚĆ). Wyjaśnij, że ta nowa interpretacja może pomóc ci osiągnąć zmianę świadomości oraz że opisana sytuacja może zawierać w sobie okazję do rozwoju i uzdrowienia.\n   2. Powiedz tak: \n   „Czuję, że moja świadomość ulega przemianie. Zaczynam otwierać się na ideę, że wszystko, co się zdarza, ma swój sens oraz że ta sytuacja być może została mi dana dla mojego duchowego rozwoju”.\n\n   Wysłuchaj reakcji grupy i ponownie rzuć kostką.\n   >>REAKCJA GRUPY: „(Imię), szanujemy twoją gotowość otwarcia się na taką możliwość”.";
+document.getElementById("opis").value = "Wrota drugie: Przemiana\n   1. Przed pokonaniem tych wrót, weź jedną kartę „Nowa opowieść” i połóż ją tekstem do góry w prawej części planszy gracza (NOWA OPOWIEŚĆ). Wyjaśnij, że ta nowa interpretacja może pomóc ci osiągnąć zmianę świadomości oraz że opisana sytuacja może zawierać w sobie okazję do rozwoju i uzdrowienia.\n   2. Powiedz tak: \n   „Czuję, że moja świadomość ulega przemianie. Zaczynam otwierać się na ideę, że wszystko, co się zdarza, ma swój sens oraz że ta sytuacja być może została mi dana dla mojego duchowego rozwoju”.\n\n   Wysłuchaj reakcji grupy i ponownie rzuć kostką.\n   >>Reakcja grupy: „(Imię), szanujemy twoją gotowość otwarcia się na taką możliwość”.";
 }
 function pole33() {
 document.getElementById("opis").value = "Nowa opowieść:\n   Wyciągnij kartę „Nowa opowieść” i połóż w ramce po prawej stronie planszy gracza, by stworzyć dla siebie nową interpretację. Odczytaj ją.\n\n   >>Reakcja grupy: Potwierdźcie: „To jest dla ciebie dobre!”";
@@ -1549,7 +1622,7 @@ function pole41() {
 document.getElementById("opis").value = "Moc:\n   Pozbądź się wszystkich pozostałych kart „Przekonanie” [p30] i „Blokady energii” [p21]. Jeśli nie masz już żadnych kart tego typu, przesuń się do przodu do najbliższych Wrót (Wrota poddania się albo SATORI).\n\n   >>Reakcja grupy: „Rzeczywiście posiadasz moc!”";
 }
 function pole46() {
-document.getElementById("opis").value = "Wrota trzecie: Poddanie się\n   1. Odwróć wszystkie karty „Przekonanie”, które nadal pozostają zakryte, i dokładnie zapoznaj się z ich treścią. Przeczytaj je na głos i wyjaśnij, w jaki sposób przekonania te miały wcześniej nad tobą władzę i były odpowiedzialne za dramaty twego życia. Powiedz, że zdajesz sobie sprawę, iż stara wersja TWOJEJ OPOWIEŚCI zapewne była spowodowana jedynie błędami percepcji, i że jesteś teraz gotów ujrzeć swoją sytuację w innym świetle.\n   2. Powiedz: \n   „Całkowicie pozbyłem się swego przywiązania do starej wersji swojej opowieści i odmawiam dalszego inwestowania w nią mojej energii. Pozbywam się potrzeby kontrolowania rezultatów wydarzeń i jestem gotów przyjąć ideę, że wszystko rozwija się zgodnie z Boskim planem.”.\n   3. Zakończ, odczytując teksty wszystkich posiadanych przez siebie kart „NOWA OPOWIEŚĆ”.\n\n   Wysłuchaj reakcji grupy i ponownie rzuć kostką.\n   >>REAKCJA GRUPY: „Wspaniale! Wspieramy cię w akcie powierzenia się Sile Wyższej!”";
+document.getElementById("opis").value = "Wrota trzecie: Poddanie się\n   1. Odwróć wszystkie karty „Przekonanie”, które nadal pozostają zakryte, i dokładnie zapoznaj się z ich treścią. Przeczytaj je na głos i wyjaśnij, w jaki sposób przekonania te miały wcześniej nad tobą władzę i były odpowiedzialne za dramaty twego życia. Powiedz, że zdajesz sobie sprawę, iż stara wersja TWOJEJ OPOWIEŚCI zapewne była spowodowana jedynie błędami percepcji, i że jesteś teraz gotów ujrzeć swoją sytuację w innym świetle.\n   2. Powiedz: \n   „Całkowicie pozbyłem się swego przywiązania do starej wersji swojej opowieści i odmawiam dalszego inwestowania w nią mojej energii. Pozbywam się potrzeby kontrolowania rezultatów wydarzeń i jestem gotów przyjąć ideę, że wszystko rozwija się zgodnie z Boskim planem.”.\n   3. Zakończ, odczytując teksty wszystkich posiadanych przez siebie kart „NOWA OPOWIEŚĆ”.\n\n   Wysłuchaj reakcji grupy i ponownie rzuć kostką.\n   >>Reakcja grupy: „Wspaniale! Wspieramy cię w akcie powierzenia się Sile Wyższej!”";
 }
 function pole49() {
 document.getElementById("opis").value = "Radykalne Wybaczenie:\n   Wybacz swoim rzekomym wrogom. Powiedz: \n   „____________, całkowicie ci/wam wybaczam. Rozumiem teraz, że nie zrobiłeś/ nie zrobiliście nic złego. Wszystko pozostaje w Boskim Porządku. Bezwarunkowo wspieram cię takim, jaki jesteś/ was takimi, jacy jesteście w całej wspaniałości swego istnienia.”\n\n   >>Reakcja grupy: „Oto prawdziwe poddanie się Sile Wyższej!”";
@@ -1590,6 +1663,65 @@ function collapseAll() {
 }
 /* === KONIEC NOWYCH FUNKCJI JS === */
 
+
+
+function readDescription() {
+  // Sprawdzenie, czy przeglądarka wspiera Web Speech API
+  if (!('speechSynthesis' in window)) {
+    alert('Twoja przeglądarka nie wspiera syntezatora mowy.');
+    return;
+  }
+  
+  const synth = window.speechSynthesis;
+  
+  // Jeśli syntezator już coś mówi, zatrzymaj go
+  if (synth.speaking) {
+    synth.cancel();
+    return;
+  }
+  
+  // === NOWA CZĘŚĆ: Pytanie o imię ===
+  // Sprawdź, czy imię nie zostało jeszcze podane w tej sesji
+  if (userName === null || userName.trim() === '') {
+    userName = prompt("Jak się mam do ciebie zwracać?");
+    
+    // Jeśli użytkownik anulował lub nic nie wpisał
+    if (!userName || userName.trim() === "") {
+      alert("Nie podano imienia. Proces czytania przerwany.");
+      userName = null; // Zresetuj, by zapytać ponownie następnym razem
+      return;
+    }
+  }
+
+  // === ISTNIEJĄCA CZĘŚĆ (z małą modyfikacją) ===
+  const opisTextarea = document.getElementById('opis');
+  const fullText = opisTextarea.value;
+  const triggerPhrase = "Reakcja grupy:";
+  
+  const phraseIndex = fullText.indexOf(triggerPhrase);
+
+  if (phraseIndex === -1) {
+    alert("Nie znaleziono frazy 'Reakcja grupy:'.");
+    return;
+  }
+  
+  const startIndex = phraseIndex + triggerPhrase.length;
+  let textToRead = fullText.substring(startIndex).trim();
+  
+  if (textToRead === '') {
+    alert("Brak tekstu do przeczytania po frazie kluczowej.");
+    return;
+  }
+  
+  // === NOWA CZĘŚĆ: podmiana tekstu (Imię) ===
+  // Podmień wszystkie wystąpienia "(Imię)" na podaną nazwę
+  textToRead = textToRead.replaceAll('(Imię)', userName);
+  
+  const utterance = new SpeechSynthesisUtterance(textToRead);
+  utterance.lang = 'pl-PL';
+  
+  synth.speak(utterance);
+}
 
 </script>
 
@@ -1722,6 +1854,7 @@ function collapseAll() {
 <span> <label for="opis">
 <i>MOC⚡: Pozbądź się wszystkich pozostałych kart „Przekonanie” [p30] i „Blokady energii” [p21].</i>
 <br><br>Polecenia do pól planszy:
+<button type="button" onclick="readDescription()">🔊 Czytaj</button>
 </label>
 <textarea id="opis" name="opis" rows="10"
  cols="50"></textarea> </span>
