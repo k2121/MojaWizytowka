@@ -20,7 +20,7 @@ body, button, textarea, select, label {
   margin-top: 0;
   margin-bottom: 0;
   resize: vertical;
-  background-color: #FFC1B4;
+  background-color: #dbe7f2;
   color: black;
   overflow-y: scroll;
 }
@@ -31,8 +31,8 @@ body, button, textarea, select, label {
   margin-top: 0;
   margin-bottom: 0;
   resize: vertical;
-  background-color: rgb(115, 52, 156);
-  color: rgb(255, 255, 255);
+  text-align: center; align-items: center;
+  background-color: #68308c; color: #ffffff;
 }
 #kontekst {
   width: 100%;
@@ -41,7 +41,8 @@ body, button, textarea, select, label {
   margin-top: 0;
   margin-bottom: 0;
   resize: vertical;
-  background-color: rgb(204, 153, 255);
+  text-align: center;
+  background-color: #a595c8;
 }
 #karma {
   width: 100%;
@@ -50,7 +51,8 @@ body, button, textarea, select, label {
   margin-top: 0;
   margin-bottom: 0;
   resize: vertical;
-  background-color: rgb(102, 255, 153);
+  text-align: center;
+  background: radial-gradient(circle, #f7fcf2 0%, #95c155 100%);
 }
 #wyobraz_sobie {
   width: 100%;
@@ -59,7 +61,8 @@ body, button, textarea, select, label {
   margin-top: 0;
   margin-bottom: 0;
   resize: vertical;
-  background-color: rgb(246, 152, 188);
+  text-align: center;
+  background: radial-gradient(circle, #f8f3f7 0%, #dfb2c3 100%);
 }
 #przekonanie {
   width: 100%;
@@ -68,7 +71,7 @@ body, button, textarea, select, label {
   margin-top: 0;
   margin-bottom: 0;
   resize: vertical;
-  background-color: rgb(255, 236, 12);
+  background: radial-gradient(circle, #f9f6e9 0%, #f6eb4b 100%);
 }
 #blokady_energii {
   width: 100%;
@@ -77,8 +80,12 @@ body, button, textarea, select, label {
   margin-top: 0;
   margin-bottom: 0;
   resize: vertical;
-  background-color: rgb(255, 255, 255);
+  text-align: center;
+  background-color: #000000;
+  color: #ffffff;
+  font-weight: bold; 
 }
+
 #nowa_opowiesc {
   width: 100%;
   height: 60px;
@@ -86,7 +93,8 @@ body, button, textarea, select, label {
   margin-top: 0;
   margin-bottom: 0;
   resize: vertical;
-  background-color: rgb(0, 205, 255);
+  text-align: center;
+  background: radial-gradient(circle, #ffffff 0%, #ae53f6 100%);
 }
 #projekcje {
   width: 76px;
@@ -96,7 +104,8 @@ body, button, textarea, select, label {
   margin-top: 0;
   margin-bottom: 0;
   resize: vertical;
-  background-color: rgb(0, 0, 127);
+  text-align: center;
+  background-color: #dbe7f2;
   color: rgb(0, 255, 0);
 }
 textarea {
@@ -106,7 +115,8 @@ textarea {
   padding: 0;
   margin-top: 0;
   margin-bottom: 0;
-  background-color: rgb(255, 186, 137);
+  text-align: center;
+  background-color: #dbe7f2;
   flex-grow: 1; /* Pozwala textarea rosnąć i wypełniać dostępną przestrzeń w karcie */
   min-height: 80px; /* Minimalna wysokość, żeby małe pola nie były zbyt małe */
   resize: vertical; /* Pozwala tylko na zmianę wysokości */
@@ -126,14 +136,20 @@ button {
   margin-top: 0px;
   margin-bottom: 0px;
 }
-.zdarzenie-background { background-color: rgb(115, 52, 156); color: rgb(255, 255, 255);}
-.kontekst-background {  background-color: rgb(204, 153, 255);}
-.karma-background { background-color: rgb(102, 255, 153); }
-.wyobraz-sobie-background { background-color: rgb(246, 152, 188); }
-.przekonanie-background { background-color: rgb(255, 236, 12); }
-.blokada-energii-background { background-color: rgb(255, 255, 255); }
-.nowa-background { background-color: rgb(0, 205, 255); }
-.default-background { background-color: rgb(255, 186, 137); }
+.zdarzenie-background { background-color: #68308c; color: #ffffff;}
+.kontekst-background { background-color: #a595c8;}
+.karma-background { background: radial-gradient(circle, #f7fcf2 0%, #95c155 100%); }
+.wyobraz-sobie-background { background: radial-gradient(circle, #f8f3f7 0%, #dfb2c3 100%); }
+.przekonanie-background { background: radial-gradient(circle, #f9f6e9 0%, #f6eb4b 100%); }
+.blokada-energii-czerwona-background { background-color: red; color: #ffffff; font-weight: bold; }
+.blokada-energii-pomarańczowa-background { background-color: orange; color: #ffffff; font-weight: bold; }
+.blokada-energii-żółta-background { background-color: yellow; color: #ffffff; font-weight: bold; }
+.blokada-energii-zielona-background { background-color: green; color: #ffffff; font-weight: bold; }
+.blokada-energii-błękitna-background { background-color: darkturquoise; color: #ffffff; font-weight: bold; }
+.blokada-energii-indygo-background { background-color: indigo; color: #ffffff; font-weight: bold; }
+.blokada-energii-fioletowa-background { background-color: violet; color: #ffffff; font-weight: bold; }
+.nowa-background { background: radial-gradient(circle, #ffffff 0%, #ae53f6 100%); }
+.default-background { background-color: #dbe7f2; }
 table {
   border-collapse: collapse;
   width: 100%;
@@ -687,7 +703,7 @@ wyobraz_sobie: ["wyobraźSobie: Bierzesz sprawy w swoje ręce i sam kierujesz sw
 "wyobraźSobie: Twoje pozytywne myślenie przynosi dobre rezultaty. Weź Nową Opowieść.", "wyobraźSobie: Twój gniew eksploduje! Wyraź emocje. (Zabawa w obwinianie [p04])", "wyobraźSobie: Widzisz u innych własne cechy. Weź Przekonanie lub Blokadę Energii.", "wyobraźSobie: Zachowałeś się nieuczciwie. Poziom niżej. (minus 16 pól)", "wyobraźSobie: Znalazłeś twórcze rozwiązanie problemu. Pozbądź się Przekonania [p30] i Blokady Energii [p21].", "wyobraźSobie: Zwycięstwo jest nieuniknione. Następne Wrota."], 
 
 przekonanie: ["przekonanie: Aby być kochanym, muszę być kimś innym niż jestem.", "przekonanie: Boję się nawiązywania bliskich relacji.", "przekonanie: Boję się osiągnąć sukces.", "przekonanie: Chyba nie dam rady.", "przekonanie: Coś mi przeszkadza w osiągnięciu mego celu.", "przekonanie: Coś musi być ze mną nie w porządku.", "przekonanie: Ja się nie liczę - inni są ważniejsi ode mnie.", "przekonanie: Jestem zbyt schorowany i słaby.", "przekonanie: Jestem zupełnie sam na świecie.", "przekonanie: Jeśli będę narzekać, narobię sobie kłopotów.", "przekonanie: Jeśli otworzę swe serce, zostanę zraniony.", "przekonanie: Jeśli pokażę prawdziwą twarz, nikt nie będzie mnie kochać.", "przekonanie: Moje życie po prostu się nie układa.", "przekonanie: Muszę być doskonały, aby mnie kochano.", "przekonanie: Muszę mieć nad wszystkim kontrolę.", "przekonanie: Na wszystko muszę ciężko zapracować.", "przekonanie: Nie jestem wart miłości.", "przekonanie: Nie jestem zbyt lubiany.", "przekonanie: Nie mam żadnych uzdolnień.", "przekonanie: Nie mogę sobie ufać.", "przekonanie: Nie staję na wysokości zadania.", "przekonanie: Nie wyglądam dobrze i tyle.", "przekonanie: Nie zasługuję na miłość.", "przekonanie: Nie zasługuję na pieniądze.", "przekonanie: Nie zasługuję na szczęście.", "przekonanie: Nie zasługuję na to, aby być rodzicem.", "przekonanie: Nie zasługuję, aby mieć to, czego pragnę.", "przekonanie: Nigdy nic mi się nie udaje!", "przekonanie: Nigdy nie będę dość dobry.", "przekonanie: Nigdy nie będę mieć dość pieniędzy.", "przekonanie: Nigdy nie dorastam do sytuacji.", "przekonanie: Nigdzie nie pasuję.", "przekonanie: Nikomu nie mogę ufać.", "przekonanie: Obawiam się bliskości.", "przekonanie: Sam naprawdę nie dam sobie rady.", "przekonanie: Trudno mnie kochać takim jakim jestem.", "przekonanie: Wciąż przydarza mi się coś złego.", "przekonanie: Wszyscy ciągle mi dokuczają.", "przekonanie: Wszyscy mnie ciągle osądzają.", "przekonanie: Wszyscy mnie ignorują i nie zwracają na mnie uwagi.", "przekonanie: Zapewne mi się nie uda.", "przekonanie: Zawsze będę sam.", "przekonanie: Zawsze czegoś brakuje.", "przekonanie: Zawsze wszystko robię źle.", "przekonanie: Złe rzeczy zawsze przydarzają się dobrym ludziom.", "przekonanie: Życie jest niebezpieczne i okrutne.", "przekonanie: Życie jest przygnębiające.", "przekonanie: Życie jest walką, a to co najlepsze trafia się innym.", /* Przekonania o Sobie (Wartość i Kompetencje) */     "przekonanie: Aby być kochanym, muszę być kimś innym niż jestem.",     "przekonanie: Coś musi być ze mną nie w porządku.",     "przekonanie: Nie jestem wart miłości.",     "przekonanie: Nie jestem dość dobry/dobra.",     "przekonanie: Jestem gorszy/gorsza od innych.",     "przekonanie: Nie zasługuję na szczęście.",     "przekonanie: Moje potrzeby nie są ważne.",     "przekonanie: Jestem porażką.",     "przekonanie: Nigdy nic mi się nie udaje.",     "przekonanie: Nie mam żadnych uzdolnień.",     "przekonanie: Nie mogę sobie ufać.",     "przekonanie: Nie wyglądam dobrze i tyle.",     "przekonanie: Jestem nudny/nudna i nieciekawy/a.",     "przekonanie: Jestem zbyt słaby/słaba, żeby sobie poradzić.",     "przekonanie: Muszę być doskonały/doskonała, aby mnie akceptowano.",     "przekonanie: Popełnianie błędów jest oznaką mojej głupoty.",     "przekonanie: Jestem oszustem/oszustką, a inni wkrótce to odkryją (Syndrom Oszusta).",     "przekonanie: Moje pochodzenie definiuje mnie jako kogoś gorszego.",     "przekonanie: Jestem z natury leniwy/leniwa i bezwartościowy/a.",     "przekonanie: Moje osiągnięcia są wynikiem szczęścia, a nie moich umiejętności.",     "przekonanie: Nie jestem wystarczająco inteligentny/a.",     "przekonanie: Moje zdanie się nie liczy.",     "przekonanie: Zawsze muszę ustępować innym.",     "przekonanie: Moje szczęście zależy od akceptacji innych.",     "przekonanie: Nie wolno mi okazywać słabości.",     "przekonanie: Moja wartość jest uzależniona od tego, ile zarabiam.",     "przekonanie: Muszę ciągle udowadniać swoją wartość.",     "przekonanie: Nie zasługuję na odpoczynek.",     "przekonanie: Jeśli odniosę sukces, ludzie mnie odrzucą.",     "przekonanie: Jestem problemem dla innych.",     "przekonanie: Moje marzenia są nierealne i głupie.",     "przekonanie: Zawsze muszę być silny/silna.",      /* Przekonania o Związkach i Relacjach z Innymi */     "przekonanie: Jeśli otworzę swe serce, zostanę zraniony/a.",     "przekonanie: Boję się nawiązywania bliskich relacji.",     "przekonanie: Nikomu nie mogę ufać.",     "przekonanie: Jeśli pokażę prawdziwą twarz, nikt nie będzie mnie kochać.",     "przekonanie: Ludzie zawsze ostatecznie mnie opuszczają.",     "przekonanie: Muszę zasłużyć na miłość i przyjaźń.",     "przekonanie: Inni są ważniejsi ode mnie.",     "przekonanie: Konflikt oznacza koniec relacji.",     "przekonanie: Muszę zadowalać wszystkich, żeby mnie lubili (people-pleasing).",     "przekonanie: Nie wolno mi mówić 'nie'.",     "przekonanie: Moi bliscy nie poradziliby sobie beze mnie.",     "przekonanie: Jeśli ktoś mnie kocha, powinien wiedzieć, czego potrzebuję, bez mówienia.",     "przekonanie: Prawdziwa miłość oznacza brak kłótni.",     "przekonanie: Samotność jest najgorszą rzeczą, jaka może mnie spotkać.",     "przekonanie: Zawsze będę sam/sama.",     "przekonanie: Wszyscy mnie ignorują i nie zwracają na mnie uwagi.",     "przekonanie: Ludzie chcą mnie tylko wykorzystać.",     "przekonanie: Muszę kontrolować partnera, żeby mnie nie opuścił.",     "przekonanie: Lepiej być w złym związku, niż być samemu.",     "przekonanie: Jestem odpowiedzialny/a za szczęście mojego partnera.",     "przekonanie: Wszyscy mnie osądzają.",     "przekonanie: Moi rodzice wiedzą lepiej, co jest dla mnie dobre.",     "przekonanie: Nie wolno mi być szczęśliwszym/ą niż moi rodzice.",     "przekonanie: Miłość oznacza całkowite poświęcenie się dla drugiej osoby.",     "przekonanie: Ludzie z natury są egoistyczni.",     "przekonanie: W związkach zawsze jest ofiara i kat.",      /* Przekonania o Świecie i Życiu */     "przekonanie: Życie jest walką, a to co najlepsze trafia się innym.",     "przekonanie: Życie jest niebezpieczne i okrutne.",     "przekonanie: Nigdy nic dobrego mnie nie spotyka.",     "przekonanie: Nie mam wpływu na swoje życie.",     "przekonanie: Chyba nie dam rady.",     "przekonanie: Moje życie po prostu się nie układa.",     "przekonanie: Świat jest niesprawiedliwy.",     "przekonanie: Na wszystko muszę ciężko zapracować.",     "przekonanie: Nie ma sensu próbować, i tak się nie uda.",     "przekonanie: Wszyscy są przeciwko mnie.",     "przekonanie: Złe rzeczy zawsze przydarzają się dobrym ludziom.",     "przekonanie: Szczęście jest ulotne i zawsze po nim przychodzi nieszczęście.",     "przekonanie: Życie jest przygnębiające.",     "przekonanie: Zawsze muszę być przygotowany/a na najgorsze.",     "przekonanie: Zawsze czegoś brakuje.",     "przekonanie: Świat jest miejscem pełnym zagrożeń.",     "przekonanie: Nie wolno ufać władzy i instytucjom.",     "przekonanie: Ludzie sukcesu na pewno oszukują.",     "przekonanie: Cierpienie uszlachetnia.",     "przekonanie: Sukces psuje ludzi.",      /* Przekonania Irracjonalne i Perfekcjonistyczne (wg A. Ellisa, K. Horney) */     "przekonanie: Absolutnie każdy musi mnie lubić i akceptować.",     "przekonanie: Muszę być we wszystkim kompetentny/a i odnosić same sukcesy.",     "przekonanie: Określone osoby są złe i niegodziwe, i powinny zostać surowo ukarane.",     "przekonanie: To straszne i katastrofalne, gdy sprawy nie idą po mojej myśli.",     "przekonanie: Ludzkie nieszczęście wynika z zewnętrznych okoliczności i nie mam na nie wpływu.",     "przekonanie: Muszę stale zamartwiać się rzeczami niebezpiecznymi lub przerażającymi.",     "przekonanie: Łatwiej jest unikać życiowych trudności i odpowiedzialności niż stawiać im czoła.",     "przekonanie: Muszę polegać na kimś silniejszym ode mnie.",     "przekonanie: Moja przeszłość determinuje moją teraźniejszość i nie mogę się od niej uwolnić.",     "przekonanie: Powinienem/powinnam się denerwować problemami innych ludzi.",     "przekonanie: Zawsze istnieje jedno idealne i doskonałe rozwiązanie problemu i muszę je znaleźć.",     "przekonanie: Jakakolwiek skaza w moim działaniu czyni je bezwartościowym.",     "przekonanie: Tyrania powinności – moje życie jest zdominowane przez listy 'muszę' i 'powinienem'.",          /* Przekonania Związane z Lękiem, Kontrolą i Bezpieczeństwem */     "przekonanie: Boję się porażki, więc lepiej nie próbować.",     "przekonanie: Muszę mieć nad wszystkim kontrolę, inaczej wydarzy się coś złego.",     "przekonanie: Jeśli nie będę się martwić, coś złego na pewno się stanie.",     "przekonanie: Unikanie ryzyka jest jedynym sposobem na bezpieczne życie.",     "przekonanie: Zmiana jest zawsze zła i niebezpieczna.",     "przekonanie: Lepiej trzymać się tego co znane, nawet jeśli jest bolesne.",     "przekonanie: Muszę znać wszystkie odpowiedzi, zanim podejmę działanie.",     "przekonanie: Świat jest zbyt chaotyczny, abym czuł/a się w nim bezpiecznie.",     "przekonanie: Boję się podejmować decyzje.",     "przekonanie: Jeśli coś odpuszczę, stracę kontrolę i wszystko się rozpadnie.",     "przekonanie: Każdy mój lęk jest uzasadniony.",          /* Przekonania Związane z Emocjami */     "przekonanie: Okazywanie emocji to słabość.",     "przekonanie: Muszę zawsze być radosny/a i pozytywny/a.",     "przekonanie: Złość jest złą i destrukcyjną emocją.",     "przekonanie: Płacz jest dla dzieci i osób słabych.",     "przekonanie: Jeśli pozwolę sobie czuć, emocje mnie pochłoną.",     "przekonanie: Moje uczucia są irracjonalne i nieistotne.",     "przekonanie: Inni nie powinni widzieć, że cierpię.",     "przekonanie: Uczucia takie jak zazdrość czy zawiść są dowodem na to, że jestem złym człowiekiem.",      /* Przekonania Związane z Sukcesem, Pieniędzmi i Karierą */     "przekonanie: Nie zasługuję na pieniądze.",     "przekonanie: Bogaci ludzie są nieuczciwi i nieszczęśliwi.",     "przekonanie: Boję się osiągnąć sukces.",     "przekonanie: Nigdy nie będę mieć dość pieniędzy.",     "przekonanie: Jeśli będę zarabiać dużo pieniędzy, stracę przyjaciół.",     "przekonanie: Praca musi być ciężka i nieprzyjemna.",     "przekonanie: Nie można jednocześnie kochać swojej pracy i dobrze zarabiać.",     "przekonanie: Robienie tego, co kocham, nie jest 'prawdziwą' pracą.",     "przekonanie: Nie mam wystarczających kwalifikacji, aby odnieść sukces.",     "przekonanie: Inni są lepsi w mojej dziedzinie, więc po co się starać.",     "przekonanie: Zawsze będę musiał/a walczyć o pieniądze.",      /* Przekonania specyficzne dla dynamiki w toksycznych związkach (dodatkowe) */     "przekonanie: Jeśli tylko będę się bardziej starać, on/ona się dla mnie zmieni.",     "przekonanie: Jego/jej złość jest dowodem na to, jak bardzo mu/jej na mnie zależy.",     "przekonanie: Tylko ja go/ją naprawdę rozumiem.",     "przekonanie: Zasłużyłem/am sobie na takie traktowanie.",     "przekonanie: Ten jeden dobry dzień wynagradza wszystkie złe.",     "przekonanie: Nikt inny mnie nie zechce.",     "przekonanie: Powinnam mu/jej wybaczyć, bo miał/a trudne dzieciństwo.",     "przekonanie: Przemoc słowna nie jest prawdziwą przemocą.",     "przekonanie: To moja wina, że on/ona się tak złości.",     "przekonanie: Dramat w związku oznacza pasję i namiętność." ],
-blokady_energii: ["blokadaEnergii: 1) ❤️ czerwony: Bezpieczeństwo, Przetrwanie, Tożsamość", "blokadaEnergii: 2) 🧡 pomarańczowy: Związki, Pieniądze / Seks, Twórcza inwencja", "blokadaEnergii: 3) 💛 żółty: Pewność siebie, Lęk / Zaufanie, Władza", "blokadaEnergii: 4) 💚 zielony: Współczucie / Przebaczenie, Miłość / Nienawiść, Złość / Żal", "blokadaEnergii: 5) 💎 błękitny: Komunikacja, Krytycyzm, Wolna wola", "blokadaEnergii: 6) 💙 indygo: Samoświadomość, Intuicja, Prawda", "blokadaEnergii: 7) 💜 fioletowy: Duchowość, Natchnienie, Wiara"],
+blokady_energii: ["Czerwona: Bezpieczeństwo, Przetrwanie, Tożsamość", "Pomarańczowa: Związki, Pieniądze/ Seks, Twórcza inwencja", "Żółta: Pewność siebie, Lęk/ Zaufanie, Władza", "Zielona: Współczucie/ Przebaczenie, Miłość/ Nienawiść, Złość/ Żal", "Błękitna: Komunikacja, Krytycyzm, Wolna wola", "Indygo: Samoświadomość, Intuicja, Prawda", "Fioletowa: Duchowość, Natchnienie, Wiara"],
 nowa_opowiesc: ["NOWA OPOWIEŚĆ: _Najgorsze już minęło.", "NOWA OPOWIEŚĆ: _W przeszłości mi się udało, więc teraz też mi się uda.", "NOWA OPOWIEŚĆ: Bardzo cieszy Mnie sposób, w jaki toczy się Moje życie.", "NOWA OPOWIEŚĆ: Bóg obdarzył Mnie wieloma darami, którymi z radością dzielę się z innymi.", "NOWA OPOWIEŚĆ: Gdy zachodzi potrzeba, dowiaduję się o wszystkim, co muszę wiedzieć.", "NOWA OPOWIEŚĆ: Jestem absolutnie doskonały jaki jaki jestem.", "NOWA OPOWIEŚĆ: Jestem bardzo uzdolniony!", "NOWA OPOWIEŚĆ: Jestem doskonały właśnie taki jaki jestem.", "NOWA OPOWIEŚĆ: Jestem dostatecznie silny, by poradzić Sobie w życiu, ponieważ wierzę, że dam radę!", "NOWA OPOWIEŚĆ: Jestem najważniejszą osobą w Moim życiu!", "NOWA OPOWIEŚĆ: Jestem największym szczęściarzem na świecie; przepełnia Mnie wdzięczność.", "NOWA OPOWIEŚĆ: Jestem równie popularny jak inni.", "NOWA OPOWIEŚĆ: Jestem teraz zawsze zauważany i doceniany.", "NOWA OPOWIEŚĆ: Jestem wart tego, by mieć wszystko, czego pragnę. I domagam się tego teraz!", "NOWA OPOWIEŚĆ: Jestem zawsze uwzględniany we wszystkich ważnych dla Mnie kwestiach.", "NOWA OPOWIEŚĆ: Kiedy pokazuję, jaki jestem naprawdę, wszyscy Mnie kochają.", "NOWA OPOWIEŚĆ: Mam teraz wszystko, czego pragnę. Z łatwością urzeczywistniam marzenia.", "NOWA OPOWIEŚĆ: Mam zawsze wszystkiego pod dostatkiem, a pieniądze napływają do Mnie teraz szerokim strumieniem.", "NOWA OPOWIEŚĆ: Mogę odnieść sukces we wszystkim, na czym Mi zależy.", "NOWA OPOWIEŚĆ: Mogę osiągnąć wszystko; a gdy czasem coś Mi nie wyjdzie, to nie szkodzi!", "NOWA OPOWIEŚĆ: Moje życie funkcjonuje doskonale - rozpiera Mnie energia!", "NOWA OPOWIEŚĆ: Moje życie to fascynująca przygoda.", "NOWA OPOWIEŚĆ: Nie jestem swoim ciałem, ale kocham i akceptuję ciało, które posiadam.", "NOWA OPOWIEŚĆ: Nigdy nie będę samotny, jeśli tak postanowię.", "NOWA OPOWIEŚĆ: Nikt nie może Mi niczego narzucać - sam podejmuję swoje decyzje.", "NOWA OPOWIEŚĆ: Wierzę, że zawsze mogę liczyć na siebie oraz na opiekę ze strony Wszechświata.", "NOWA OPOWIEŚĆ: Wolno Mi być SOBĄ!", "NOWA OPOWIEŚĆ: Wszyscy darzą Mnie szacunkiem.", "NOWA OPOWIEŚĆ: Wszyscy kochają Mnie właśnie takim, jakim jestem.", "NOWA OPOWIEŚĆ: Wszyscy Mnie lubią takiego jakim jestem.", "NOWA OPOWIEŚĆ: Wszystkie aspekty Mojego życia pozostają w doskonałej równowadze.", "NOWA OPOWIEŚĆ: Z łatwością odczuwam i wyrażam swe uczucia.", "NOWA OPOWIEŚĆ: Z przekonaniem wyrażam Swoje myśli, poglądy i uczucia.", "NOWA OPOWIEŚĆ: Zajmuję się tym, na co mam wpływ, powierzając resztę spraw Sile Wyższej.", "NOWA OPOWIEŚĆ: Zasługuję na wszystko, czego pragnę i domagam się tego teraz!", "NOWA OPOWIEŚĆ: Życie jest teraz takie proste. Jadę na wakacje.", "NOWA OPOWIEŚĆ: Żyję przepełniony mocą i poczuciem szczęścia.", 
  "NOWA OPOWIEŚĆ: 💰 Dzięki mojej mądrości finansowej, osiągam coraz większy dobrobyt.",
  "NOWA OPOWIEŚĆ: 💰 Jestem otwarty na przepływ pieniędzy i bogactwa w moje życie.",
@@ -1497,20 +1513,22 @@ async function copyToClipboard(id) {
 }
 
 window.onload = function () {
+    // Inicjalizacja pól wyboru z planszy (pozostaje bez zmian)
     initPolaPlanszyDropdown();
     initPolaZdarzenieDropdown();
     initPolaKontekstDropdown();
-  const container = document.getElementById('textareas-container');
-  const numberOfTextareas = 39;
 
-  for (let i = 1; i <= numberOfTextareas; i++) {
-    const textareaId = `textarea${i.toString().padStart(2, '0')}`;
-    const textareaHTML = generateTextarea(textareaId);
-    const div = document.createElement('div');
-    div.className = 'textarea-box';
-    div.innerHTML = textareaHTML;
-    container.appendChild(div);
-  }
+    // Tworzenie dynamicznych pól textarea (pozostaje bez zmian)
+    const container = document.getElementById('textareas-container');
+    const numberOfTextareas = 39;
+    for (let i = 1; i <= numberOfTextareas; i++) {
+        const textareaId = `textarea${i.toString().padStart(2, '0')}`;
+        const textareaHTML = generateTextarea(textareaId);
+        const div = document.createElement('div');
+        div.className = 'textarea-box';
+        div.innerHTML = textareaHTML;
+        container.appendChild(div);
+    }
 
   // Funkcja kolorująca tło
   window.updateBackgroundColor = function (textarea) {
@@ -1520,7 +1538,7 @@ window.onload = function () {
     textarea.classList.remove(
       'zdarzenie-background', 'kontekst-background',
       'karma-background', 'wyobraz-sobie-background', 'przekonanie-background',
-      'blokada-energii-background', 'nowa-background', 'default-background'
+      'blokada-energii-czerwona-background', 'blokada-energii-pomarańczowa-background', 'blokada-energii-żółta-background', 'blokada-energii-zielona-background', 'blokada-energii-błękitna-background', 'blokada-energii-indygo-background', 'blokada-energii-fioletowa-background', 'nowa-background', 'default-background'
     );
 
     switch (firstWord) {
@@ -1539,8 +1557,26 @@ window.onload = function () {
       case 'przekonanie:':
         textarea.classList.add('przekonanie-background');
         break;
-      case 'blokadaenergii:':
-        textarea.classList.add('blokada-energii-background');
+      case 'czerwona:':
+        textarea.classList.add('blokada-energii-czerwona-background');
+        break;
+      case 'pomarańczowa:':
+        textarea.classList.add('blokada-energii-pomarańczowa-background');
+        break;
+      case 'żółta:':
+        textarea.classList.add('blokada-energii-żółta-background');
+        break;
+      case 'zielona:':
+        textarea.classList.add('blokada-energii-zielona-background');
+        break;
+      case 'błękitna:':
+        textarea.classList.add('blokada-energii-błękitna-background');
+        break;
+      case 'indygo:':
+        textarea.classList.add('blokada-energii-indygo-background');
+        break;
+      case 'fioletowa:':
+        textarea.classList.add('blokada-energii-fioletowa-background');
         break;
       case 'nowa':
         textarea.classList.add('nowa-background');
@@ -1558,9 +1594,6 @@ window.onload = function () {
     });
   });
 };
-
-
-
 
 
 function pole00() {
@@ -1722,6 +1755,7 @@ function readDescription() {
   
   synth.speak(utterance);
 }
+
 
 </script>
 
