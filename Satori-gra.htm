@@ -1570,56 +1570,29 @@ function generateTextarea(id) {
   `;
 }
 
-async function toggleVisibility(textareaId, button) {
+function toggleVisibility(textareaId, button) {
   const textarea = document.getElementById(textareaId);
-  const msgId = textareaId + '-msg';
-  let msg = document.getElementById(msgId);
-
-  // jeśli nie istnieje kontener na komunikat – stwórz
-  if (!msg) {
-    msg = document.createElement('p');
-    msg.id = msgId;
-    msg.style.color = 'red';
-    msg.style.display = 'none';
-    textarea.insertAdjacentElement('afterend', msg);
-  }
-
   if (textarea.style.display === 'none') {
     textarea.style.display = 'block';
     button.innerText = 'Ukryj';
-    msg.style.display = 'none';
-    textarea.style.backgroundColor = ''; // reset tła
   } else {
     textarea.style.display = 'none';
     button.innerText = 'Pokaż';
-
-    try {
-      const text = await navigator.clipboard.readText();
-      textarea.value = text;
-      msg.textContent = "Szkodliwe przekonanie wklejone.";
-      textarea.style.background = 'radial-gradient(circle, #f9f6e9 0%, #f6eb4b 100%)';
- // kolor po wklejeniu
-    } catch (e) {
-      msg.textContent = "Nie udało się wkleić ze schowka.";
-    }
-
-    msg.style.display = 'block';
   }
 }
 
 
-function clearTextarea(id) {
+async function clearTextarea(id) {
   const textarea = document.getElementById(id);
   try {
-    textarea.value = '';
-    textarea.style.background = '#dbe7f2'; // szare tło po kasowaniu
+    const text = await '';
+    textarea.value = text;
+    updateBackgroundColor(textarea); // Aktualizacja koloru tła po wklejeniu
   } catch (err) {
     console.error('Błąd podczas kasowania:', err);
-  }
 }
-
-
-
+           
+}
 
 async function pasteFromClipboard(id) {
   const textarea = document.getElementById(id);
@@ -1627,6 +1600,7 @@ async function pasteFromClipboard(id) {
     const text = await navigator.clipboard.readText();
     textarea.value = text;
     updateBackgroundColor(textarea); // Aktualizacja koloru tła po wklejeniu
+        alert('Karta została wklejona.');
   } catch (err) {
     console.error('Błąd podczas wklejania:', err);
   }
