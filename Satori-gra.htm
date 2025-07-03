@@ -48,7 +48,7 @@ body, button, textarea, select, label {
 }
 #karma {
   width: 100%;
-  height: 25px;
+  height: 19px;
   padding: 0;
   margin-top: 0;
   margin-bottom: 0;
@@ -58,7 +58,7 @@ body, button, textarea, select, label {
 }
 #wyobraz_sobie {
   width: 100%;
-  height: 75px;
+  height: 55px;
   padding: 0;
   margin-top: 0;
   margin-bottom: 0;
@@ -73,11 +73,12 @@ body, button, textarea, select, label {
   margin-top: 0;
   margin-bottom: 0;
   resize: vertical;
+  display: none;
   background: radial-gradient(circle, #f9f6e9 0%, #f6eb4b 100%);
 }
 #blokady_energii {
   width: 100%;
-  height: 60px;
+  height: 40px;
   padding: 0;
   margin-top: 0;
   margin-bottom: 0;
@@ -127,7 +128,7 @@ textarea {
   text-align: center;
   background-color: #dbe7f2;
   flex-grow: 1; /* Pozwala textarea rosnąć i wypełniać dostępną przestrzeń w karcie */
-  min-height: 80px; /* Minimalna wysokość, żeby małe pola nie były zbyt małe */
+  min-height: 60px; /* Minimalna wysokość, żeby małe pola nie były zbyt małe */
   resize: vertical; /* Pozwala tylko na zmianę wysokości */
   overflow-y: scroll; 
 }
@@ -434,7 +435,7 @@ th, td {
   width: 100%; /* Textarea wypełnia całą szerokość karty */
   box-sizing: border-box; /* Padding i border wliczane są w szerokość */
   flex-grow: 1; /* Pozwala textarea rosnąć i wypełniać dostępną przestrzeń w karcie */
-  min-height: 50px; /* Minimalna wysokość, żeby małe pola nie były zbyt małe */
+  min-height: 22px; /* Minimalna wysokość, żeby małe pola nie były zbyt małe */
   resize: vertical; /* Pozwala tylko na zmianę wysokości */
 }
 
@@ -543,7 +544,7 @@ th, td {
           <style>
             body { margin: 0; text-align: center; background: #000; }
             img { max-width: 100%; height: auto; }
-            button { position: absolute; top: 10px; right: 10px; font-size: 20px; }
+            button { position: absolute; top: 10px; right: 10px; font-size: 60px; }
           </style>
         </head>
         <body>
@@ -1569,28 +1570,56 @@ function generateTextarea(id) {
   `;
 }
 
-function toggleVisibility(textareaId, button) {
+async function toggleVisibility(textareaId, button) {
   const textarea = document.getElementById(textareaId);
+  const msgId = textareaId + '-msg';
+  let msg = document.getElementById(msgId);
+
+  // jeśli nie istnieje kontener na komunikat – stwórz
+  if (!msg) {
+    msg = document.createElement('p');
+    msg.id = msgId;
+    msg.style.color = 'red';
+    msg.style.display = 'none';
+    textarea.insertAdjacentElement('afterend', msg);
+  }
+
   if (textarea.style.display === 'none') {
     textarea.style.display = 'block';
     button.innerText = 'Ukryj';
+    msg.style.display = 'none';
+    textarea.style.backgroundColor = ''; // reset tła
   } else {
     textarea.style.display = 'none';
     button.innerText = 'Pokaż';
+
+    try {
+      const text = await navigator.clipboard.readText();
+      textarea.value = text;
+      msg.textContent = "Szkodliwe przekonanie wklejone.";
+      textarea.style.background = 'radial-gradient(circle, #f9f6e9 0%, #f6eb4b 100%)';
+ // kolor po wklejeniu
+    } catch (e) {
+      msg.textContent = "Nie udało się wkleić ze schowka.";
+    }
+
+    msg.style.display = 'block';
   }
 }
 
-async function clearTextarea(id) {
+
+function clearTextarea(id) {
   const textarea = document.getElementById(id);
   try {
-    const text = await '';
-    textarea.value = text;
-    updateBackgroundColor(textarea); // Aktualizacja koloru tła po wklejeniu
+    textarea.value = '';
+    textarea.style.background = '#dbe7f2'; // szare tło po kasowaniu
   } catch (err) {
     console.error('Błąd podczas kasowania:', err);
+  }
 }
-           
-}
+
+
+
 
 async function pasteFromClipboard(id) {
   const textarea = document.getElementById(id);
@@ -1997,6 +2026,31 @@ function readDescription() {
 <!-- Westchnienie -->
 <button onclick="document.getElementById('sigh').play()">Westchnienie 😮‍💨</button>
 <audio id="sigh" src="female-sigh-medium-distance-6853=pixabay.com.mp3"></audio>
+
+<!-- Przycisk Emocje -->
+<button onclick="otworzEmocje()">Emocje 😊</button>
+
+<script>
+  function otworzEmocje() {
+    const win = window.open('', 'Emocje', 'width=800,height=600');
+    win.document.write(`
+      <html>
+        <head>
+          <title>Emocje</title>
+          <style>
+            body { margin: 0; text-align: center; background: #000; }
+            img { max-width: 100%; height: auto; }
+            button { position: absolute; top: 10px; right: 10px; font-size: 60px; }
+          </style>
+        </head>
+        <body>
+          <button onclick="window.close()">✖</button>
+          <img src="Emocje.jpg" alt="Emocje">
+        </body>
+      </html>
+    `);
+  }
+</script>
 
 </label>
 <textarea id="opis" name="opis" rows="10"
