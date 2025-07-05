@@ -89,22 +89,40 @@ body, button, textarea, select, label {
   font-weight: bold; 
 }
 
+
 #nowa_opowiesc {
-  width: 100%;
-  height: 60px;
-  padding: 0;
-  margin-top: 0;
-  margin-bottom: 0;
-  resize: vertical;
-  text-align: center;
-  color:yellow;
-  background: radial-gradient(circle, #ae53f6 0%, #ae53f6 100%);
-  font-weight:  bold;
-  text-shadow:
-    -1px -1px 0 black,
-     1px -1px 0 black,
-    -1px  1px 0 black,
-     1px  1px 0 black;
+  background-color: #f8f4e3; /* bazowy kolor papieru */
+  background-image:
+    /* Marmurowe żyłki (zwiększony kontrast i widoczność) */
+    linear-gradient(110deg, transparent 0%, rgba(180, 160, 140, 0.6) 10%, transparent 30%),
+    linear-gradient(230deg, transparent 40%, rgba(160, 140, 120, 0.7) 50%, transparent 65%),
+    linear-gradient(340deg, transparent 15%, rgba(190, 170, 150, 0.75) 25%, transparent 45%),
+    /* Marmurowe plamy (zwiększony kontrast i widoczność) */
+    radial-gradient(circle at 20% 30%, rgba(180, 160, 140, 0.6) 0%, transparent 25%),
+    radial-gradient(circle at 80% 70%, rgba(170, 150, 130, 0.7) 0%, transparent 30%),
+    radial-gradient(circle at 40% 60%, rgba(160, 140, 120, 0.55) 0%, transparent 20%),
+    /* Efekt postarzenia (pozostałe bez zmian dla delikatności) */
+    radial-gradient(circle at center, transparent 60%, rgba(180, 160, 120, 0.1) 100%),
+    radial-gradient(circle at 10% 15%, rgba(220, 200, 160, 0.2) 0%, transparent 15%),
+    radial-gradient(circle at 90% 85%, rgba(210, 190, 150, 0.25) 0%, transparent 20%),
+    /* Delikatne pionowe paski (pozostałe bez zmian dla subtelności) */
+    repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(230, 215, 180, 0.08) 3px,
+        rgba(230, 215, 180, 0.08) 4px
+    ),
+  color: #000000; /* kolor tekstu - brązowy */
+  font-family: Georgia, serif; /* klasyczna czcionka */
+  border: 1px solid #d4c9b1; /* ramka w kolorze papieru */
+  box-shadow: 
+    0 0 10px rgba(0,0,0,0.1),
+    inset 0 0 20px rgba(0,0,0,0.05); /* delikatne cienie */
+  padding: 0px; /* większy padding */
+  line-height: 1.1; /* lepsza czytelność */
+  border-radius: 2px; /* lekko zaokrąglone rogi */
+  height: 55px;
 }
 #projekcje {
   width: 100px;
@@ -158,7 +176,42 @@ button {
 .blokada-energii-błękitna-background { background-color: #42b8d2; color: #ffffff; font-weight:  bold; text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px  1px 0 black, 1px  1px 0 black; }
 .blokada-energii-indygo-background { background-color: indigo; color: #ffffff; font-weight:  bold; text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px  1px 0 black, 1px  1px 0 black; }
 .blokada-energii-fioletowa-background { background-color: #b260b2; color: #ffffff; font-weight:  bold; text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px  1px 0 black, 1px  1px 0 black; }
-.nowa-background  { color:yellow; background: radial-gradient(circle, #ae53f6 0%, #ae53f6 100%); font-weight:  bold; text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px  1px 0 black, 1px  1px 0 black; }
+
+.nowa-background  {
+  background-color: #f8f4e3 !important; /* bazowy kolor papieru */
+  background-image:
+    /* Marmurowe żyłki */
+    linear-gradient(110deg, transparent 0%, rgba(224, 209, 174, 0.25) 10%, transparent 30%),
+    linear-gradient(230deg, transparent 40%, rgba(210, 190, 150, 0.3) 50%, transparent 65%),
+    linear-gradient(340deg, transparent 15%, rgba(235, 220, 185, 0.35) 25%, transparent 45%),
+    /* Marmurowe plamy */
+    radial-gradient(circle at 20% 30%, rgba(240, 225, 190, 0.3) 0%, transparent 25%),
+    radial-gradient(circle at 80% 70%, rgba(230, 210, 170, 0.4) 0%, transparent 30%),
+    radial-gradient(circle at 40% 60%, rgba(220, 200, 160, 0.25) 0%, transparent 20%),
+    /* Efekt postarzenia */
+    radial-gradient(circle at center, transparent 60%, rgba(180, 160, 120, 0.1) 100%),
+    radial-gradient(circle at 10% 15%, rgba(220, 200, 160, 0.2) 0%, transparent 15%),
+    radial-gradient(circle at 90% 85%, rgba(210, 190, 150, 0.25) 0%, transparent 20%),
+    /* Delikatne pionowe paski */
+    repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(230, 215, 180, 0.08) 3px,
+        rgba(230, 215, 180, 0.08) 4px
+    ),
+
+  color: #000000 !important; /* kolor tekstu - brązowy */
+  font-family: Georgia, serif !important; /* klasyczna czcionka */
+  text-shadow: none !important; /* usunięcie cienia tekstu */
+  border: 1px solid #d4c9b1 !important; /* ramka w kolorze papieru */
+  box-shadow: 
+    0 0 10px rgba(0,0,0,0.1),
+    inset 0 0 20px rgba(0,0,0,0.05) !important; /* delikatne cienie */
+  border-radius: 2px !important; /* lekko zaokrąglone rogi */
+  line-height: 1.1 !important; /* lepsza czytelność */
+  padding: 0px !important; /* większy padding */
+}
 table {
   border-collapse: collapse;
   width: 100%;
@@ -682,13 +735,13 @@ pola_planszy: [
 { value: "05", label: "A05 🕸️🕷️ Przekonanie" },
 { value: "06", label: "A06 🔒 Blokada energii" },
 { value: "07", label: "A07 📽️ Projekcja" },
-{ value: "08", label: "A08 🔁 KARMA" },
+{ value: "08", label: "A08 ☯️ KARMA" },
 { value: "09", label: "A09 🕸️🕷️ Przekonanie" },
 { value: "10", label: "A10 🔒 Blokada energii" },
 { value: "11", label: "A11 🤔💭 Wyobraź sobie!" },
 { value: "12", label: "A12 👉🏻🙎🏻‍♂️ Zabawa w obwinianie" },
 { value: "13", label: "A13 🕸️🕷️ Przekonanie" },
-{ value: "14", label: "A14 🔁 KARMA" },
+{ value: "14", label: "A14 ☯️ KARMA" },
 { value: "15", label: "A15 🤔💭 Wyobraź sobie!" },
 { value: "16", label: "=A16 ⛔ Wrota Świadomości STOP!" },
 { value: "17", label: "B17 💡 Światło" },
@@ -709,12 +762,12 @@ pola_planszy: [
 { value: "32", label: "C32 😮‍💨 Westchnienie ulgi" },
 { value: "33", label: "C33 📖 Nowa opowieść" },
 { value: "34", label: "C34 💡 Światło" },
-{ value: "35", label: "C35 🦋 Uzdrawiający Anioł" },
+{ value: "35", label: "C35 👼 Uzdrawiający Anioł" },
 { value: "36", label: "C36 🤔💭 Wyobraź sobie!" },
 { value: "37", label: "C37 🔥 Pozbądź się tego" },
 { value: "38", label: "C38 📖 Nowa opowieść" },
 { value: "39", label: "C39 💡 Światło" },
-{ value: "40", label: "C40 🦋 Uzdrawiający Anioł" },
+{ value: "40", label: "C40 👼 Uzdrawiający Anioł" },
 { value: "41", label: "C41 ⚡ Moc" },
 { value: "42", label: "C42 📖 Nowa opowieść" },
 { value: "43", label: "C43 😮‍💨 Westchnienie ulgi" },
@@ -731,7 +784,7 @@ pola_planszy: [
 { value: "54", label: "D54 🔥 Pozbądź się tego" },
 { value: "55", label: "D55 ⚡ Moc" },
 { value: "56", label: "D56 💕 Radykalne Wybaczenie" },
-{ value: "57", label: "D57 🦋 Uzdrawiający Anioł" },
+{ value: "57", label: "D57 👼 Uzdrawiający Anioł" },
 { value: "58", label: "D58 🌍 Jedność" },
 { value: "59", label: "D59 🤗 Samo- akceptacja" },
 { value: "60", label: "D60 🥹 Poddanie się" },
@@ -1881,7 +1934,7 @@ function readDescription() {
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
  onclick="pole03()">p07📽️</button> <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
- onclick="pole08()">p08🔁</button> <button
+ onclick="pole08()">p08☯️</button> <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
  onclick="pole01()">p09🕸️🕷️</button> <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
@@ -1893,7 +1946,7 @@ function readDescription() {
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
  onclick="pole01()">p13🕸️🕷️</button> <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
- onclick="pole08()">p14🔁</button> <button
+ onclick="pole08()">p14☯️</button> <button
  style="background-color: rgb(139, 163, 208); color: rgb(64, 27, 122);"
  onclick="pole11()">p15🤔💭</button> <button
  style="background-color: rgb(195, 0, 128); color: black; border: 5px solid green;"
@@ -1935,7 +1988,7 @@ function readDescription() {
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122); border: 5px solid green;"
  onclick="pole17()">p34💡</button> <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122); border: 5px solid green;"
- onclick="pole35()">p35🦋</button> <button
+ onclick="pole35()">p35👼</button> <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122);"
  onclick="pole11()">p36🤔💭</button> <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122); border: 5px solid green;"
@@ -1945,7 +1998,7 @@ function readDescription() {
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122); border: 5px solid green;"
  onclick="pole17()">p39💡</button> <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122); border: 5px solid green;"
- onclick="pole35()">p40🦋</button> <button
+ onclick="pole35()">p40👼</button> <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122); border: 5px solid green;"
  onclick="pole41()">p41⚡</button> <button
  style="background-color: rgb(255, 179, 100); color: rgb(64, 27, 122); border: 5px solid green;"
@@ -1979,7 +2032,7 @@ function readDescription() {
  style="background-color: rgb(224, 149, 232); color: rgb(64, 27, 122); border: 5px solid green;"
  onclick="pole49()">p56💕</button> <button
  style="background-color: rgb(224, 149, 232); color: rgb(64, 27, 122); border: 5px solid green;"
- onclick="pole35()">p57🦋</button> <button
+ onclick="pole35()">p57👼</button> <button
  style="background-color: rgb(224, 149, 232); color: rgb(64, 27, 122); border: 5px solid green;"
  onclick="pole58()">p58🌍</button> <button
  style="background-color: rgb(224, 149, 232); color: rgb(64, 27, 122); border: 5px solid green;"
