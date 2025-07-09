@@ -402,16 +402,57 @@ th, td {
 
 
 
-  .textarea-box {
-    display: inline-block; /* To sprawi, że elementy będą układać się obok siebie */
-    vertical-align: top;   /* Zapobiega problemom z wyrównaniem, jeśli elementy mają różną wysokość */
-    margin: 0px;           /* Dodaje trochę odstępu między kartami */
+
+
+
+
+  #textareas-container {
+    display: flex;         /* Zmienia kontener w elastyczny kontener */
+    flex-wrap: wrap;       /* Pozwala elementom zawijać się do następnej linii */
+    justify-content: center; /* Wyśrodkowuje elementy, gdy nie wypełniają całej linii */
+    gap: 0px;             /* Dodaje odstęp między elementami (równomiernie w pionie i poziomie) */
+    padding: 0px;         /* Lekki padding wokół całego kontenera */
   }
 
-  /* Możesz również dostosować szerokość textarea, aby lepiej pasowały */
+  .textarea-box {
+    /* Zastępuje poprzednie inline-block i margin, aby Flexbox zarządzał układem */
+    /* flex: [flex-grow] [flex-shrink] [flex-basis] */
+    flex: 1 1 255px;       /* Elementy będą próbowały mieć 180px szerokości bazowej, */
+                           /* mogą się kurczyć (do min-width) i rosnąć, aby wypełnić dostępną przestrzeń */
+    min-width: 200px;      /* Minimalna szerokość, aby nie były zbyt małe na telefonach */
+    max-width: 350px;      /* Maksymalna szerokość, aby nie były zbyt szerokie na dużych ekranach */
+    box-sizing: border-box; /* Zapewnia, że padding i border są wliczone w szerokość/wysokość elementu */
+    border: 0px solid #ddd; /* Dodatkowy styl dla wizualnego oddzielenia kart */
+    padding: 0px;          /* Wewnętrzny padding karty */
+    background-color: #fff; /* Tło karty */
+    border-radius: 5px;    /* Zaokrąglone rogi dla kart */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Delikatny cień dla wizualnej głębi */
+  }
+
+  .textarea-box label {
+    display: block;        /* Label zajmuje całą szerokość nad textarea */
+    margin-bottom: 0px;
+    font-weight: bold;
+    color: #333;
+  }
+
   .textarea-box textarea {
-    width: 260px; /* Przykładowa szerokość, dostosuj do swoich potrzeb */
-    height: 80px; /* Przykładowa wysokość, dostosuj do swoich potrzeb */
+    width: 100%;           /* Textarea wypełnia 100% szerokości swojej karty */
+    height: 80px;          /* Stała wysokość lub dostosuj, jeśli wolisz dynamiczną */
+    resize: vertical;      /* Umożliwia użytkownikowi zmianę rozmiaru w pionie */
+    padding: 0px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
+
+
+  /* Dodatkowe media queries dla bardzo małych ekranów, jeśli 150px min-width to za dużo */
+  @media (max-width: 600px) {
+    .textarea-box {
+      flex-basis: 100%; /* Na bardzo małych ekranach każda karta zajmuje całą szerokość */
+      max-width: none;  /* Usuwamy max-width, aby mogły zająć całą szerokość */
+    }
   }
 
 
