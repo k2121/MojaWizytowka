@@ -232,36 +232,7 @@ th, td {
   margin-bottom: 0px;
 }
 
-.cart-container {
-  background-color: #ecf0f1;
-  border: 1px dashed #7f8c8d;
-  padding: 0px;
-  margin-bottom: 0px;
-  border-radius: 5px;
-}
 
-#cart {
-  width: 100%;
-  box-sizing: border-box;
-  height: 60px; /* Wysokość koszyka na połowę wysokości kontenera rodzica */
-  min-height: 60px; /* Minimalna wysokość, żeby był użyteczny */
-  background-color: rgb(102, 255, 153);
-  color: black;
-  border: 1px solid #bdc3c7;
-  font-family: monospace;
-}
-
-.cart-container button {
-  margin: 0px 0px 0 0;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  padding: 0px 0px;
-  border-radius: 4px;
-}
-.cart-container button:last-of-type {
-  background-color: #e74c3c;
-}
 
 #problem-list-container {
   height: 150px;
@@ -359,31 +330,6 @@ th, td {
 }
 
 @media (max-width: 600px) {
-  .cart-container {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-
-  .cart-container textarea {
-    width: 100%;
-    font-size: 1rem;
-  }
-
-  .cart-container button {
-    display: block;
-    width: 100%;
-    margin-top: 5px;
-    font-size: 1rem;
-  }
-
-  .cart-container h3 {
-    font-size: 1.2rem;
-    text-align: center;
-  }
-}
-
-@media (max-width: 600px) {
   #problem-list-container {
     max-height: 300px;
     overflow-y: auto;
@@ -454,6 +400,22 @@ th, td {
   resize: vertical; /* Pozwala tylko na zmianę wysokości */
 }
 
+
+
+  .textarea-box {
+    display: inline-block; /* To sprawi, że elementy będą układać się obok siebie */
+    vertical-align: top;   /* Zapobiega problemom z wyrównaniem, jeśli elementy mają różną wysokość */
+    margin: 0px;           /* Dodaje trochę odstępu między kartami */
+  }
+
+  /* Możesz również dostosować szerokość textarea, aby lepiej pasowały */
+  .textarea-box textarea {
+    width: 260px; /* Przykładowa szerokość, dostosuj do swoich potrzeb */
+    height: 80px; /* Przykładowa wysokość, dostosuj do swoich potrzeb */
+  }
+
+
+
 </style>
 </head>
 <body style="background-color: rgb(0, 255, 0); color: rgb(0, 0, 0);"
@@ -487,12 +449,6 @@ th, td {
 
 <!-- Przeniesiony kontener koszyka i listy problemów - ma zerowe marginesy -->
 <div id="problem-selector-container" style="margin: 0;">
-  <div class="cart-container">
-    <h3>🛒 Twój koszyk wyzwań</h3>
-    <textarea id="cart" readonly rows="3" placeholder="Twoje wybrane problemy pojawią się tutaj..."></textarea>
-    <button onclick="copyCartToClipboard()">📋 Kopiuj z koszyka</button>
-    <button onclick="clearCart()">🗑️ Wyczyść koszyk</button>
-  </div>
   
   <h3>[466] Wybierz problemy, nad którymi chcesz pracować:</h3>
   <div style="margin-bottom: 0px;">
@@ -2348,7 +2304,6 @@ const problemsData = {
 /* === KONIEC NOWEJ BAZY DANYCH PROBLEMÓW === */
 
 
-let cartItems = [];
 
 // Funkcja do dynamicznego generowania listy problemów z akordeonem
 function generateProblemList() {
@@ -2414,13 +2369,11 @@ function createProblemItem(problem) {
     const addButton = document.createElement('button');
     addButton.textContent = '+';
     addButton.className = 'add-problem-btn';
-    if (cartItems.includes(problem)) {
-        addButton.classList.add('added');
-        addButton.disabled = true;
-    }
+    // Usunięto logikę sprawdzającą cartItems.includes(problem) i dodającą klasę 'added' / wyłączającą przycisk
     addButton.onclick = () => addToCart(problem, addButton);
     
-    const label = document.createElement('span');
+    // ZMIANA ZASTOSOWANA TUTAJ
+    const label = document.createElement('span'); 
     label.className = 'problem-label';
     label.textContent = problem;
     
@@ -2432,56 +2385,18 @@ function createProblemItem(problem) {
 
 // Dodawanie problemu do koszyka
 function addToCart(problem, button) {
-    if (cartItems.length < 3) {
-        cartItems.push(problem);
-        updateCartDisplay();
-        button.classList.add('added');
-        button.disabled = true;
-    } else {
-        alert('Możesz wybrać maksymalnie 3 problemy.');
-    }
-}
-
-// Czyszczenie koszyka
-function clearCart() {
-    cartItems = [];
-    updateCartDisplay();
-    // Po prostu usuwamy klasę 'added' i włączamy przyciski, bez przebudowywania całej listy
-    const allButtons = document.querySelectorAll('.add-problem-btn.added');
-    allButtons.forEach(button => {
-        button.classList.remove('added');
-        button.disabled = false;
-    });
-}
-
-// Aktualizacja wyświetlania koszyka
-function updateCartDisplay() {
-    const cartTextarea = document.getElementById('cart');
-    const formattedCartContent = cartItems.map(item => `karma: ${item}`).join('\n');
-    cartTextarea.value = formattedCartContent;
-
-    // Po aktualizacji wartości, musimy ponownie zastosować logikę zmiany koloru tła
-    // w polu tekstowym koszyka, jeśli jest taka potrzeba. 
-    // Ponieważ wszystkie linie zaczynają się od "karma:", możemy
-    // na sztywno przypisać klasę dla koszyka.
-    // Ale w tej sytuacji lepiej zmodyfikować CSS dla konkretnego ID
-    // żeby uniknąć mieszania logiki
-}
-
-// Kopiowanie zawartości koszyka do schowka
-function copyCartToClipboard() {
-    const cartTextarea = document.getElementById('cart');
-    if(cartTextarea.value.trim() === '') {
-        alert('Koszyk jest pusty.');
-        return;
-    }
-    cartTextarea.select();
-    navigator.clipboard.writeText(cartTextarea.value).then(() => {
-        alert('Problemy z koszyka zostały skopiowane do schowka.');
+    const problemWithPrefix = "karma: " + problem;
+    navigator.clipboard.writeText(problemWithPrefix).then(() => {
+        alert("Skopiowano wyzwanie do schowka: " + problemWithPrefix); // Lepszy komunikat
     }, (err) => {
-        alert('Błąd kopiowania: ' + err);
+        console.error('Błąd kopiowania do schowka:', err);
+        alert('Nie udało się skopiować wyzwania do schowka.');
     });
+
+    // Cała logika dodawania do koszyka i zmiany stanu przycisku została usunięta
 }
+
+
 
 // Filtrowanie problemów na liście na podstawie wpisanego tekstu
 function filterProblems() {
@@ -3033,7 +2948,9 @@ function readDescription() {
 
 <br><br>
 
-<div id="textareas-container" class="textarea-grid"></div>
+
+<!-- Kontener dla dynamicznych textarea, do którego JavaScript dodaje karty -->
+<div id="textareas-container"></div>
 <br>
 <br>
 <div
