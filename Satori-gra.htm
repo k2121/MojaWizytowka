@@ -495,7 +495,7 @@ th, td {
   <div style="margin-bottom: 0px;">
       <button onclick="expandAll()">Rozwiń wszystkie</button>
       <button onclick="collapseAll()">Zwiń wszystkie</button>
-      <button onclick="clearSearch()">Kasuj wyszukiwanie</button>
+      <button onclick="clearSearch()">Kasuj</button>
       <button onclick="openBasketInNewWindow()">Nowe okno</button>
   </div>
   <input type="text" id="problemSearch" onkeyup="filterProblems()" placeholder="Szukaj problemu...">
@@ -2927,37 +2927,36 @@ function clearSearch() {
 
 function openBasketInNewWindow() {
   const basketContainer = document.getElementById('problem-selector-container');
-  // 1. Klonujemy kontener, aby nie modyfikować oryginału
   const containerClone = basketContainer.cloneNode(true);
   
-  // 2. Usuwamy przycisk "Nowe okno" z klona, aby uniknąć rekursji
   const buttonToRemove = containerClone.querySelector('button[onclick="openBasketInNewWindow()"]');
   if (buttonToRemove) {
     buttonToRemove.remove();
   }
   const basketHTML = containerClone.outerHTML;
 
-  // 3. Pobieramy wszystkie style
   const styles = document.querySelectorAll('style');
   let styleContent = '';
   styles.forEach(style => {
     styleContent += style.outerHTML;
   });
 
-  // 4. Pobieramy cały główny blok skryptu
   const scriptHTML = document.getElementById('main-script').outerHTML;
 
-  // 5. Otwieramy nowe okno
-  const newWindow = window.open('', 'Koszyk Problemów', 'width=800,height=600,scrollbars=yes,resizable=yes');
+  // ZMIANA 1: Usunięto stałe wymiary 'width' i 'height'
+  const newWindow = window.open('', 'Koszyk Problemów', 'scrollbars=yes,resizable=yes');
   
-  // 6. Wpisujemy całą strukturę, style, HTML koszyka ORAZ skrypty do nowego okna
   newWindow.document.write(`
     <!DOCTYPE html>
     <html lang="pl">
     <head>
       <meta charset="UTF-8">
+      <!-- ZMIANA 2: Dodano kluczowy meta tag dla responsywności -->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Satori - Wybrane Problemy</title>
       ${styleContent}
+      
+      <!-- ZMIANA 3: Dodano media query dla urządzeń mobilnych -->
       <style>
         html, body {
           height: 100%;
@@ -2976,13 +2975,30 @@ function openBasketInNewWindow() {
           display: flex;
           flex-direction: column;
           flex-grow: 1;
-          height: 100%;
+          height: 100%; /* Używa 100% wysokości body */
         }
         #problem-list-container {
           flex-grow: 1;
           min-height: 200px;
           resize: vertical;
           overflow: auto;
+        }
+        /* Style dla urządzeń mobilnych */
+        @media (max-width: 600px) {
+          #problem-list-container {
+            resize: none; /* Wyłączamy manualną zmianę rozmiaru na mobilkach */
+          }
+          .problem-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px; /* Zwiększony odstęp dla lepszej czytelności */
+            padding: 8px;
+          }
+          .add-problem-btn {
+            width: 100%; /* Przycisk na całą szerokość dla łatwiejszego dotyku */
+            padding: 10px;
+            font-size: 1rem;
+          }
         }
       </style>
     </head>
