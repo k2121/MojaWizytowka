@@ -2927,14 +2927,26 @@ function clearSearch() {
 
 function openBasketInNewWindow() {
   const basketContainer = document.getElementById('problem-selector-container');
+  // 1. Klonujemy kontener, aby go bezpiecznie modyfikować
   const containerClone = basketContainer.cloneNode(true);
-  
-  const buttonToRemove = containerClone.querySelector('button[onclick="openBasketInNewWindow()"]');
-  if (buttonToRemove) {
-    buttonToRemove.remove();
+
+  // 2. Znajdujemy w klonie div z przyciskami
+  const buttonDiv = containerClone.querySelector('div[style="margin-bottom: 0px;"]');
+  if (buttonDiv) {
+    // Usuwamy z klona przycisk "Nowe okno"
+    const openBtn = buttonDiv.querySelector('button[onclick="openBasketInNewWindow()"]');
+    if (openBtn) openBtn.remove();
+    
+    // Dodajemy do klona przycisk "X" (Zamknij)
+    const closeBtn = document.createElement('button');
+    closeBtn.innerText = 'X';
+    closeBtn.title = 'Zamknij okno'; // Dodaje podpowiedź po najechaniu
+    closeBtn.setAttribute('onclick', 'window.close()');
+    buttonDiv.appendChild(closeBtn);
   }
   const basketHTML = containerClone.outerHTML;
 
+  // 3. Pobieramy style i skrypty jak wcześniej
   const styles = document.querySelectorAll('style');
   let styleContent = '';
   styles.forEach(style => {
@@ -2943,20 +2955,20 @@ function openBasketInNewWindow() {
 
   const scriptHTML = document.getElementById('main-script').outerHTML;
 
-  // ZMIANA 1: Usunięto stałe wymiary 'width' i 'height'
+  // 4. Otwieramy nowe okno bez stałych wymiarów
   const newWindow = window.open('', 'Koszyk Problemów', 'scrollbars=yes,resizable=yes');
   
+  // 5. Wpisujemy kompletną strukturę z poprawionymi stylami CSS
   newWindow.document.write(`
     <!DOCTYPE html>
     <html lang="pl">
     <head>
       <meta charset="UTF-8">
-      <!-- ZMIANA 2: Dodano kluczowy meta tag dla responsywności -->
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Satori - Wybrane Problemy</title>
       ${styleContent}
       
-      <!-- ZMIANA 3: Dodano media query dla urządzeń mobilnych -->
+      <!-- START: POPRAWIONE STYLE DLA NOWEGO OKNA -->
       <style>
         html, body {
           height: 100%;
@@ -2967,6 +2979,7 @@ function openBasketInNewWindow() {
         body {
           display: flex;
           flex-direction: column;
+          height: 100vh; /* Kluczowa zmiana: używa 100% wysokości okna przeglądarki */
           padding: 10px;
           box-sizing: border-box;
           background-color: #f0f8ff;
@@ -2974,33 +2987,24 @@ function openBasketInNewWindow() {
         #problem-selector-container {
           display: flex;
           flex-direction: column;
-          flex-grow: 1;
-          height: 100%; /* Używa 100% wysokości body */
+          flex-grow: 1; /* Wypełnia dostępną przestrzeń w body */
+          height: 100%;
+          min-height: 0; /* Ważne dla poprawnego działania flexbox w niektórych przeglądarkach */
         }
         #problem-list-container {
-          flex-grow: 1;
-          min-height: 200px;
+          flex-grow: 1; /* Pozwala liście rozciągnąć się na całą dostępną wysokość */
           resize: vertical;
           overflow: auto;
         }
-        /* Style dla urządzeń mobilnych */
+        /* Style dla urządzeń mobilnych - bez zmian */
         @media (max-width: 600px) {
-          #problem-list-container {
-            resize: none; /* Wyłączamy manualną zmianę rozmiaru na mobilkach */
-          }
-          .problem-item {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 8px; /* Zwiększony odstęp dla lepszej czytelności */
-            padding: 8px;
-          }
-          .add-problem-btn {
-            width: 100%; /* Przycisk na całą szerokość dla łatwiejszego dotyku */
-            padding: 10px;
-            font-size: 1rem;
-          }
+          #problem-list-container { resize: none; }
+          .problem-item { flex-direction: column; align-items: flex-start; gap: 8px; padding: 8px; }
+          .add-problem-btn { width: 100%; padding: 10px; font-size: 1rem; }
         }
       </style>
+      <!-- KONIEC: POPRAWIONE STYLE -->
+
     </head>
     <body>
       ${basketHTML}
